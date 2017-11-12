@@ -46,8 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessLayer\IReadData.cs" />
-    <Compile Include="DataAccessLayer\ISaveData.cs" />
+    <Compile Include="DataAccessLayer\DbHandler.cs" />
+    <Compile Include="DataAccessLayer\FileHandler.cs" />
+    <Compile Include="DataAccessLayer\Interfaces\IReadData.cs" />
+    <Compile Include="DataAccessLayer\Interfaces\ISaveData.cs" />
+    <Compile Include="DataAccessLayer\WebServiceHandler.cs" />
     <Compile Include="Models\Password.cs" />
     <Compile Include="Models\Root.cs" />
     <Compile Include="Models\RootExt.cs" />
