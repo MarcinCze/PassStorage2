@@ -57,6 +57,7 @@
     <Compile Include="DataCryptoLayer\Interfaces\ICrypto.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IDecodeData.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

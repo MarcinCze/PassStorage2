@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
+using PassStorage2.Base;
 
 namespace PassStorage2.Controller
 {
@@ -9,14 +10,28 @@ namespace PassStorage2.Controller
     {
         Base.DataAccessLayer.Interfaces.IStorage storage;
 
+        public string PasswordFirst { get; set; }
+        public string PasswordSecond { get; set; }
+
         public MainController()
         {
             storage = new Base.DataAccessLayer.FileHandler();
         }
 
-        public IEnumerable<Password> GetList()
+        public IEnumerable<Password> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (string.IsNullOrEmpty(PasswordFirst) || string.IsNullOrEmpty(PasswordSecond))
+                    throw new Exception("Passwords are incorrect");
+
+                return storage.Read();
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
         }
 
         public Password Get(int id)

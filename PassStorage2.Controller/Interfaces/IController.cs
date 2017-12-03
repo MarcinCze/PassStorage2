@@ -3,9 +3,12 @@ using PassStorage2.Models;
 
 namespace PassStorage2.Controller.Interfaces
 {
-    interface IController
+    public interface IController
     {
-        IEnumerable<Password> GetList();
+        string PasswordFirst { get; set; }
+        string PasswordSecond { get; set; }
+
+        IEnumerable<Password> GetAll();
         Password Get(int id);
         void Save(int id);
         void SaveAll();
