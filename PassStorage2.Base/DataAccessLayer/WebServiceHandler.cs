@@ -1,5 +1,5 @@
 ﻿using PassStorage2.Base.DataAccessLayer.Interfaces;
-using PassStorage2.Base.Models;
+using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 

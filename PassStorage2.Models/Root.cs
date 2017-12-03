@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PassStorage2.Base.Models
+namespace PassStorage2.Models
 {
     public partial class Root
     {

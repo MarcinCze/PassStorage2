@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{099DB720-6DFF-4D63-B8A1-8CFD619781CA}</ProjectGuid>
+    <ProjectGuid>{370F024F-22D5-4A75-9CB3-8E2E0B53115D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PassStorage2.Base</RootNamespace>
-    <AssemblyName>PassStorage2.Base</AssemblyName>
+    <RootNamespace>PassStorage2.Controller</RootNamespace>
+    <AssemblyName>PassStorage2.Controller</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,9 +33,6 @@
     <ApplicationIcon>Key-256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,30 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessLayer\DbHandler.cs" />
-    <Compile Include="DataAccessLayer\FileHandler.cs" />
-    <Compile Include="DataAccessLayer\Interfaces\IReadData.cs" />
-    <Compile Include="DataAccessLayer\Interfaces\ISaveData.cs" />
-    <Compile Include="DataAccessLayer\Interfaces\IStorage.cs" />
-    <Compile Include="DataAccessLayer\WebServiceHandler.cs" />
-    <Compile Include="DataCryptoLayer\Decoder.cs" />
-    <Compile Include="DataCryptoLayer\Encoder.cs" />
-    <Compile Include="DataCryptoLayer\Interfaces\ICrypto.cs" />
-    <Compile Include="DataCryptoLayer\Interfaces\IDecodeData.cs" />
-    <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
+    <Compile Include="Interfaces\IController.cs" />
+    <Compile Include="MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Key-256.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PassStorage2.Base\PassStorage2.Base.csproj">
+      <Project>{099db720-6dff-4d63-b8a1-8cfd619781ca}</Project>
+      <Name>PassStorage2.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PassStorage2.Models\PassStorage2.Models.csproj">
       <Project>{7940d278-ccaa-4f5a-8d79-58f8363e3a83}</Project>
       <Name>PassStorage2.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

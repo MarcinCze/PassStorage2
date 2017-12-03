@@ -2,7 +2,7 @@
 
 namespace PassStorage2.Base.DataAccessLayer.Interfaces
 {
-    interface IReadData
+    public interface IReadData
     {
         IEnumerable<Models.Password> Read();
     }

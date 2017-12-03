@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PassStorage2.Base.DataAccessLayer.Interfaces;
-using PassStorage2.Base.Models;
+using PassStorage2.Models;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
-    public class FileHandler : IReadData, ISaveData
+    public class FileHandler : IStorage
     {
-        public FileHandler() { }
-
         public IEnumerable<Password> Read()
         {
             throw new NotImplementedException();

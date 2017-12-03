@@ -1,4 +1,4 @@
-﻿namespace PassStorage2.Base.Models
+﻿namespace PassStorage2.Models
 {
     public partial class Password
     {
