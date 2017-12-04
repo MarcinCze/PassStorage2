@@ -17,28 +17,48 @@ namespace PassStorage2.Base.DataAccessLayer
         {
             Logger.Instance.FunctionStart();
 
-            string content = string.Empty;
-
-            if (!File.Exists(FileName))
+            try
             {
-                Logger.Instance.Warning($"File {FileName} doesn't exist!");
-                Logger.Instance.Debug($"Returning empty list");
-                return new List<Password>();
+                if (!File.Exists(FileName))
+                {
+                    Logger.Instance.Warning($"File {FileName} doesn't exist!");
+                    Logger.Instance.Debug($"Saving empty list");
+                    Save(new List<Password>());
+                }
+
+                Logger.Instance.Debug($"File {FileName} exist. Reading data...");
+
+                string content = string.Empty;
+                using (var reader = new StreamReader(FileName))
+                {
+                    content = reader.ReadToEnd();
+                }
+
+                return null;
             }
-
-            Logger.Instance.Debug($"File {FileName} exist. Reading data...");
-
-            using (var reader = new StreamReader(FileName))
+            catch (Exception)
             {
-                content = reader.ReadToEnd();
+                return null;
             }
-
-            return new List<Password>();
         }
 
         public void Save(IEnumerable<Password> passwords)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var content = new Root
+                {
+                    ComputerName = Utils.GetComputerName(),
+                    SaveTime = DateTime.Now.ToString("yyyy-MM-dd H:m:s"),
+                    User = Utils.GetUserName(),
+                    Version = Utils.GetVersion(),
+                    Passwords = passwords.ToList()
+                };
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
