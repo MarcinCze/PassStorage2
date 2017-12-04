@@ -27,12 +27,5 @@ namespace PassStorage2
             InitializeComponent();
             controller = new Controller.MainController();
         }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            controller.PasswordFirst = "aaa";
-            controller.PasswordSecond = "bbb";
-            controller.GetAll();
-        }
     }
 }

@@ -5,9 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassStorage2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
-    <Grid>
-        <Button Name="btnLogin" Content="btnLogin" HorizontalAlignment="Left" Margin="199,208,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click"/>
-
-    </Grid>
+        Title="PassStorage 2.0" Height="650" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+    <Grid/>
 </Window>
