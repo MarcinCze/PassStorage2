@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Base;
@@ -22,9 +23,6 @@ namespace PassStorage2.Controller
         {
             try
             {
-                if (string.IsNullOrEmpty(PasswordFirst) || string.IsNullOrEmpty(PasswordSecond))
-                    throw new Exception("Passwords are incorrect");
-
                 return storage.Read();
             }
             catch (Exception e)
@@ -36,22 +34,43 @@ namespace PassStorage2.Controller
 
         public Password Get(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return storage.Read().ToList().FirstOrDefault(x => x.Id == id);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var passwords = storage.Read().ToList();
+                passwords.Remove(passwords.First(x => x.Id == id));
+                storage.Save(passwords);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
         }
 
-        public void Save(int id)
+        public void Save(Password pass)
         {
-            throw new NotImplementedException();
-        }
-
-        public void SaveAll()
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var passwords = storage.Read().ToList();
+                passwords.Add(pass);
+                storage.Save(passwords);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
         }
 
         public void Backup()

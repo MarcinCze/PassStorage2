@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using PassStorage2.Base.DataAccessLayer.Interfaces;
 using PassStorage2.Models;
+using Newtonsoft.Json;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
@@ -34,10 +35,19 @@ namespace PassStorage2.Base.DataAccessLayer
                     content = reader.ReadToEnd();
                 }
 
-                return null;
+                if (string.IsNullOrEmpty(content))
+                {
+                    Logger.Instance.Error("File read but content is empty string");
+                    return null;
+                }
+
+                var root = JsonConvert.DeserializeObject<Root>(content);
+
+                return root?.Passwords;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Logger.Instance.Error(e);
                 return null;
             }
         }
@@ -54,10 +64,15 @@ namespace PassStorage2.Base.DataAccessLayer
                     Version = Utils.GetVersion(),
                     Passwords = passwords.ToList()
                 };
-            }
-            catch (Exception)
-            {
 
+                using (var writer = new StreamWriter(FileName))
+                {
+                    writer.Write(JsonConvert.SerializeObject(content, Formatting.Indented));
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
             }
         }
     }

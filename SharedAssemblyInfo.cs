@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Marcin 'Ratel' Czernecki")]
 [assembly: AssemblyProduct("PassStorage 2.0")]
-[assembly: AssemblyCopyright("Copyright mCzernecki.pl © 2017")]
+[assembly: AssemblyCopyright("Copyright © Marcin Czernecki 2017")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: CLSCompliant(true)]

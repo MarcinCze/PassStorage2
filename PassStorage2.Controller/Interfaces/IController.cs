@@ -10,8 +10,7 @@ namespace PassStorage2.Controller.Interfaces
 
         IEnumerable<Password> GetAll();
         Password Get(int id);
-        void Save(int id);
-        void SaveAll();
+        void Save(Password pass);
         void Delete(int id);
         void Backup();
         void BackupDecoded();
