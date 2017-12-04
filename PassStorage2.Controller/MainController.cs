@@ -10,6 +10,8 @@ namespace PassStorage2.Controller
     public class MainController : IController
     {
         Base.DataAccessLayer.Interfaces.IStorage storage;
+        Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
+        Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
         public string PasswordFirst { get; set; }
         public string PasswordSecond { get; set; }
@@ -17,13 +19,15 @@ namespace PassStorage2.Controller
         public MainController()
         {
             storage = new Base.DataAccessLayer.FileHandler();
+            decoder = new Base.DataCryptoLayer.Decoder();
+            encoder = new Base.DataCryptoLayer.Encoder();
         }
 
         public IEnumerable<Password> GetAll()
         {
             try
             {
-                return storage.Read();
+                return decoder.Decode(storage.Read());
             }
             catch (Exception e)
             {
@@ -36,7 +40,7 @@ namespace PassStorage2.Controller
         {
             try
             {
-                return storage.Read().ToList().FirstOrDefault(x => x.Id == id);
+                return decoder.Decode(storage.Read()).ToList().FirstOrDefault(x => x.Id == id);
             }
             catch (Exception e)
             {
@@ -49,9 +53,9 @@ namespace PassStorage2.Controller
         {
             try
             {
-                var passwords = storage.Read().ToList();
+                var passwords = decoder.Decode(storage.Read()).ToList();
                 passwords.Remove(passwords.First(x => x.Id == id));
-                storage.Save(passwords);
+                storage.Save(encoder.Encode(passwords));
             }
             catch (Exception e)
             {
@@ -63,9 +67,9 @@ namespace PassStorage2.Controller
         {
             try
             {
-                var passwords = storage.Read().ToList();
+                var passwords = decoder.Decode(storage.Read()).ToList();
                 passwords.Add(pass);
-                storage.Save(passwords);
+                storage.Save(encoder.Encode(passwords));
             }
             catch (Exception e)
             {
