@@ -14,7 +14,6 @@
 
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
-
                 <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FormatListBulleted" />
@@ -81,7 +80,6 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
