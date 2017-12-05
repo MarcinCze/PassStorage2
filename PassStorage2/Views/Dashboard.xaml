@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PassStorage2.Views.Login"
+﻿<UserControl x:Class="PassStorage2.Views.Dashboard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,8 +11,6 @@
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
              d:DesignHeight="650" d:DesignWidth="1024">
     <Grid>
-        <Label Content="Pass Storage 2.0" FontSize="40" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnLogin" Content="LOGIN" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Center" Width="155" Height="54" Click="btnLogin_Click"/>
 
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
 	        PlacementMode="BottomAndAlignRightEdges"
@@ -25,19 +23,6 @@
             </StackPanel>
         </materialDesign:PopupBox>
 
-        <PasswordBox FontSize="20" Width="300"
-            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,200" x:Name="passPrimary" 
-            materialDesign:HintAssist.Hint="Primary key" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-
-        <PasswordBox FontSize="20" Width="300"
-            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" x:Name="passSecondary" 
-            materialDesign:HintAssist.Hint="Secondary key" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-
-        <Grid Name="gridWrongPass">
-            <materialDesign:Card Padding="32" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="800">
-                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center">Secret keys are not correct !</TextBlock>
-            </materialDesign:Card>
-        </Grid>
+        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
     </Grid>
-
 </UserControl>

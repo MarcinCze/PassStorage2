@@ -12,53 +12,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xaml;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Base;
 
 namespace PassStorage2.Views
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Login : UserControl, ISwitchable
+    public partial class Dashboard : UserControl
     {
         IController controller;
 
-        public Login(IController cntr)
+        public Dashboard(IController cntr)
         {
             InitializeComponent();
-            Logger.Instance.Debug("Creating Login user control");
-            gridWrongPass.Visibility = Visibility.Hidden;
+            Logger.Instance.Debug("Creating Dashboard user control");
 
             if (cntr is null)
             {
-                Logger.Instance.Warning("Login :: controller is empty");
+                Logger.Instance.Warning("Dashboard :: controller is empty");
             }
 
             controller = cntr;
-        }
-
-        public void UtilizeState(object state)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
-
-            if (!result)
-            {
-                Logger.Instance.Warning("SetPass result is failure. Showing message");
-                gridWrongPass.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Logger.Instance.Debug("SetPass ok. Switching to DASHBOARD");
-                Switcher.Switch(new Dashboard(controller));
-            }
-                
         }
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)

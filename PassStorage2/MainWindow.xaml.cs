@@ -9,11 +9,15 @@ namespace PassStorage2
     /// </summary>
     public partial class MainWindow : Window
     {
+        Controller.Interfaces.IController controller;
+
         public MainWindow()
         {
             InitializeComponent();
+            ConsoleManager.Show();
+            controller = new Controller.MainController();
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new Views.Login());
+            Switcher.Switch(new Views.Login(controller));
         }
 
         public void Navigate(UserControl nextPage)

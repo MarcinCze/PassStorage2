@@ -64,7 +64,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConsoleManager.cs" />
     <Compile Include="Switcher.cs" />
+    <Compile Include="Views\Dashboard.xaml.cs">
+      <DependentUpon>Dashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -84,6 +88,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Dashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +128,10 @@
     <Resource Include="Key-256.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PassStorage2.Base\PassStorage2.Base.csproj">
+      <Project>{099DB720-6DFF-4D63-B8A1-8CFD619781CA}</Project>
+      <Name>PassStorage2.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PassStorage2.Controller\PassStorage2.Controller.csproj">
       <Project>{370f024f-22d5-4a75-9cb3-8e2e0b53115d}</Project>
       <Name>PassStorage2.Controller</Name>

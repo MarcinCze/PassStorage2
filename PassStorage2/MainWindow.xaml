@@ -9,7 +9,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         mc:Ignorable="d"
-        Title="PassStorage 2.0" Height="650" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="PassStorage 2.0" Height="650" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid>
         
     </Grid>

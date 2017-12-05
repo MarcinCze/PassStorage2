@@ -19,6 +19,7 @@ namespace PassStorage2.Controller
 
         public MainController()
         {
+            Logger.Instance.Debug("Creating MainController");
             storage = new Base.DataAccessLayer.FileHandler();
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
@@ -26,6 +27,7 @@ namespace PassStorage2.Controller
 
         public IEnumerable<Password> GetAll()
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 return decoder.Decode(storage.Read());
@@ -35,10 +37,15 @@ namespace PassStorage2.Controller
                 Logger.Instance.Error(e.Message);
                 return null;
             }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public Password Get(int id)
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 return decoder.Decode(storage.Read()).ToList().FirstOrDefault(x => x.Id == id);
@@ -48,10 +55,15 @@ namespace PassStorage2.Controller
                 Logger.Instance.Error(e.Message);
                 return null;
             }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void Delete(int id)
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 var passwords = decoder.Decode(storage.Read()).ToList();
@@ -62,10 +74,15 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.Error(e);
             }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void Save(Password pass)
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 var passwords = decoder.Decode(storage.Read()).ToList();
@@ -75,6 +92,10 @@ namespace PassStorage2.Controller
             catch (Exception e)
             {
                 Logger.Instance.Error(e);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
             }
         }
 
@@ -90,6 +111,7 @@ namespace PassStorage2.Controller
 
         public bool SetPasswords(string primary, string secondary)
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 using (var protection = new Base.DataCryptoLayer.EntryProtection(primary, secondary))
@@ -112,6 +134,10 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.Error(e);
                 return false;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
             }
         }
     }
