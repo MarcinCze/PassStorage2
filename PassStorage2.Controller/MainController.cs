@@ -4,17 +4,18 @@ using System.Linq;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Base;
+using System.Threading;
 
 namespace PassStorage2.Controller
 {
     public class MainController : IController
     {
-        Base.DataAccessLayer.Interfaces.IStorage storage;
-        Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
-        Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
+        readonly Base.DataAccessLayer.Interfaces.IStorage storage;
+        readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
+        readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
-        public string PasswordFirst { get; set; }
-        public string PasswordSecond { get; set; }
+        protected string PasswordFirst { get; set; }
+        protected string PasswordSecond { get; set; }
 
         public MainController()
         {
@@ -85,6 +86,33 @@ namespace PassStorage2.Controller
         public void BackupDecoded()
         {
             throw new NotImplementedException();
+        }
+
+        public bool SetPasswords(string primary, string secondary)
+        {
+            try
+            {
+                using (var protection = new Base.DataCryptoLayer.EntryProtection(primary, secondary))
+                {
+                    protection.Validate();
+
+                    if (!protection.IsAllowed)
+                    {
+                        Logger.Instance.Error("Passwords are incorrect");
+                        return false;
+                    }
+
+                    PasswordFirst = primary;
+                    PasswordSecond = secondary;
+                    Logger.Instance.Debug("Passwords ok");
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return false;
+            }
         }
     }
 }

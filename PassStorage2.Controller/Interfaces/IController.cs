@@ -5,9 +5,7 @@ namespace PassStorage2.Controller.Interfaces
 {
     public interface IController
     {
-        string PasswordFirst { get; set; }
-        string PasswordSecond { get; set; }
-
+        bool SetPasswords(string primary, string secondary);
         IEnumerable<Password> GetAll();
         Password Get(int id);
         void Save(Password pass);
