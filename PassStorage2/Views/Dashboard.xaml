@@ -12,6 +12,82 @@
              d:DesignHeight="650" d:DesignWidth="1024">
     <Grid>
 
+        <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
+            <StackPanel Width="240">
+
+                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FormatListBulleted" />
+                        <TextBlock Width="15" />
+                        <TextBlock>All passwords</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show mostly used passwords" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="CursorDefaultOutline" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Mostly used</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show passwords where expiration date is exceeded" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AlertCircleOutline" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Expiry warning</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Add new one" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="PlusCircleOutline" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Add new</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnSaveAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Save changes" HorizontalContentAlignment="Left" Click="btnSaveAll_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="DatabasePlus" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Save</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries to separate file" HorizontalContentAlignment="Left" Click="btnBackup_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FolderLock" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Backup</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries DECODED(!) to separate file" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="FolderLockOpen" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Backup decoded</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Separator/>
+                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Close application" HorizontalContentAlignment="Left" Click="btnExit_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Export" />
+                        <TextBlock Width="15" />
+                        <TextBlock>Exit</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Credentials" HorizontalContentAlignment="Left" Click="btnAbout_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Incognito" />
+                        <TextBlock Width="15" />
+                        <TextBlock>About</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            
+        </Grid>
+        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
+        <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
+            
+        </Grid>
+
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
 	        PlacementMode="BottomAndAlignRightEdges"
 	        StaysOpen="False">
@@ -22,7 +98,7 @@
                 <Button Content="Pass Storage 2.0..." Name="menuAbout" Click="menuAbout_Click" />
             </StackPanel>
         </materialDesign:PopupBox>
-
-        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
+        
     </Grid>
+    
 </UserControl>

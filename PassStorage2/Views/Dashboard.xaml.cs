@@ -51,5 +51,50 @@ namespace PassStorage2.Views
         {
 
         }
+
+        private void btnAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnSaveAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBackup_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBackupDecoded_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            menuClose_Click(sender, e);
+        }
+
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
