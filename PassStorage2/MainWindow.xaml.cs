@@ -28,13 +28,11 @@ namespace PassStorage2
         public void Navigate(UserControl nextPage, object state)
         {
             this.Content = nextPage;
-            ISwitchable s = nextPage as ISwitchable;
 
-            if (s != null)
+            if (nextPage is ISwitchable s)
                 s.UtilizeState(state);
             else
-                throw new ArgumentException("NextPage is not ISwitchable! "
-                  + nextPage.Name.ToString());
+                throw new ArgumentException("NextPage is not ISwitchable! " + nextPage.Name);
         }
     }
 }

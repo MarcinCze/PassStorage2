@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Base;
+using PassStorage2.Models;
 
 namespace PassStorage2.Views
 {
@@ -22,7 +23,8 @@ namespace PassStorage2.Views
     /// </summary>
     public partial class Dashboard : UserControl
     {
-        IController controller;
+        readonly IController controller;
+        List<Password> passwords;
 
         public Dashboard(IController cntr)
         {
@@ -37,6 +39,15 @@ namespace PassStorage2.Views
             controller = cntr;
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            passwords = controller.GetAll().ToList();
+
+            ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
+            ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
+            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({controller.GetAllExpired().Count()})";
+        }
+
         private void menuMinimize_Click(object sender, RoutedEventArgs e)
         {
             Switcher.pageSwitcher.WindowState = WindowState.Minimized;
@@ -44,17 +55,36 @@ namespace PassStorage2.Views
 
         private void menuClose_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
         }
 
         private void menuAbout_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
+            //controller.Save(new Password
+            //{
+            //    Title = "Titel1",
+            //    Login = "Login1",
+            //    Pass = "Pass1"
+            //});
 
+            //controller.Save(new Password
+            //{
+            //    Title = "Titel2",
+            //    Login = "Login2",
+            //    Pass = "Pass2"
+            //});
+
+            //controller.Save(new Password
+            //{
+            //    Title = "Titel3",
+            //    Login = "Login3",
+            //    Pass = "Pass3"
+            //});
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Base;
@@ -16,6 +18,7 @@ namespace PassStorage2.Controller
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
+        protected const int ExpirationDays = 180;
 
         public MainController()
         {
@@ -43,7 +46,25 @@ namespace PassStorage2.Controller
             }
         }
 
-        public Password Get(int id)
+        public IEnumerable<Password> GetAllExpired()
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return decoder.Decode(storage.Read()).Where(x => (DateTime.Now - x.PassChangeTime).TotalDays >= ExpirationDays);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public Password Get(Guid id)
         {
             Logger.Instance.FunctionStart();
             try
@@ -61,7 +82,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             Logger.Instance.FunctionStart();
             try
@@ -86,7 +107,29 @@ namespace PassStorage2.Controller
             try
             {
                 var passwords = decoder.Decode(storage.Read()).ToList();
-                passwords.Add(pass);
+
+                if (pass.Id == null)
+                {
+                    pass.SaveTime = DateTime.Now;
+                    pass.PassChangeTime = DateTime.Now;
+                    pass.Id = Guid.NewGuid();
+                    passwords.Add(pass);
+                    storage.Save(encoder.Encode(passwords));
+                    return;
+                }
+
+                var passInList = passwords.First(x => x.Id == pass.Id);
+                passInList.Title = pass.Title;
+                passInList.Login = pass.Login;
+                passInList.ViewCount = pass.ViewCount;
+                passInList.SaveTime = DateTime.Now;
+
+                if (!pass.Pass.Equals(passInList.Pass))
+                {
+                    passInList.Pass = pass.Pass;
+                    passInList.PassChangeTime = DateTime.Now;
+                }
+
                 storage.Save(encoder.Encode(passwords));
             }
             catch (Exception e)
@@ -138,6 +181,38 @@ namespace PassStorage2.Controller
             finally
             {
                 Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public void UpdateViewCount(Guid id, int counter)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var password = Get(id);
+                password.ViewCount = counter;
+                Save(password);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                throw;
+            }
+        }
+
+        public void IncrementViewCount(Guid id)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var password = Get(id);
+                password.ViewCount++;
+                Save(password);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                throw;
             }
         }
     }

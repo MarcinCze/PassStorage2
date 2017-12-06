@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PassStorage2.Models;
 
 namespace PassStorage2.Controller.Interfaces
@@ -7,9 +8,12 @@ namespace PassStorage2.Controller.Interfaces
     {
         bool SetPasswords(string primary, string secondary);
         IEnumerable<Password> GetAll();
-        Password Get(int id);
+        IEnumerable<Password> GetAllExpired();
+        Password Get(Guid id);
         void Save(Password pass);
-        void Delete(int id);
+        void Delete(Guid id);
+        void UpdateViewCount(Guid id, int counter);
+        void IncrementViewCount(Guid id);
         void Backup();
         void BackupDecoded();
     }

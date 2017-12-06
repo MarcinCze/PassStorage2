@@ -9,7 +9,7 @@
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-             d:DesignHeight="650" d:DesignWidth="1024">
+             d:DesignHeight="650" d:DesignWidth="1024" Loaded="UserControl_Loaded">
     <Grid>
 
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
