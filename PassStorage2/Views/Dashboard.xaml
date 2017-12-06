@@ -83,20 +83,22 @@
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
-            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                            materialDesign:DialogHost.DialogClosingAttached="Sample2_DialogHost_OnDialogClosing"
-                            Width="128">
-                    <Button.CommandParameter>
-                        <StackPanel Margin="16">
-                            <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" />
-                            <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" 
-                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                        CommandParameter="Sample2Cancel"
-                                        HorizontalAlignment="Center">CANCEL</Button>
-                        </StackPanel>
-                    </Button.CommandParameter>
-                    PASS VIEW
-                </Button>
+            <ListView Name="listViewPasswords">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Image" Width="200" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="200"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
+                        <GridViewColumn Header="Warning">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <materialDesign:PackIcon Kind="AlertCircleOutline" Visibility="{Binding WarningIconState}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
 
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"

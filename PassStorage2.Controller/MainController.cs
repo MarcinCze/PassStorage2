@@ -7,6 +7,7 @@ using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Base;
 using System.Threading;
+using System.Windows;
 
 namespace PassStorage2.Controller
 {
@@ -213,6 +214,41 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.Error(e);
                 throw;
+            }
+        }
+
+        public IEnumerable<PasswordExt> GetAllExtended()
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var passExtList = new List<PasswordExt>();
+                var passList = GetAll();
+
+                foreach (var pass in passList)
+                {
+                    var passExt = new PasswordExt
+                    {
+                        Id = pass.Id,
+                        Login = pass.Login,
+                        Title = pass.Title,
+                        Pass = pass.Pass,
+                        PassChangeTime = pass.PassChangeTime,
+                        SaveTime = pass.SaveTime,
+                        ViewCount = pass.ViewCount,
+                        IsValid = (DateTime.Now - pass.PassChangeTime).TotalDays <= ExpirationDays,
+                    };
+
+                    passExt.WarningIconState = passExt.IsValid ? Visibility.Hidden : Visibility.Hidden;
+                    passExtList.Add(passExt);
+                }
+
+                return passExtList;
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return null;
             }
         }
     }

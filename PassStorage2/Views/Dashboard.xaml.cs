@@ -25,7 +25,7 @@ namespace PassStorage2.Views
     public partial class Dashboard : UserControl
     {
         readonly IController controller;
-        List<Password> passwords;
+        List<PasswordExt> passwords;
 
         public Dashboard(IController cntr)
         {
@@ -42,11 +42,13 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            passwords = controller.GetAll().ToList();
+            passwords = controller.GetAllExtended().ToList();
 
             ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
             ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
-            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({controller.GetAllExpired().Count()})";
+            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => !x.IsValid)})";
+
+            listViewPasswords.ItemsSource = passwords;
         }
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)
@@ -66,26 +68,7 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            //controller.Save(new Password
-            //{
-            //    Title = "Titel1",
-            //    Login = "Login1",
-            //    Pass = "Pass1"
-            //});
 
-            //controller.Save(new Password
-            //{
-            //    Title = "Titel2",
-            //    Login = "Login2",
-            //    Pass = "Pass2"
-            //});
-
-            //controller.Save(new Password
-            //{
-            //    Title = "Titel3",
-            //    Login = "Login3",
-            //    Pass = "Pass3"
-            //});
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
@@ -125,7 +108,26 @@ namespace PassStorage2.Views
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
+            controller.Save(new Password
+            {
+                Title = "Titel1",
+                Login = "Login1",
+                Pass = "Pass1"
+            });
 
+            controller.Save(new Password
+            {
+                Title = "Titel2",
+                Login = "Login2",
+                Pass = "Pass2"
+            });
+
+            controller.Save(new Password
+            {
+                Title = "Titel3",
+                Login = "Login3",
+                Pass = "Pass3"
+            });
         }
 
         private void Sample2_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)

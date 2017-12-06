@@ -34,6 +34,7 @@
     <ApplicationIcon>Key-256.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +49,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Password.cs" />
+    <Compile Include="PasswordExt.cs" />
     <Compile Include="Root.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
