@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Base;
 using PassStorage2.Models;
@@ -125,6 +126,11 @@ namespace PassStorage2.Views
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Sample2_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("SAMPLE 2: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
         }
     }
 }
