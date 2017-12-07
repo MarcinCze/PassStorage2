@@ -68,21 +68,21 @@
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Width="770" HorizontalAlignment="Right">
-            <TextBox Name="tbTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,100,0,0"
+            <TextBox Name="tbTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,100,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
 	                materialDesign:HintAssist.Hint="Title"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
 	                FontSize="24"
 	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 	                Text="" />
-            <TextBox Name="tbLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,170,0,0"
+            <TextBox Name="tbLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,170,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
 	                materialDesign:HintAssist.Hint="Login"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
 	                FontSize="24"
 	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 	                Text="" />
-            <TextBox Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,240,0,0"
+            <TextBox Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,240,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
 	                materialDesign:HintAssist.Hint="Password"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"

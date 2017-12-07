@@ -9,6 +9,11 @@ namespace PassStorage2.Base
 {
     public static class RandomPassword
     {
+        /// <summary>
+        /// Generating random string
+        /// </summary>
+        /// <param name="length">Length of the string</param>
+        /// <returns></returns>
         public static string Generate(int length)
         {
             Logger.Instance.FunctionStart();
@@ -34,6 +39,10 @@ namespace PassStorage2.Base
             {
                 Logger.Instance.Error(e);
                 return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
             }
         }
     }
