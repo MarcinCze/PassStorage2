@@ -9,7 +9,7 @@ namespace PassStorage2.Base
 {
     public class MostUsageAnalyzer
     {
-        protected IEnumerable<Password> passwords;
+        protected readonly IEnumerable<Password> passwords;
 
         public MostUsageAnalyzer (IEnumerable<Password> list)
         {
@@ -20,10 +20,13 @@ namespace PassStorage2.Base
         {
             var mostUsed = new List<Password>();
 
+            int max = passwords.Max(x => x.ViewCount);
+            int min = passwords.Min(x => x.ViewCount);
+            int border = (max - min) / 2 + min;
+
             foreach (var pass in passwords)
             {
-                if (pass.ViewCount > 0)
-                    mostUsed.Add(pass);
+                if (pass.ViewCount > border) mostUsed.Add(pass);
             }
             return mostUsed;
         }
