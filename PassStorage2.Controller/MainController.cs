@@ -34,7 +34,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read());
+                return decoder.Decode(storage.Read()).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -52,7 +52,9 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read()).Where(x => (DateTime.Now - x.PassChangeTime).TotalDays >= ExpirationDays);
+                return decoder.Decode(storage.Read())
+                    .Where(x => (DateTime.Now - x.PassChangeTime).TotalDays >= ExpirationDays)
+                    .OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -227,23 +229,12 @@ namespace PassStorage2.Controller
 
                 foreach (var pass in passList)
                 {
-                    var passExt = new PasswordExt
-                    {
-                        Id = pass.Id,
-                        Login = pass.Login,
-                        Title = pass.Title,
-                        Pass = pass.Pass,
-                        PassChangeTime = pass.PassChangeTime,
-                        SaveTime = pass.SaveTime,
-                        ViewCount = pass.ViewCount,
-                        IsValid = (DateTime.Now - pass.PassChangeTime).TotalDays <= ExpirationDays,
-                    };
-
-                    passExt.WarningIconState = passExt.IsValid ? Visibility.Hidden : Visibility.Hidden;
+                    var passExt = new PasswordExt();
+                    passExt.Copy(pass, ExpirationDays);
                     passExtList.Add(passExt);
                 }
 
-                return passExtList;
+                return passExtList.OrderBy(x => x.Title);
             }
             catch (Exception e)
             {

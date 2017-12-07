@@ -86,13 +86,16 @@
             <ListView Name="listViewPasswords">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Image" Width="200" />
+                        <!--<GridViewColumn Header="Image" Width="200" />-->
                         <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="200"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
                         <GridViewColumn Header="Warning">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <materialDesign:PackIcon Kind="AlertCircleOutline" Visibility="{Binding WarningIconState}" />
+                                    <DataTemplate.Resources>
+                                        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+                                    </DataTemplate.Resources>
+                                    <materialDesign:PackIcon Kind="AlertCircleOutline" Visibility="{Binding IsExpired, Converter={StaticResource VisibilityOfBool}}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -101,6 +104,7 @@
             </ListView>
         </Grid>
 
+        <!-- THREE DOTS MENU IN THE CORNER -->
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
 	        PlacementMode="BottomAndAlignRightEdges"
 	        StaysOpen="False">
@@ -111,7 +115,6 @@
                 <Button Content="Pass Storage 2.0..." Name="menuAbout" Click="menuAbout_Click" />
             </StackPanel>
         </materialDesign:PopupBox>
-        
     </Grid>
     
 </UserControl>

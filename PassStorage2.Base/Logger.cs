@@ -22,11 +22,23 @@ namespace PassStorage2.Base
             }
         }
 
+        /// <summary>
+        /// Logging start of the function
+        /// </summary>
+        /// <param name="name">Name of the function</param>
+        /// <param name="filePath">Path to the file</param>
+        /// <param name="line">Line of code</param>
         public void FunctionStart([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
             Console.WriteLine($"Function [{name}] starts");
         }
 
+        /// <summary>
+        /// Logging end of the function
+        /// </summary>
+        /// <param name="name">Name of the function</param>
+        /// <param name="filePath">Path to the file</param>
+        /// <param name="line">Line of code</param>
         public void FunctionEnd([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
             Console.WriteLine($"Function [{name}] ends");

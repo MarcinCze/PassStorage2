@@ -46,6 +46,11 @@ namespace PassStorage2.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            #region TO BE REMOVE
+            passPrimary.Password = "123";
+            passSecondary.Password = "abc";
+            #endregion
+
             bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 
             if (!result)

@@ -46,7 +46,7 @@ namespace PassStorage2.Views
 
             ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
             ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
-            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => !x.IsValid)})";
+            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.IsExpired)})";
 
             listViewPasswords.ItemsSource = passwords;
         }
@@ -68,17 +68,23 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-
+            passwords = controller.GetAllExtended().ToList();
+            listViewPasswords.ItemsSource = null;
+            listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-
+            passwords = controller.GetAllExtended().Where(x => x.ViewCount >0).ToList();
+            listViewPasswords.ItemsSource = null;
+            listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-
+            passwords = PasswordExt.CopyList(controller.GetAllExpired()).ToList();
+            listViewPasswords.ItemsSource = null;
+            listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
