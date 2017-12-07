@@ -64,11 +64,18 @@ namespace PassStorage2.Views
 
         private void RefreshLabels()
         {
-            passwords = controller.GetAll().ToList();
+            try
+            {
+                passwords = controller.GetAll().ToList();
 
-            ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
-            ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed().Count()})";
-            ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
+                ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
+                ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed().Count()})";
+                ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

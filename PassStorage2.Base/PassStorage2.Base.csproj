@@ -56,12 +56,16 @@
     <Compile Include="DataAccessLayer\Interfaces\ISaveData.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IStorage.cs" />
     <Compile Include="DataAccessLayer\WebServiceHandler.cs" />
+    <Compile Include="DataCryptoLayer\AES.cs" />
     <Compile Include="DataCryptoLayer\Decoder.cs" />
     <Compile Include="DataCryptoLayer\Encoder.cs" />
     <Compile Include="DataCryptoLayer\EntryProtection.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\ICrypto.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IDecodeData.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
+    <Compile Include="DataCryptoLayer\PlayfairCipher.cs" />
+    <Compile Include="DataCryptoLayer\Rijndael.cs" />
+    <Compile Include="DataCryptoLayer\VigenereCipher.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MostUsageAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

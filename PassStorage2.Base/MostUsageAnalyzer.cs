@@ -18,17 +18,30 @@ namespace PassStorage2.Base
 
         public IEnumerable<Password> Analyze()
         {
-            var mostUsed = new List<Password>();
-
-            int max = passwords.Max(x => x.ViewCount);
-            int min = passwords.Min(x => x.ViewCount);
-            int border = (max - min) / 2 + min;
-
-            foreach (var pass in passwords)
+            try
             {
-                if (pass.ViewCount > border) mostUsed.Add(pass);
+                var mostUsed = new List<Password>();
+
+                if (!passwords.Any())
+                {
+                    return mostUsed;
+                }
+
+                int max = passwords.Max(x => x.ViewCount);
+                int min = passwords.Min(x => x.ViewCount);
+                int border = (max - min) / 2 + min;
+
+                foreach (var pass in passwords)
+                {
+                    if (pass.ViewCount > border) mostUsed.Add(pass);
+                }
+                return mostUsed;
             }
-            return mostUsed;
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return null;
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read()).OrderBy(x => x.Title);
+                return decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -65,7 +65,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read()).ToList().FirstOrDefault(x => x.Id == id);
+                return decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList().FirstOrDefault(x => x.Id == id);
             }
             catch (Exception e)
             {
@@ -83,9 +83,9 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var passwords = decoder.Decode(storage.Read()).ToList();
+                var passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList();
                 passwords.Remove(passwords.First(x => x.Id == id));
-                storage.Save(encoder.Encode(passwords));
+                storage.Save(encoder.Encode(passwords, PasswordFirst, PasswordSecond));
             }
             catch (Exception e)
             {
@@ -102,7 +102,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var passwords = decoder.Decode(storage.Read()).ToList();
+                var passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList();
 
                 if (pass.Id == null)
                 {
@@ -110,7 +110,7 @@ namespace PassStorage2.Controller
                     pass.PassChangeTime = DateTime.Now;
                     pass.Id = Guid.NewGuid();
                     passwords.Add(pass);
-                    storage.Save(encoder.Encode(passwords));
+                    storage.Save(encoder.Encode(passwords, PasswordFirst, PasswordSecond));
                     return;
                 }
 
@@ -126,7 +126,7 @@ namespace PassStorage2.Controller
                     passInList.PassChangeTime = DateTime.Now;
                 }
 
-                storage.Save(encoder.Encode(passwords));
+                storage.Save(encoder.Encode(passwords, PasswordFirst, PasswordSecond));
             }
             catch (Exception e)
             {

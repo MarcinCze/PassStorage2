@@ -5,6 +5,6 @@ namespace PassStorage2.Base.DataCryptoLayer.Interfaces
 {
     public interface IDecodeData
     {
-        IEnumerable<Password> Decode(IEnumerable<Password> passwords);
+        IEnumerable<Password> Decode(IEnumerable<Password> passwords, string primaryKey, string secondaryKey);
     }
 }
