@@ -16,6 +16,9 @@ using MaterialDesignThemes.Wpf;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Base;
 using PassStorage2.Models;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
+using System.Text.RegularExpressions;
 
 namespace PassStorage2.Views
 {
@@ -27,6 +30,7 @@ namespace PassStorage2.Views
         readonly IController controller;
         readonly MenuType menu;
         List<Password> passwords;
+        Guid? detailsId;
 
         public enum MenuType { ALL, MOST, EXPIRY }
 
@@ -44,13 +48,43 @@ namespace PassStorage2.Views
             this.menu = menu;
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void OpenDetailsDrawer(Password pass)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                controller.IncrementViewCount(pass.Id.Value);
+                detailTitle.Text = pass.Title;
+                detailLogin.Text = pass.Login;
+                detailPassword.Text = pass.Pass;
+                detailsId = pass.Id;
+
+                ButtonAutomationPeer peer = new ButtonAutomationPeer(btnOpenDrawer);
+                IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProv.Invoke();
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        private void RefreshLabels()
         {
             passwords = controller.GetAll().ToList();
 
-            ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
-            ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
-            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.IsExpired)})";
+            ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
+            ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.ViewCount > 0)})";
+            ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshLabels();
 
             switch (menu)
             {
@@ -74,6 +108,7 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
+            RefreshLabels();
             passwords = controller.GetAll().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
@@ -81,13 +116,15 @@ namespace PassStorage2.Views
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            passwords = controller.GetAll().Where(x => x.ViewCount >0).ToList();
+            RefreshLabels();
+            passwords = controller.GetAll().Where(x => x.ViewCount > 0).ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
+            RefreshLabels();
             passwords = controller.GetAllExpired().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
@@ -120,26 +157,38 @@ namespace PassStorage2.Views
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
-            controller.Save(new Password
-            {
-                Title = "Titel1",
-                Login = "Login1",
-                Pass = "Pass1"
-            });
 
-            controller.Save(new Password
-            {
-                Title = "Titel2",
-                Login = "Login2",
-                Pass = "Pass2"
-            });
+        }
 
-            controller.Save(new Password
+        private void listViewPasswords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
             {
-                Title = "Titel3",
-                Login = "Login3",
-                Pass = "Pass3"
-            });
+                var item = (sender as ListView).SelectedItem as Password;
+                if (item == null)
+                    throw new Exception("Selected item is null");
+
+                OpenDetailsDrawer(item);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+        }
+
+        private void btnCopyLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(detailLogin.Text);
+        }
+
+        private void btnCopyPassword_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(detailPassword.Text);
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Modify(controller, detailsId));
         }
     }
 }

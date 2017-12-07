@@ -19,6 +19,7 @@
                         <materialDesign:PackIcon Kind="FormatListBulleted" />
                         <TextBlock Width="15" />
                         <TextBlock>All passwords</TextBlock>
+                        <TextBlock/>
                     </StackPanel>
                 </Button>
                 <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show mostly used passwords" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
@@ -26,6 +27,7 @@
                         <materialDesign:PackIcon Kind="CursorDefaultOutline" />
                         <TextBlock Width="15" />
                         <TextBlock>Mostly used</TextBlock>
+                        <TextBlock/>
                     </StackPanel>
                 </Button>
                 <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show passwords where expiration date is exceeded" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
@@ -33,6 +35,7 @@
                         <materialDesign:PackIcon Kind="AlertCircleOutline" />
                         <TextBlock Width="15" />
                         <TextBlock>Expiry warning</TextBlock>
+                        <TextBlock/>
                     </StackPanel>
                 </Button>
                 <Separator/>
@@ -83,11 +86,11 @@
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
-            <ListView Name="listViewPasswords">
+            <ListView Name="listViewPasswords" SelectionChanged="listViewPasswords_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <!--<GridViewColumn Header="Image" Width="200" />-->
-                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="200"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="350"/>
                         <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
                         <GridViewColumn Header="Warning">
                             <GridViewColumn.CellTemplate>
@@ -102,6 +105,52 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+        </Grid>
+        <Grid Name="gridDetails" Width="770" HorizontalAlignment="Right">
+            <materialDesign:DrawerHost Width="770" Height="650" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:DrawerHost.RightDrawerContent>
+                    <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
+                        <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
+                        <Separator Margin="0,20,0,0"/>
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Login</TextBlock>
+                        <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
+                        <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyLogin_Click">
+                            <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
+                        </Button>
+
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Password</TextBlock>
+                        <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
+                        <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyPassword_Click">
+                            <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
+                        </Button>
+                        <Separator Margin="0,20,0,0"/>
+
+                        <Grid>
+                            <Button Name="btnEdit" Width="100" Style="{StaticResource MaterialDesignRaisedButton}" 
+                                    ToolTip="Edit this entry" VerticalAlignment="Center" Margin="0,50,150,0" Click="btnEdit_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Brush" />
+                                    <TextBlock Width="15" />
+                                    <TextBlock>Edit</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Name="btnClose" Width="100" Style="{StaticResource MaterialDesignRaisedButton}" 
+                                    ToolTip="Close details" VerticalAlignment="Center" Margin="150,50,0,0"
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Right}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CloseCircleOutline" />
+                                    <TextBlock Width="15" />
+                                    <TextBlock>Close</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </materialDesign:DrawerHost.RightDrawerContent>
+                <Button Visibility="Hidden" Name="btnOpenDrawer" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}" CommandParameter="{x:Static Dock.Right}">
+                    <materialDesign:PackIcon Kind="ArrowRight" />
+                </Button>
+            </materialDesign:DrawerHost>
         </Grid>
     </Grid>
     
