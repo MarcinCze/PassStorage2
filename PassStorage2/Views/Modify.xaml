@@ -68,7 +68,36 @@
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Width="770" HorizontalAlignment="Right">
-            
+            <TextBox Name="tbTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,100,0,0"
+	                materialDesign:HintAssist.FloatingScale="0.50"
+	                materialDesign:HintAssist.Hint="Title"
+	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+	                FontSize="24"
+	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+	                Text="" />
+            <TextBox Name="tbLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,170,0,0"
+	                materialDesign:HintAssist.FloatingScale="0.50"
+	                materialDesign:HintAssist.Hint="Login"
+	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+	                FontSize="24"
+	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+	                Text="" />
+            <TextBox Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="100,240,0,0"
+	                materialDesign:HintAssist.FloatingScale="0.50"
+	                materialDesign:HintAssist.Hint="Password"
+	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
+	                FontSize="24"
+	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+	                Text="" />
+
+            <Slider Name="sliderRandomPassLength" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,100,150" Width="300" Maximum="20" Minimum="4"
+	                Style="{StaticResource MaterialDesignDiscreteSlider}"
+	                ToolTip="MaterialDesignDiscreteSlider"
+	                Value="10" />
+            <Button Name="btnRandomPass" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Generate random password" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,212,80" Click="btnRandomPass_Click">
+                <materialDesign:PackIcon Width="32" Height="32" Kind="Dice5" />
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

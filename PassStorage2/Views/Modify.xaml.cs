@@ -24,7 +24,7 @@ namespace PassStorage2.Views
     public partial class Modify : UserControl
     {
         IController controller;
-        PasswordExt password;
+        Password password;
 
         public Modify(IController cntr, Guid? passwordId = null)
         {
@@ -39,9 +39,7 @@ namespace PassStorage2.Views
             if (passwordId.HasValue)
             {
                 Logger.Instance.Debug("Entering EDIT mode");
-                var pass = controller.Get(passwordId.Value);
-                password = new PasswordExt();
-                password.Copy(pass);
+                password = controller.Get(passwordId.Value);
             }
             else
             {
@@ -51,11 +49,22 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var passwords = controller.GetAllExtended().ToList();
+            var passwords = controller.GetAll().ToList();
 
             ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
             ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
             ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.IsExpired)})";
+
+            if (password != null)
+            {
+                tbTitle.Text = password.Title;
+                tbLogin.Text = password.Login;
+                tbPassword.Text = password.Pass;
+            }
+            else
+            {
+                password = new Password();
+            }
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
@@ -75,12 +84,17 @@ namespace PassStorage2.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            password.Title = tbTitle.Text;
+            password.Login = tbLogin.Text;
+            password.Pass = tbPassword.Text;
+            
+            controller.Save(password);
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -91,6 +105,11 @@ namespace PassStorage2.Views
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnRandomPass_Click(object sender, RoutedEventArgs e)
+        {
+            tbPassword.Text = RandomPassword.Generate((int)sliderRandomPassLength.Value);
         }
     }
 }

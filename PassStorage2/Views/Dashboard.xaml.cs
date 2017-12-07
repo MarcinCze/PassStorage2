@@ -26,7 +26,7 @@ namespace PassStorage2.Views
     {
         readonly IController controller;
         readonly MenuType menu;
-        List<PasswordExt> passwords;
+        List<Password> passwords;
 
         public enum MenuType { ALL, MOST, EXPIRY }
 
@@ -46,7 +46,7 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            passwords = controller.GetAllExtended().ToList();
+            passwords = controller.GetAll().ToList();
 
             ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
             ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
@@ -74,21 +74,21 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            passwords = controller.GetAllExtended().ToList();
+            passwords = controller.GetAll().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            passwords = controller.GetAllExtended().Where(x => x.ViewCount >0).ToList();
+            passwords = controller.GetAll().Where(x => x.ViewCount >0).ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-            passwords = PasswordExt.CopyList(controller.GetAllExpired()).ToList();
+            passwords = controller.GetAllExpired().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }

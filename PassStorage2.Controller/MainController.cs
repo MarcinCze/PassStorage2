@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
-using PassStorage2.Base;
-using System.Threading;
-using System.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PassStorage2.Controller
 {
@@ -19,7 +15,6 @@ namespace PassStorage2.Controller
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
-        protected const int ExpirationDays = 180;
 
         public MainController()
         {
@@ -52,9 +47,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read())
-                    .Where(x => (DateTime.Now - x.PassChangeTime).TotalDays >= ExpirationDays)
-                    .OrderBy(x => x.Title);
+                return GetAll().Where(x => x.IsExpired).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -216,30 +209,6 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.Error(e);
                 throw;
-            }
-        }
-
-        public IEnumerable<PasswordExt> GetAllExtended()
-        {
-            Logger.Instance.FunctionStart();
-            try
-            {
-                var passExtList = new List<PasswordExt>();
-                var passList = GetAll();
-
-                foreach (var pass in passList)
-                {
-                    var passExt = new PasswordExt();
-                    passExt.Copy(pass, ExpirationDays);
-                    passExtList.Add(passExt);
-                }
-
-                return passExtList.OrderBy(x => x.Title);
-            }
-            catch (Exception e)
-            {
-                Logger.Instance.Error(e);
-                return null;
             }
         }
     }

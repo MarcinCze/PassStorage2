@@ -4,6 +4,8 @@ namespace PassStorage2.Models
 {
     public partial class Password
     {
+        protected const int expirationDays = 180;
+
         public Guid? Id { get; set; }
         public string Title { get; set; }
         public string Login { get; set; }
@@ -11,5 +13,6 @@ namespace PassStorage2.Models
         public DateTime SaveTime { get; set; }
         public DateTime PassChangeTime { get; set; }
         public int ViewCount { get; set; }
+        public bool IsExpired => (DateTime.Now - PassChangeTime).TotalDays >= expirationDays;
     }
 }

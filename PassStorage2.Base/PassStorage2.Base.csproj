@@ -64,6 +64,7 @@
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomPassword.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
