@@ -78,7 +78,7 @@ namespace PassStorage2.Views
             passwords = controller.GetAll().ToList();
 
             ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
-            ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.ViewCount > 0)})";
+            ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed().Count()})";
             ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
         }
 
@@ -117,7 +117,7 @@ namespace PassStorage2.Views
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
             RefreshLabels();
-            passwords = controller.GetAll().Where(x => x.ViewCount > 0).ToList();
+            passwords = controller.GetMostUsed().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }
@@ -135,24 +135,43 @@ namespace PassStorage2.Views
             Switcher.Switch(new Modify(controller));
         }
 
-        private void btnSaveAll_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnBackup_Click(object sender, RoutedEventArgs e)
         {
-
+            Logger.Instance.FunctionStart();
+            try
+            {
+                controller.Backup();
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnBackupDecoded_Click(object sender, RoutedEventArgs e)
         {
-
+            Logger.Instance.FunctionStart();
+            try
+            {
+                controller.BackupDecoded();
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)

@@ -99,7 +99,7 @@ namespace PassStorage2.Views
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)

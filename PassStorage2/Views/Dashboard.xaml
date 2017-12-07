@@ -46,13 +46,6 @@
                         <TextBlock>Add new</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnSaveAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Save changes" HorizontalContentAlignment="Left" Click="btnSaveAll_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="DatabasePlus" />
-                        <TextBlock Width="15" />
-                        <TextBlock>Save</TextBlock>
-                    </StackPanel>
-                </Button>
                 <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries to separate file" HorizontalContentAlignment="Left" Click="btnBackup_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FolderLock" />

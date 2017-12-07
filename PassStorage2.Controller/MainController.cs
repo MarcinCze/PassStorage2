@@ -211,5 +211,24 @@ namespace PassStorage2.Controller
                 throw;
             }
         }
+
+        public IEnumerable<Password> GetMostUsed()
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var analyzer = new MostUsageAnalyzer(GetAll());
+                return analyzer.Analyze();
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
     }
 }
