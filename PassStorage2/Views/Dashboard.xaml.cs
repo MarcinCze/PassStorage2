@@ -25,9 +25,12 @@ namespace PassStorage2.Views
     public partial class Dashboard : UserControl
     {
         readonly IController controller;
+        readonly MenuType menu;
         List<PasswordExt> passwords;
 
-        public Dashboard(IController cntr)
+        public enum MenuType { ALL, MOST, EXPIRY }
+
+        public Dashboard(IController cntr, MenuType menu = MenuType.ALL)
         {
             InitializeComponent();
             Logger.Instance.Debug("Creating Dashboard user control");
@@ -38,6 +41,7 @@ namespace PassStorage2.Views
             }
 
             controller = cntr;
+            this.menu = menu;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -48,22 +52,24 @@ namespace PassStorage2.Views
             ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
             ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.IsExpired)})";
 
-            listViewPasswords.ItemsSource = passwords;
-        }
-
-        private void menuMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            Switcher.pageSwitcher.WindowState = WindowState.Minimized;
-        }
-
-        private void menuClose_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void menuAbout_Click(object sender, RoutedEventArgs e)
-        {
-            
+            switch (menu)
+            {
+                case MenuType.ALL:
+                    {
+                        btnAll_Click(sender, e);
+                        break;
+                    }
+                case MenuType.MOST:
+                    {
+                        btnMostlyUsed_Click(sender, e);
+                        break;
+                    }
+                case MenuType.EXPIRY:
+                    {
+                        btnExpiryWarning_Click(sender, e);
+                        break;
+                    }
+            }
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
@@ -89,7 +95,7 @@ namespace PassStorage2.Views
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.Switch(new Modify(controller));
         }
 
         private void btnSaveAll_Click(object sender, RoutedEventArgs e)
@@ -109,7 +115,7 @@ namespace PassStorage2.Views
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            menuClose_Click(sender, e);
+
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
@@ -134,11 +140,6 @@ namespace PassStorage2.Views
                 Login = "Login3",
                 Pass = "Pass3"
             });
-        }
-
-        private void Sample2_DialogHost_OnDialogClosing(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("SAMPLE 2: Closing dialog with parameter: " + (eventArgs.Parameter ?? ""));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="PassStorage2.Views.Dashboard"
+﻿<UserControl x:Class="PassStorage2.Views.Modify"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,7 +11,6 @@
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
              d:DesignHeight="650" d:DesignWidth="1024" Loaded="UserControl_Loaded">
     <Grid>
-
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
                 <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
@@ -36,32 +35,18 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Add new one" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
+                <Button Name="btnSave" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Save changes" HorizontalContentAlignment="Left" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="PlusCircleOutline" />
+                        <materialDesign:PackIcon Kind="Check" Foreground="Green" />
                         <TextBlock Width="15" />
-                        <TextBlock>Add new</TextBlock>
+                        <TextBlock Foreground="Green">Save</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnSaveAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Save changes" HorizontalContentAlignment="Left" Click="btnSaveAll_Click">
+                <Button Name="btnCancel" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Discard changes" HorizontalContentAlignment="Left" Click="btnCancel_Click">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="DatabasePlus" />
+                        <materialDesign:PackIcon Kind="Close" Foreground="Red" />
                         <TextBlock Width="15" />
-                        <TextBlock>Save</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries to separate file" HorizontalContentAlignment="Left" Click="btnBackup_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FolderLock" />
-                        <TextBlock Width="15" />
-                        <TextBlock>Backup</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries DECODED(!) to separate file" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="FolderLockOpen" />
-                        <TextBlock Width="15" />
-                        <TextBlock>Backup decoded</TextBlock>
+                        <TextBlock Foreground="Red">Cancel</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
@@ -82,27 +67,8 @@
             </StackPanel>
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
-        <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
-            <ListView Name="listViewPasswords">
-                <ListView.View>
-                    <GridView>
-                        <!--<GridViewColumn Header="Image" Width="200" />-->
-                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="200"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
-                        <GridViewColumn Header="Warning">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <DataTemplate.Resources>
-                                        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
-                                    </DataTemplate.Resources>
-                                    <materialDesign:PackIcon Kind="AlertCircleOutline" Visibility="{Binding IsExpired, Converter={StaticResource VisibilityOfBool}}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+        <Grid Width="770" HorizontalAlignment="Right">
+            
         </Grid>
     </Grid>
-    
 </UserControl>
