@@ -3,6 +3,7 @@ using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace PassStorage2.Controller
@@ -28,6 +29,10 @@ namespace PassStorage2.Controller
         public IEnumerable<Password> GetAll()
         {
             Logger.Instance.FunctionStart();
+            Logger.Instance.Debug($"========= Get All start =========");
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             try
             {
                 Passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
@@ -41,6 +46,8 @@ namespace PassStorage2.Controller
             }
             finally
             {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"========= Get All finished in {stopWatch.ElapsedMilliseconds} ms =========");
                 Logger.Instance.FunctionEnd();
             }
         }
@@ -138,9 +145,12 @@ namespace PassStorage2.Controller
 
         public void Save(Password pass)
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             Logger.Instance.FunctionStart();
             try
             {
+                Logger.Instance.Debug("============ STARTING SAVING ============ ");
                 var passwords = GetAll().ToList();
 
                 if (pass.Id == null)
@@ -173,6 +183,8 @@ namespace PassStorage2.Controller
             }
             finally
             {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"============ FINISHED SAVING ({stopWatch.ElapsedMilliseconds} ms) ============ ");
                 Logger.Instance.FunctionEnd();
             }
         }
@@ -252,6 +264,10 @@ namespace PassStorage2.Controller
         public void IncrementViewCount(Guid id, IEnumerable<Password> passwords)
         {
             Logger.Instance.FunctionStart();
+            Logger.Instance.Debug("=============== INCREMENT VIEW COUNT ===============");
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            
             try
             {
                 Password password = null;
@@ -271,6 +287,11 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.Error(e);
                 throw;
+            }
+            finally
+            {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"=============== INCREMENT VIEW COUNT FINISHED ({stopWatch.ElapsedMilliseconds} ms) ===============");
             }
         }
 

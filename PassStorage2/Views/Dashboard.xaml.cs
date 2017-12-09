@@ -4,6 +4,7 @@ using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -42,7 +43,7 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
-                controller.IncrementViewCount(pass.Id.Value, passwords);
+                Task.Run(() => controller.IncrementViewCount(pass.Id.Value, passwords));
                 detailTitle.Text = pass.Title;
                 detailLogin.Text = pass.Login;
                 detailPassword.Text = pass.Pass;
@@ -78,6 +79,7 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ControlLoadingGrid(true, "Loading...");
             passwords = controller.GetAll().ToList();
 
             RefreshLabels();
@@ -100,6 +102,17 @@ namespace PassStorage2.Views
                         break;
                     }
             }
+            ControlLoadingGrid(false, null);
+        }
+
+        private void ControlLoadingGrid(bool isVisible, string message)
+        {
+            if (!string.IsNullOrEmpty(message)) waitMsg.Text = message;
+
+            if (isVisible)
+                gridWait.Visibility = Visibility.Visible;
+            else
+                gridWait.Visibility = Visibility.Hidden;
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)

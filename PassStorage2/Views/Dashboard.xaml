@@ -11,7 +11,6 @@
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
              d:DesignHeight="650" d:DesignWidth="1024" Loaded="UserControl_Loaded">
     <Grid>
-
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
                 <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
@@ -76,6 +75,10 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
+        </Grid>
+        <Grid Name="gridWait" Width="240" HorizontalAlignment="Left">
+            <ProgressBar Margin="12,12,12,12" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsIndeterminate="True" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" />
+            <TextBlock Name="waitMsg" Margin="50,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Saving...</TextBlock>
         </Grid>
         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="1" HorizontalAlignment="Left" Margin="250,0,0,0" />
         <Grid Name="gridList" Width="770" HorizontalAlignment="Right">
