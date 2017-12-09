@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PassStorage2.Base;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,6 +16,7 @@ namespace PassStorage2
         {
             InitializeComponent();
             ConsoleManager.Show();
+            Logger.Instance.SetLogLevel(Logger.LogLevel.DEBUG);
             controller = new Controller.MainController();
             Switcher.pageSwitcher = this;
             Switcher.Switch(new Views.Login(controller));

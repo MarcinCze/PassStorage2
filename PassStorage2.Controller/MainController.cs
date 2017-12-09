@@ -15,6 +15,7 @@ namespace PassStorage2.Controller
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
+        protected IEnumerable<Password> Passwords { get; set; }
 
         public MainController()
         {
@@ -29,7 +30,9 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
+                Passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
+                Logger.Instance.Debug("Returning passwords");
+                return Passwords;
             }
             catch (Exception e)
             {
@@ -47,7 +50,25 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return GetAll().Where(x => x.IsExpired).OrderBy(x => x.Title);
+                return GetAllExpired(GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return passwords.Where(x => x.IsExpired).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -65,7 +86,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList().FirstOrDefault(x => x.Id == id);
+                return GetAll().FirstOrDefault(x => x.Id == id);
             }
             catch (Exception e)
             {
@@ -83,7 +104,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList();
+                var passwords = GetAll().ToList();
                 passwords.Remove(passwords.First(x => x.Id == id));
                 storage.Save(encoder.Encode(passwords, PasswordFirst, PasswordSecond));
             }
@@ -102,7 +123,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var passwords = decoder.Decode(storage.Read(), PasswordFirst, PasswordSecond).ToList();
+                var passwords = GetAll().ToList();
 
                 if (pass.Id == null)
                 {
@@ -217,7 +238,25 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var analyzer = new MostUsageAnalyzer(GetAll());
+                return GetMostUsed(GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var analyzer = new MostUsageAnalyzer(passwords);
                 return analyzer.Analyze();
             }
             catch (Exception e)

@@ -66,10 +66,8 @@ namespace PassStorage2.Views
         {
             try
             {
-                passwords = controller.GetAll().ToList();
-
                 ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
-                ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed().Count()})";
+                ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed(passwords).Count()})";
                 ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
             }
             catch (Exception ex)
@@ -80,6 +78,8 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            passwords = controller.GetAll().ToList();
+
             RefreshLabels();
 
             switch (menu)
@@ -105,25 +105,23 @@ namespace PassStorage2.Views
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
             RefreshLabels();
-            passwords = controller.GetAll().ToList();
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = passwords;
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            RefreshLabels();
-            passwords = controller.GetMostUsed().ToList();
+            var mostUsed = controller.GetMostUsed(passwords);
             listViewPasswords.ItemsSource = null;
-            listViewPasswords.ItemsSource = passwords;
+            listViewPasswords.ItemsSource = mostUsed;
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
             RefreshLabels();
-            passwords = controller.GetAllExpired().ToList();
+            var expired = controller.GetAllExpired(passwords);
             listViewPasswords.ItemsSource = null;
-            listViewPasswords.ItemsSource = passwords;
+            listViewPasswords.ItemsSource = expired;
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)

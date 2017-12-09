@@ -9,7 +9,9 @@ namespace PassStorage2.Controller.Interfaces
         bool SetPasswords(string primary, string secondary);
         IEnumerable<Password> GetAll();
         IEnumerable<Password> GetAllExpired();
+        IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords);
         IEnumerable<Password> GetMostUsed();
+        IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords);
         Password Get(Guid id);
         void Save(Password pass);
         void Delete(Guid id);

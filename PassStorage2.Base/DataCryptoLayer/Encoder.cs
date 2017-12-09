@@ -23,9 +23,9 @@ namespace PassStorage2.Base.DataCryptoLayer
                     //pass.Login = PlayfairCipher.Encipher(pass.Login, secondaryKey);
                     //pass.Pass = PlayfairCipher.Encipher(pass.Pass, secondaryKey);
 
-                    pass.Title = AES.Encrypt(pass.Title, primaryKey);
-                    pass.Login = AES.Encrypt(pass.Login, primaryKey);
-                    pass.Pass = AES.Encrypt(pass.Pass, primaryKey);
+                    //pass.Title = AES.Encrypt(pass.Title, primaryKey);
+                    //pass.Login = AES.Encrypt(pass.Login, primaryKey);
+                    //pass.Pass = AES.Encrypt(pass.Pass, primaryKey);
 
                     pass.Title = Rijndael.EncryptRijndael(pass.Title, secondaryKey);
                     pass.Login = Rijndael.EncryptRijndael(pass.Login, secondaryKey);
