@@ -86,7 +86,25 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                return GetAll().FirstOrDefault(x => x.Id == id);
+                return Get(id, GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public Password Get(Guid id, IEnumerable<Password> passwords)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return passwords.FirstOrDefault(x => x.Id == id);
             }
             catch (Exception e)
             {
@@ -222,7 +240,30 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var password = Get(id);
+                IncrementViewCount(id, null);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                throw;
+            }
+        }
+
+        public void IncrementViewCount(Guid id, IEnumerable<Password> passwords)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                Password password = null;
+                if (passwords == null)
+                {
+                    password = Get(id);
+                }
+                else
+                {
+                    password = Get(id, passwords);
+                }
+
                 password.ViewCount++;
                 Save(password);
             }

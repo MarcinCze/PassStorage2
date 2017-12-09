@@ -42,7 +42,7 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
-                controller.IncrementViewCount(pass.Id.Value);
+                controller.IncrementViewCount(pass.Id.Value, passwords);
                 detailTitle.Text = pass.Title;
                 detailLogin.Text = pass.Login;
                 detailPassword.Text = pass.Pass;
