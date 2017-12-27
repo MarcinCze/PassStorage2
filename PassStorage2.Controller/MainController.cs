@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PassStorage2.Controller
 {
-    public class MainController : IController
+    public class MainController //: IController
     {
         readonly Base.DataAccessLayer.Interfaces.IStorage storage;
         readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
@@ -88,7 +88,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public Password Get(Guid id)
+        public Password Get(int id)
         {
             Logger.Instance.FunctionStart();
             try
@@ -106,7 +106,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public Password Get(Guid id, IEnumerable<Password> passwords)
+        public Password Get(int id, IEnumerable<Password> passwords)
         {
             Logger.Instance.FunctionStart();
             try
@@ -124,7 +124,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void Delete(Guid id)
+        public void Delete(int id)
         {
             Logger.Instance.FunctionStart();
             try
@@ -157,7 +157,7 @@ namespace PassStorage2.Controller
                 {
                     pass.SaveTime = DateTime.Now;
                     pass.PassChangeTime = DateTime.Now;
-                    pass.Id = Guid.NewGuid();
+                    //pass.Id = Guid.NewGuid();
                     passwords.Add(pass);
                     storage.Save(encoder.Encode(passwords, PasswordFirst, PasswordSecond));
                     return;
@@ -231,7 +231,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void UpdateViewCount(Guid id, int counter)
+        public void UpdateViewCount(int id, int counter)
         {
             Logger.Instance.FunctionStart();
             try
@@ -247,7 +247,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void IncrementViewCount(Guid id)
+        public void IncrementViewCount(int id)
         {
             Logger.Instance.FunctionStart();
             try
@@ -261,7 +261,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void IncrementViewCount(Guid id, IEnumerable<Password> passwords)
+        public void IncrementViewCount(int id, IEnumerable<Password> passwords)
         {
             Logger.Instance.FunctionStart();
             Logger.Instance.Debug("=============== INCREMENT VIEW COUNT ===============");

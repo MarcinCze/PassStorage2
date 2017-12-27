@@ -51,6 +51,7 @@
     <Compile Include="Interfaces\IController.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqliteController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Key-256.ico" />

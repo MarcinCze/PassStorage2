@@ -20,7 +20,7 @@ namespace PassStorage2.Views
         readonly IController controller;
         readonly MenuType menu;
         List<Password> passwords;
-        Guid? detailsId;
+        int detailsId;
 
         public enum MenuType { ALL, MOST, EXPIRY }
 
@@ -43,7 +43,7 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
-                Task.Run(() => controller.IncrementViewCount(pass.Id.Value, passwords));
+                controller.IncrementViewCount(pass.Id, passwords);
                 detailTitle.Text = pass.Title;
                 detailLogin.Text = pass.Login;
                 detailPassword.Text = pass.Pass;

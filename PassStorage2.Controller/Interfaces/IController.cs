@@ -12,13 +12,13 @@ namespace PassStorage2.Controller.Interfaces
         IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords);
         IEnumerable<Password> GetMostUsed();
         IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords);
-        Password Get(Guid id);
-        Password Get(Guid id, IEnumerable<Password> passwords);
+        Password Get(int id);
+        Password Get(int id, IEnumerable<Password> passwords);
         void Save(Password pass);
-        void Delete(Guid id);
-        void UpdateViewCount(Guid id, int counter);
-        void IncrementViewCount(Guid id);
-        void IncrementViewCount(Guid id, IEnumerable<Password> passwords);
+        void Delete(int id);
+        void UpdateViewCount(int id, int counter);
+        void IncrementViewCount(int id);
+        void IncrementViewCount(int id, IEnumerable<Password> passwords);
         void Backup();
         void BackupDecoded();
     }

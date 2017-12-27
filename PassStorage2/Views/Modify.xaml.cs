@@ -26,7 +26,7 @@ namespace PassStorage2.Views
         IController controller;
         Password password;
 
-        public Modify(IController cntr, Guid? passwordId = null)
+        public Modify(IController cntr, int? passwordId = null)
         {
             InitializeComponent();
             Logger.Instance.Debug("Creating Modify user control");
