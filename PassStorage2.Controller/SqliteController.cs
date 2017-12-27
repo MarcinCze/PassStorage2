@@ -18,7 +18,6 @@ namespace PassStorage2.Controller
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
-        protected IEnumerable<Password> Passwords { get; set; }
 
         public SqliteController()
         {
@@ -191,7 +190,7 @@ namespace PassStorage2.Controller
             throw new NotImplementedException();
         }
 
-        public void Save(Password pass)
+        public void Save(Password pass, bool updatePassTime)
         {
             Logger.Instance.FunctionStart();
             Logger.Instance.Debug($"############# SAVE #############");
@@ -200,7 +199,7 @@ namespace PassStorage2.Controller
             try
             {
                 Logger.Instance.FunctionStart();
-                storage.Save(encoder.Encode(pass, PasswordFirst, PasswordSecond));
+                storage.Save(encoder.Encode(pass, PasswordFirst, PasswordSecond), updatePassTime);
             }
             catch (Exception e)
             {

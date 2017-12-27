@@ -43,7 +43,7 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        public bool Save(Password pass)
+        public bool Save(Password pass, bool isPassUpdate)
         {
             try
             {
@@ -56,7 +56,8 @@ namespace PassStorage2.Base.DataAccessLayer
                 }
                 else
                 {
-                    query = $"UPDATE Password SET Title = '{pass.Title}', Login = '{pass.Login}', Pass = '{pass.Pass}', SaveTime = '{pass.SaveTime.ToString("O")}', PassChangeTime = '{pass.PassChangeTime.ToString("O")}', ViewCount = {pass.ViewCount} WHERE Id = {pass.Id}";
+                    string updTime = isPassUpdate ? $", PassChangeTime = '{DateTime.Now.ToString("O")}'" : string.Empty;
+                    query = $"UPDATE Password SET Title = '{pass.Title}', Login = '{pass.Login}', Pass = '{pass.Pass}', ViewCount = {pass.ViewCount} {updTime} WHERE Id = {pass.Id}";
                 }
 
                 using (var connection = new SQLiteConnection(ConnString))
@@ -98,7 +99,7 @@ namespace PassStorage2.Base.DataAccessLayer
                     var command = new SQLiteCommand(query, connection);
                     var reader = command.ExecuteReader();
                     reader.Read();
-                    return new Password
+                    var pass = new Password
                     {
                         Id = reader.GetInt32(0),
                         Title = reader.GetString(1),
@@ -108,6 +109,8 @@ namespace PassStorage2.Base.DataAccessLayer
                         PassChangeTime = reader.GetDateTime(5),
                         ViewCount = reader.GetInt32(6),
                     };
+                    connection.Close();
+                    return pass;
                 }
             }
             catch (Exception e)

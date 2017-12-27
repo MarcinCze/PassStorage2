@@ -14,7 +14,7 @@ namespace PassStorage2.Controller.Interfaces
         IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords);
         Password Get(int id);
         Password Get(int id, IEnumerable<Password> passwords);
-        void Save(Password pass);
+        void Save(Password pass, bool updatePassTime);
         void Delete(int id);
         void UpdateViewCount(int id, int counter);
         void IncrementViewCount(int id);

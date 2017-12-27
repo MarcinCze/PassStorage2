@@ -4,6 +4,7 @@ using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -82,29 +83,38 @@ namespace PassStorage2.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             ControlLoadingGrid(true, "Loading...");
+
+            passwords = null;
+            Task.Run(() => LoadList());
+        }
+
+        private void LoadList()
+        {
             passwords = controller.GetAll().ToList();
 
-            RefreshLabels();
-
-            switch (menu)
+            Dispatcher.Invoke(() =>
             {
-                case MenuType.ALL:
-                    {
-                        btnAll_Click(sender, e);
-                        break;
-                    }
-                case MenuType.MOST:
-                    {
-                        btnMostlyUsed_Click(sender, e);
-                        break;
-                    }
-                case MenuType.EXPIRY:
-                    {
-                        btnExpiryWarning_Click(sender, e);
-                        break;
-                    }
-            }
-            ControlLoadingGrid(false, null);
+                ControlLoadingGrid(false, null);
+
+                switch (menu)
+                {
+                    case MenuType.ALL:
+                        {
+                            btnAll_Click(null, null);
+                            break;
+                        }
+                    case MenuType.MOST:
+                        {
+                            btnMostlyUsed_Click(null, null);
+                            break;
+                        }
+                    case MenuType.EXPIRY:
+                        {
+                            btnExpiryWarning_Click(null, null);
+                            break;
+                        }
+                }
+            });
         }
 
         private void ControlLoadingGrid(bool isVisible, string message)
@@ -126,6 +136,7 @@ namespace PassStorage2.Views
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
+            RefreshLabels();
             var mostUsed = controller.GetMostUsed(passwords);
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = mostUsed;

@@ -46,8 +46,8 @@ namespace PassStorage2.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            passPrimary.Password = "czernecki";
-            passSecondary.Password = "cichosczernecki";
+            passPrimary.Password = "SkodaFabia";
+            passSecondary.Password = "martusia";
 
             bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 

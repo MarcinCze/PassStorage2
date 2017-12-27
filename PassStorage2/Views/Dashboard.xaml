@@ -76,7 +76,7 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <Grid Name="gridWait" Width="240" HorizontalAlignment="Left">
+        <Grid Name="gridWait" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,70,50,50">
             <ProgressBar Margin="12,12,12,12" HorizontalAlignment="Left" VerticalAlignment="Bottom" IsIndeterminate="True" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" />
             <TextBlock Name="waitMsg" Margin="50,0,0,13" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Saving...</TextBlock>
         </Grid>

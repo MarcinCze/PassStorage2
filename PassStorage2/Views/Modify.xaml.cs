@@ -93,11 +93,13 @@ namespace PassStorage2.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            bool updTime = !(password.Pass.Equals(tbPassword.Text));
+
             password.Title = tbTitle.Text;
             password.Login = tbLogin.Text;
             password.Pass = tbPassword.Text;
             
-            controller.Save(password);
+            controller.Save(password, updTime);
             Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
         }
 
