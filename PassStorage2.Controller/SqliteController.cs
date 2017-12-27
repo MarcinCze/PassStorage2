@@ -45,7 +45,23 @@ namespace PassStorage2.Controller
 
         public Password Get(int id)
         {
-            throw new NotImplementedException();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            Logger.Instance.Debug($"########### GET ###########");
+            try
+            {
+                return decoder.Decode(storage.Get(id), PasswordFirst, PasswordSecond);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return null;
+            }
+            finally
+            {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"########### GET {stopWatch.ElapsedMilliseconds} ms ###########");
+            }
         }
 
         public Password Get(int id, IEnumerable<Password> passwords)
@@ -60,7 +76,7 @@ namespace PassStorage2.Controller
             Logger.Instance.Debug($"########### GET ALL ###########");
             try
             {
-                return decoder.Decode(storage.GetAll(), PasswordFirst, PasswordSecond);
+                return decoder.Decode(storage.GetAll(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
@@ -76,27 +92,98 @@ namespace PassStorage2.Controller
 
         public IEnumerable<Password> GetAllExpired()
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return GetAllExpired(GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords)
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return passwords.Where(x => x.IsExpired).OrderBy(x => x.Title);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public IEnumerable<Password> GetMostUsed()
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return GetMostUsed(GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords)
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                var analyzer = new MostUsageAnalyzer(passwords);
+                return analyzer.Analyze();
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e.Message);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void IncrementViewCount(int id)
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            Logger.Instance.Debug($"########### IncrementViewCount ###########");
+
+            try
+            {
+                storage.IncrementViewCount(id);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"########### IncrementViewCount ({stopWatch.ElapsedMilliseconds} ms) ###########");
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void IncrementViewCount(int id, IEnumerable<Password> passwords)

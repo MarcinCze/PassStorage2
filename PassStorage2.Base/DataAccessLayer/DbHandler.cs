@@ -80,6 +80,44 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
+        public Password Get(int id)
+        {
+            try
+            {
+                Logger.Instance.FunctionStart();
+
+                var list = new List<Password>();
+                string query = $"SELECT Id, Title, Login, Pass, SaveTime, PassChangeTime, ViewCount FROM Password WHERE Id = {id}";
+
+                using (var connection = new SQLiteConnection(ConnString))
+                {
+                    connection.Open();
+                    var command = new SQLiteCommand(query, connection);
+                    var reader = command.ExecuteReader();
+                    reader.Read();
+                    return new Password
+                    {
+                        Id = reader.GetInt32(0),
+                        Title = reader.GetString(1),
+                        Login = reader.GetString(2),
+                        Pass = reader.GetString(3),
+                        SaveTime = reader.GetDateTime(4),
+                        PassChangeTime = reader.GetDateTime(5),
+                        ViewCount = reader.GetInt32(6),
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
         public IEnumerable<Password> GetAll()
         {
             try
@@ -118,6 +156,35 @@ namespace PassStorage2.Base.DataAccessLayer
             {
                 Logger.Instance.Error(e);
                 return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
+        }
+
+        public bool IncrementViewCount(int id)
+        {
+            try
+            {
+                Logger.Instance.FunctionStart();
+
+                string query = $"UPDATE Password SET ViewCount = ViewCount + 1 WHERE Id = {id}";
+
+                using (var connection = new SQLiteConnection(ConnString))
+                {
+                    connection.Open();
+                    var command = new SQLiteCommand(query, connection);
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return false;
             }
             finally
             {
