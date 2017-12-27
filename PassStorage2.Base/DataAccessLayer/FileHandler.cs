@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using PassStorage2.Base.DataAccessLayer.Interfaces;
 using PassStorage2.Models;
 using Newtonsoft.Json;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
-    public class FileHandler : IStorage
+    public class FileHandler
     {
         protected const string FileName = "PassStorage2.Storage.dat";
 

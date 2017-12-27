@@ -1,4 +1,5 @@
 ﻿using PassStorage2.Base;
+using PassStorage2.Base.DataAccessLayer;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using System;
@@ -10,7 +11,7 @@ namespace PassStorage2.Controller
 {
     public class MainController //: IController
     {
-        readonly Base.DataAccessLayer.Interfaces.IStorage storage;
+        readonly FileHandler storage;
         readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
         readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
@@ -21,7 +22,7 @@ namespace PassStorage2.Controller
         public MainController()
         {
             Logger.Instance.Debug("Creating MainController");
-            storage = new Base.DataAccessLayer.FileHandler();
+            storage = new FileHandler();
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
         }

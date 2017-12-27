@@ -1,11 +1,10 @@
-﻿using PassStorage2.Base.DataAccessLayer.Interfaces;
-using PassStorage2.Models;
+﻿using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
-    public class WebServiceHandler : IReadData, ISaveData
+    public class WebServiceHandler
     {
         public IEnumerable<Password> Read() => throw new NotImplementedException();
 

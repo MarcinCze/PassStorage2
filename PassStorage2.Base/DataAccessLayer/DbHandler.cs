@@ -1,8 +1,8 @@
-﻿using PassStorage2.Base.DataAccessLayer.Interfaces;
-using PassStorage2.Models;
+﻿using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 
 namespace PassStorage2.Base.DataAccessLayer
@@ -82,6 +82,9 @@ namespace PassStorage2.Base.DataAccessLayer
 
         public Password Get(int id)
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             try
             {
                 Logger.Instance.FunctionStart();
@@ -114,16 +117,21 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             finally
             {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"**** Get from DB ended in {stopWatch.ElapsedMilliseconds} ms");
                 Logger.Instance.FunctionEnd();
             }
         }
 
         public IEnumerable<Password> GetAll()
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             try
             {
                 Logger.Instance.FunctionStart();
-
+                
                 var list = new List<Password>();
                 string query = "SELECT Id, Title, Login, Pass, SaveTime, PassChangeTime, ViewCount FROM Password";
 
@@ -159,6 +167,8 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             finally
             {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"**** GetAll from DB ended in {stopWatch.ElapsedMilliseconds} ms");
                 Logger.Instance.FunctionEnd();
             }
         }
