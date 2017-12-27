@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PassStorage2.Base;
 using PassStorage2.Base.DataAccessLayer;
 using PassStorage2.Models;
+using System.IO;
 
 namespace PassStorage2.Controller
 {
@@ -29,7 +30,34 @@ namespace PassStorage2.Controller
 
         public void Backup()
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                if (!Directory.Exists("Backups")) Directory.CreateDirectory("Backups");
+
+                string fileName = $"{DbHandler.FileName}_{DateTime.Now.ToString("yyyy-MM-dd")}";
+                int idx = 1;
+
+                while (true)
+                {
+                    if (!File.Exists($"Backups\\{fileName}"))
+                    {
+                        File.Copy(DbHandler.FileName, $"Backups\\{fileName}");
+                        break;
+                    }
+
+                    fileName = $"{DbHandler.FileName}_{DateTime.Now.ToString("yyyy-MM-dd")}" + $"_{idx}";
+                    idx++;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void BackupDecoded()
@@ -46,7 +74,6 @@ namespace PassStorage2.Controller
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            Logger.Instance.Debug($"########### GET ###########");
             try
             {
                 return decoder.Decode(storage.Get(id), PasswordFirst, PasswordSecond);
@@ -72,7 +99,6 @@ namespace PassStorage2.Controller
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            Logger.Instance.Debug($"########### GET ALL ###########");
             try
             {
                 return decoder.Decode(storage.GetAll(), PasswordFirst, PasswordSecond).OrderBy(x => x.Title);
@@ -167,7 +193,6 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            Logger.Instance.Debug($"########### IncrementViewCount ###########");
 
             try
             {
@@ -193,7 +218,6 @@ namespace PassStorage2.Controller
         public void Save(Password pass, bool updatePassTime)
         {
             Logger.Instance.FunctionStart();
-            Logger.Instance.Debug($"############# SAVE #############");
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             try

@@ -30,6 +30,7 @@ namespace PassStorage2.Base
                 int max = passwords.Max(x => x.ViewCount);
                 int min = passwords.Min(x => x.ViewCount);
                 int border = (max - min) / 2 + min;
+                Logger.Instance.Debug($"MOST USED VALS :: Min [{min}] :: Max [{max}] :: Border [{border}]");
 
                 foreach (var pass in passwords)
                 {

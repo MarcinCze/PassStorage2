@@ -46,9 +46,6 @@ namespace PassStorage2.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            passPrimary.Password = "SkodaFabia";
-            passSecondary.Password = "martusia";
-
             bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 
             if (!result)
@@ -61,7 +58,6 @@ namespace PassStorage2.Views
                 Logger.Instance.Debug("SetPass ok. Switching to DASHBOARD");
                 Switcher.Switch(new Dashboard(controller));
             }
-                
         }
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)

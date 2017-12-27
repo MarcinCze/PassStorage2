@@ -9,7 +9,7 @@ namespace PassStorage2.Base.DataAccessLayer
 {
     public class DbHandler
     {
-        protected const string FileName = "PassStorage2.Storage.sqlite";
+        public const string FileName = "PassStorage2.Storage.sqlite";
         protected string ConnString => $"Data Source={FileName};Version=3;";
 
         public DbHandler()
