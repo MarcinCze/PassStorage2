@@ -25,11 +25,14 @@ namespace PassStorage2.Views
     {
         IController controller;
         Password password;
+        Counters counters;
 
-        public Modify(IController cntr, int? passwordId = null)
+        public Modify(IController cntr, Counters c, int? passwordId = null)
         {
             InitializeComponent();
             Logger.Instance.Debug("Creating Modify user control");
+
+            this.counters = c;
 
             if (cntr is null)
                 Logger.Instance.Warning("Modify :: controller is empty");
@@ -49,11 +52,17 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            var passwords = controller.GetAll().ToList();
+            if (counters.NeedRefresh)
+            {
+                var passwords = controller.GetAll().ToList();
+                counters.All = passwords.Count;
+                counters.MostUsed = controller.GetMostUsed(passwords).Count();
+                counters.Expired = passwords.Count(x => x.IsExpired);
+            }
 
-            ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count})";
-            ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.ViewCount > 0)})";
-            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({passwords.Count(x => x.IsExpired)})";
+            ((btnAll.Content as StackPanel).Children[2] as TextBlock).Text += $" ({counters.All})";
+            ((btnMostlyUsed.Content as StackPanel).Children[2] as TextBlock).Text += $" ({counters.MostUsed})";
+            ((btnExpiryWarning.Content as StackPanel).Children[2] as TextBlock).Text += $" ({counters.Expired})";
 
             if (password != null)
             {

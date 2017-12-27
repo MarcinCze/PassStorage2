@@ -48,6 +48,7 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Counters.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="PasswordExt.cs" />
     <Compile Include="Root.cs" />

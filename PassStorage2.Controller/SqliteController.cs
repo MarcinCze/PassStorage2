@@ -193,6 +193,10 @@ namespace PassStorage2.Controller
 
         public void Save(Password pass)
         {
+            Logger.Instance.FunctionStart();
+            Logger.Instance.Debug($"############# SAVE #############");
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             try
             {
                 Logger.Instance.FunctionStart();
@@ -204,6 +208,8 @@ namespace PassStorage2.Controller
             }
             finally
             {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"############# SAVE {stopWatch.ElapsedMilliseconds} ms #############");
                 Logger.Instance.FunctionEnd();
             }
         }

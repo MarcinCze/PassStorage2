@@ -20,6 +20,7 @@ namespace PassStorage2.Views
         readonly IController controller;
         readonly MenuType menu;
         List<Password> passwords;
+        Counters counters;
         int detailsId;
 
         public enum MenuType { ALL, MOST, EXPIRY }
@@ -67,9 +68,10 @@ namespace PassStorage2.Views
         {
             try
             {
-                ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count})";
-                ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({controller.GetMostUsed(passwords).Count()})";
-                ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({passwords.Count(x => x.IsExpired)})";
+                counters = new Counters(passwords.Count, controller.GetMostUsed(passwords).Count(), passwords.Count(x => x.IsExpired));
+                ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({counters.All})";
+                ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({counters.MostUsed})";
+                ((btnExpiryWarning.Content as StackPanel).Children[3] as TextBlock).Text = $" ({counters.Expired})";
             }
             catch (Exception ex)
             {
@@ -139,7 +141,7 @@ namespace PassStorage2.Views
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Modify(controller));
+            Switcher.Switch(new Modify(controller, counters));
         }
 
         private void btnBackup_Click(object sender, RoutedEventArgs e)
@@ -214,7 +216,7 @@ namespace PassStorage2.Views
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Modify(controller, detailsId));
+            Switcher.Switch(new Modify(controller, counters, detailsId));
         }
     }
 }
