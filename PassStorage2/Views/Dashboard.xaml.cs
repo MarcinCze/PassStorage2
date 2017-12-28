@@ -4,7 +4,6 @@ using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -18,15 +17,15 @@ namespace PassStorage2.Views
     /// </summary>
     public partial class Dashboard : UserControl
     {
-        readonly IController controller;
-        readonly MenuType menu;
-        List<Password> passwords;
-        Counters counters;
-        int detailsId;
+        private readonly IController controller;
+        private readonly MenuType menu;
+        private List<Password> passwords;
+        private Counters counters;
+        private int detailsId;
 
-        public enum MenuType { ALL, MOST, EXPIRY }
+        public enum MenuType { All, Most, Expiry }
 
-        public Dashboard(IController cntr, MenuType menu = MenuType.ALL)
+        public Dashboard(IController cntr, MenuType menu = MenuType.All)
         {
             InitializeComponent();
             Logger.Instance.Debug("Creating Dashboard user control");
@@ -98,17 +97,17 @@ namespace PassStorage2.Views
 
                 switch (menu)
                 {
-                    case MenuType.ALL:
+                    case MenuType.All:
                         {
                             btnAll_Click(null, null);
                             break;
                         }
-                    case MenuType.MOST:
+                    case MenuType.Most:
                         {
                             btnMostlyUsed_Click(null, null);
                             break;
                         }
-                    case MenuType.EXPIRY:
+                    case MenuType.Expiry:
                         {
                             btnExpiryWarning_Click(null, null);
                             break;
@@ -121,10 +120,7 @@ namespace PassStorage2.Views
         {
             if (!string.IsNullOrEmpty(message)) waitMsg.Text = message;
 
-            if (isVisible)
-                gridWait.Visibility = Visibility.Visible;
-            else
-                gridWait.Visibility = Visibility.Hidden;
+            gridWait.Visibility = isVisible ? Visibility.Visible : Visibility.Hidden;
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
@@ -203,8 +199,7 @@ namespace PassStorage2.Views
         {
             try
             {
-                var item = (sender as ListView).SelectedItem as Password;
-                if (item == null)
+                if (!((sender as ListView).SelectedItem is Password item))
                     throw new Exception("Selected item is null");
 
                 OpenDetailsDrawer(item);

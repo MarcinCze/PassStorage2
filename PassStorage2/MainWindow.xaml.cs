@@ -10,15 +10,15 @@ namespace PassStorage2
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controller.Interfaces.IController controller;
+        readonly Controller.Interfaces.IController controller;
 
         public MainWindow()
         {
             InitializeComponent();
             //ConsoleManager.Show();
-            Logger.Instance.SetLogLevel(Logger.LogLevel.DEBUG);
+            Logger.Instance.SetLogLevel(Logger.LogLevel.Debug);
             controller = new Controller.SqliteController();
-            Switcher.pageSwitcher = this;
+            Switcher.PageSwitcher = this;
             Switcher.Switch(new Views.Login(controller));
         }
 

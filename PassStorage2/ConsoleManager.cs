@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PassStorage2
 {
@@ -27,10 +23,7 @@ namespace PassStorage2
         [DllImport(Kernel32_DllName)]
         private static extern int GetConsoleOutputCP();
 
-        public static bool HasConsole
-        {
-            get { return GetConsoleWindow() != IntPtr.Zero; }
-        }
+        public static bool HasConsole => GetConsoleWindow() != IntPtr.Zero;
 
         /// <summary>
         /// Creates a new console instance if the process is not attached to a console already.

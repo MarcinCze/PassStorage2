@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PassStorage2.Base;
+using PassStorage2.Controller.Interfaces;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xaml;
-using PassStorage2.Controller.Interfaces;
-using PassStorage2.Base;
 
 namespace PassStorage2.Views
 {
@@ -23,7 +12,7 @@ namespace PassStorage2.Views
     /// </summary>
     public partial class Login : UserControl, ISwitchable
     {
-        IController controller;
+        private readonly IController controller;
 
         public Login(IController cntr)
         {
@@ -62,7 +51,7 @@ namespace PassStorage2.Views
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.pageSwitcher.WindowState = WindowState.Minimized;
+            Switcher.PageSwitcher.WindowState = WindowState.Minimized;
         }
 
         private void menuClose_Click(object sender, RoutedEventArgs e)
@@ -73,6 +62,11 @@ namespace PassStorage2.Views
         private void menuAbout_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UserControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) btnLogin_Click(null, null);
         }
     }
 }

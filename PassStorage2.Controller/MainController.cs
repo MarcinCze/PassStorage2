@@ -11,9 +11,9 @@ namespace PassStorage2.Controller
 {
     public class MainController //: IController
     {
-        readonly FileHandler storage;
-        readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
-        readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
+        private readonly FileHandler storage;
+        private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
+        private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
@@ -154,7 +154,7 @@ namespace PassStorage2.Controller
                 Logger.Instance.Debug("============ STARTING SAVING ============ ");
                 var passwords = GetAll().ToList();
 
-                if (pass.Id == null)
+                if (pass.Id == 0)
                 {
                     pass.SaveTime = DateTime.Now;
                     pass.PassChangeTime = DateTime.Now;
@@ -272,14 +272,7 @@ namespace PassStorage2.Controller
             try
             {
                 Password password = null;
-                if (passwords == null)
-                {
-                    password = Get(id);
-                }
-                else
-                {
-                    password = Get(id, passwords);
-                }
+                password = passwords == null ? Get(id) : Get(id, passwords);
 
                 password.ViewCount++;
                 Save(password);

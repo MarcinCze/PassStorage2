@@ -10,20 +10,13 @@ namespace PassStorage2.Base
 {
     public sealed class Logger
     {
-        public enum LogLevel { ALL, DEBUG, WARNING, ERROR }
+        public enum LogLevel { All, Debug, Warning, Error }
 
-        private static readonly Logger instance = new Logger();
-        private LogLevel level = LogLevel.ERROR;
+        private LogLevel level = LogLevel.Error;
 
         private Logger() { }
 
-        public static Logger Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+        public static Logger Instance { get; } = new Logger();
 
         #region Protected functions
 
@@ -70,7 +63,7 @@ namespace PassStorage2.Base
         /// <param name="line">Line of code</param>
         public void FunctionStart([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.ALL)
+            if (level == LogLevel.All)
             {
                 Task.Run(() => FunctionStartAsync(name, filePath, line));
             }   
@@ -84,7 +77,7 @@ namespace PassStorage2.Base
         /// <param name="line">Line of code</param>
         public void FunctionEnd([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.ALL)
+            if (level == LogLevel.All)
             {
                 Task.Run(() => FunctionEndAsync(name, filePath, line));
             }
@@ -92,7 +85,7 @@ namespace PassStorage2.Base
 
         public void Debug(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.DEBUG || level == LogLevel.ALL)
+            if (level == LogLevel.Debug || level == LogLevel.All)
             {
                 Task.Run(() => DebugAsync(message, name, filePath, line));
             }
@@ -100,7 +93,7 @@ namespace PassStorage2.Base
 
         public void Warning(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level != LogLevel.ERROR)
+            if (level != LogLevel.Error)
             {
                 Task.Run(() => WarningAsync(message, name, filePath, line));
             }

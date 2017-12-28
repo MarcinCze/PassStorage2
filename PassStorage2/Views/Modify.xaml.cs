@@ -1,20 +1,10 @@
-﻿using PassStorage2.Base;
+﻿using System;
+using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PassStorage2.Views
 {
@@ -23,9 +13,9 @@ namespace PassStorage2.Views
     /// </summary>
     public partial class Modify : UserControl
     {
-        IController controller;
-        Password password;
-        Counters counters;
+        private readonly IController controller;
+        private readonly Counters counters;
+        private Password password;
 
         public Modify(IController cntr, Counters c, int? passwordId = null)
         {
@@ -78,34 +68,54 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.All));
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.MOST));
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.Most));
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.EXPIRY));
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.Expiry));
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            bool updTime = !(password.Pass.Equals(tbPassword.Text));
+            Logger.Instance.FunctionStart();
+            try
+            {
+                bool updTime;
+                if (string.IsNullOrEmpty(password?.Pass))
+                {
+                    updTime = true;
+                }
+                else
+                {
+                    updTime = !(password.Pass.Equals(tbPassword.Text));
+                }
 
-            password.Title = tbTitle.Text;
-            password.Login = tbLogin.Text;
-            password.Pass = tbPassword.Text;
-            
-            controller.Save(password, updTime);
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
+                password.Title = tbTitle.Text;
+                password.Login = tbLogin.Text;
+                password.Pass = tbPassword.Text;
+
+                controller.Save(password, updTime);
+                Switcher.Switch(new Dashboard(controller));
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.ALL));
+            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.All));
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

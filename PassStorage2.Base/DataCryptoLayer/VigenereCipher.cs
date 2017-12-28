@@ -1,4 +1,6 @@
-﻿namespace PassStorage2.Base.DataCryptoLayer
+﻿using System.Linq;
+
+namespace PassStorage2.Base.DataCryptoLayer
 {
     public static class VigenereCipher
     {
@@ -9,9 +11,10 @@
 
         private static string Cipher(string input, string key, bool encipher)
         {
-            for (int i = 0; i < key.Length; ++i)
-                if (!char.IsLetter(key[i]))
-                    return null; // Error
+            if (key.Any(t => !char.IsLetter(t)))
+            {
+                return null; // Error
+            }
 
             string output = string.Empty;
             int nonAlphaCharCount = 0;

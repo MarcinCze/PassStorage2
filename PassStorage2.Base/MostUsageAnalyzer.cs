@@ -2,18 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PassStorage2.Base
 {
     public class MostUsageAnalyzer
     {
-        protected readonly IEnumerable<Password> passwords;
+        protected readonly IEnumerable<Password> Passwords;
 
         public MostUsageAnalyzer (IEnumerable<Password> list)
         {
-            passwords = list;
+            Passwords = list;
         }
 
         public IEnumerable<Password> Analyze()
@@ -22,20 +20,17 @@ namespace PassStorage2.Base
             {
                 var mostUsed = new List<Password>();
 
-                if (!passwords.Any())
+                if (!Passwords.Any())
                 {
                     return mostUsed;
                 }
 
-                int max = passwords.Max(x => x.ViewCount);
-                int min = passwords.Min(x => x.ViewCount);
+                int max = Passwords.Max(x => x.ViewCount);
+                int min = Passwords.Min(x => x.ViewCount);
                 int border = (max - min) / 2 + min;
                 Logger.Instance.Debug($"MOST USED VALS :: Min [{min}] :: Max [{max}] :: Border [{border}]");
 
-                foreach (var pass in passwords)
-                {
-                    if (pass.ViewCount > border) mostUsed.Add(pass);
-                }
+                mostUsed.AddRange(Passwords.Where(pass => pass.ViewCount > border));
                 return mostUsed;
             }
             catch (Exception e)

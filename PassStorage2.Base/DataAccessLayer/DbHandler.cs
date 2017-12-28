@@ -23,7 +23,7 @@ namespace PassStorage2.Base.DataAccessLayer
 
         protected void GenerateTables()
         {
-            string query = @"
+            const string query = @"
                              CREATE TABLE Password (
                                 Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
                                 Title TEXT NOT NULL,
@@ -52,11 +52,11 @@ namespace PassStorage2.Base.DataAccessLayer
                 string query;
                 if (pass.Id == 0)
                 {
-                    query = $"INSERT INTO Password (Title, Login, Pass, SaveTime, PassChangeTime, ViewCount) VALUES ('{pass.Title}', '{pass.Login}', '{pass.Pass}', '{DateTime.Now.ToString("O")}', '{DateTime.Now.ToString("O")}', {pass.ViewCount})";
+                    query = $"INSERT INTO Password (Title, Login, Pass, SaveTime, PassChangeTime, ViewCount) VALUES ('{pass.Title}', '{pass.Login}', '{pass.Pass}', '{DateTime.Now:O}', '{DateTime.Now:O}', {pass.ViewCount})";
                 }
                 else
                 {
-                    string updTime = isPassUpdate ? $", PassChangeTime = '{DateTime.Now.ToString("O")}'" : string.Empty;
+                    string updTime = isPassUpdate ? $", PassChangeTime = '{DateTime.Now:O}'" : string.Empty;
                     query = $"UPDATE Password SET Title = '{pass.Title}', Login = '{pass.Login}', Pass = '{pass.Pass}', ViewCount = {pass.ViewCount} {updTime} WHERE Id = {pass.Id}";
                 }
 
@@ -90,7 +90,6 @@ namespace PassStorage2.Base.DataAccessLayer
             {
                 Logger.Instance.FunctionStart();
 
-                var list = new List<Password>();
                 string query = $"SELECT Id, Title, Login, Pass, SaveTime, PassChangeTime, ViewCount FROM Password WHERE Id = {id}";
 
                 using (var connection = new SQLiteConnection(ConnString))

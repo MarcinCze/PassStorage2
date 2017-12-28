@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using Newtonsoft.Json;
 using PassStorage2.Models;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
@@ -22,13 +20,13 @@ namespace PassStorage2.Base.DataAccessLayer
                 if (!File.Exists(FileName))
                 {
                     Logger.Instance.Warning($"File {FileName} doesn't exist!");
-                    Logger.Instance.Debug($"Saving empty list");
+                    Logger.Instance.Debug("Saving empty list");
                     Save(new List<Password>());
                 }
 
                 Logger.Instance.Debug($"File {FileName} exist. Reading data...");
 
-                string content = string.Empty;
+                string content;
                 using (var reader = new StreamReader(FileName))
                 {
                     content = reader.ReadToEnd();

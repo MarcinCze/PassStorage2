@@ -18,7 +18,7 @@ namespace PassStorage2.Base.DataCryptoLayer
 
         private static RijndaelManaged RatelRijndaelManaged(string salt)
         {
-            if (salt == null) throw new ArgumentNullException("salt");
+            if (salt == null) throw new ArgumentNullException(nameof(salt));
 
             var saltBytes = Encoding.ASCII.GetBytes(salt);
             var key = new Rfc2898DeriveBytes(Inputkey, saltBytes);
@@ -32,7 +32,7 @@ namespace PassStorage2.Base.DataCryptoLayer
 
         public static string EncryptRijndael(string text, string salt)
         {
-            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException("text");
+            if (string.IsNullOrEmpty(text)) throw new ArgumentNullException(nameof(text));
 
             var aesAlg = RatelRijndaelManaged(salt);
 
@@ -61,7 +61,7 @@ namespace PassStorage2.Base.DataCryptoLayer
         public static string DecryptRijndael(string cipherText, string salt)
         {
             if (string.IsNullOrEmpty(cipherText))
-                throw new ArgumentNullException("cipherText");
+                throw new ArgumentNullException(nameof(cipherText));
 
             if (!IsBase64String(cipherText))
                 throw new Exception("The cipherText input parameter is not base64 encoded");

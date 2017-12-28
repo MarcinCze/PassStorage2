@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PassStorage2.Base;
+﻿using PassStorage2.Base;
 using PassStorage2.Base.DataAccessLayer;
 using PassStorage2.Models;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace PassStorage2.Controller
 {
     public class SqliteController : Interfaces.IController
     {
-        readonly DbHandler storage;
-        readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
-        readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
+        private readonly DbHandler storage;
+        private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
+        private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
@@ -35,7 +33,7 @@ namespace PassStorage2.Controller
             {
                 if (!Directory.Exists("Backups")) Directory.CreateDirectory("Backups");
 
-                string fileName = $"{DbHandler.FileName}_{DateTime.Now.ToString("yyyy-MM-dd")}";
+                string fileName = $"{DbHandler.FileName}_{DateTime.Now:yyyy-MM-dd}";
                 int idx = 1;
 
                 while (true)
@@ -46,7 +44,7 @@ namespace PassStorage2.Controller
                         break;
                     }
 
-                    fileName = $"{DbHandler.FileName}_{DateTime.Now.ToString("yyyy-MM-dd")}" + $"_{idx}";
+                    fileName = $"{DbHandler.FileName}_{DateTime.Now:yyyy-MM-dd}" + $"_{idx}";
                     idx++;
                 }
             }
@@ -175,7 +173,7 @@ namespace PassStorage2.Controller
             try
             {
                 var analyzer = new MostUsageAnalyzer(passwords);
-                return analyzer.Analyze();
+                return analyzer.Analyze().OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
