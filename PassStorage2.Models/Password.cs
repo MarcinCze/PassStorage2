@@ -10,7 +10,7 @@ namespace PassStorage2.Models
         /// <summary>
         /// Default expiration days
         /// </summary>
-        protected const int expirationDays = 180;
+        protected int ExpirationDays = Constants.ExpirationDays;
         /// <summary>
         /// Id
         /// </summary>
@@ -42,6 +42,6 @@ namespace PassStorage2.Models
         /// <summary>
         /// Is password expired?
         /// </summary>
-        public bool IsExpired => (DateTime.Now - PassChangeTime).TotalDays >= expirationDays;
+        public bool IsExpired => (DateTime.Now - PassChangeTime).TotalDays >= ExpirationDays;
     }
 }
