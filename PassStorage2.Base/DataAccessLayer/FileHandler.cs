@@ -34,7 +34,7 @@ namespace PassStorage2.Base.DataAccessLayer
 
                 if (string.IsNullOrEmpty(content))
                 {
-                    Logger.Instance.Error("File read but content is empty string");
+                    Logger.Instance.Error(new Exception("File read but content is empty string"));
                     return null;
                 }
 

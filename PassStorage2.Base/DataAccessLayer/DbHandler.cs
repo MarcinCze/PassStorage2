@@ -14,10 +14,27 @@ namespace PassStorage2.Base.DataAccessLayer
 
         public DbHandler()
         {
-            if (!File.Exists(FileName))
+            Logger.Instance.FunctionStart();
+            try
             {
-                SQLiteConnection.CreateFile(FileName);
-                GenerateTables();
+                if (!File.Exists(FileName))
+                {
+                    Logger.Instance.Debug("SQLite file doesn't exist. Creating...");
+                    SQLiteConnection.CreateFile(FileName);
+                    GenerateTables();
+                }
+                else
+                {
+                    Logger.Instance.Debug("SQLite file exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
             }
         }
 
@@ -38,6 +55,7 @@ namespace PassStorage2.Base.DataAccessLayer
             {
                 connection.Open();
                 var command = new SQLiteCommand(query, connection);
+                Logger.Instance.Debug("Executing command in database", command);
                 command.ExecuteNonQuery();
                 connection.Close();
             }
@@ -64,6 +82,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
+                    Logger.Instance.Debug($"Executing command in database - {query}");
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -96,6 +115,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
+                    Logger.Instance.Debug($"Executing command in database - {query}");
                     var reader = command.ExecuteReader();
                     reader.Read();
                     var pass = new Password
@@ -141,6 +161,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
+                    Logger.Instance.Debug($"Executing command in database - {query}");
                     var reader = command.ExecuteReader();
                 
                     while (reader.Read())
@@ -187,6 +208,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
+                    Logger.Instance.Debug($"Executing command in database - {query}");
                     command.ExecuteNonQuery();
                     connection.Close();
                 }

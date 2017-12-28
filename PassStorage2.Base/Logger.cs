@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace PassStorage2.Base
 {
@@ -26,38 +27,49 @@ namespace PassStorage2.Base
 
         string ShortenFileName(string fileName)
         {
-            return fileName.Substring((fileName.Length - 10));
+            fileName = fileName.Substring(0, fileName.LastIndexOf('.'));
+            fileName = fileName.Substring(fileName.Substring(0, fileName.LastIndexOf("\\", StringComparison.Ordinal)).LastIndexOf("\\", StringComparison.Ordinal) + 1);
+            return fileName;
         }
 
         async void FunctionStartAsync(string name, string filePath, int line)
         {
-            Console.WriteLine($"Function [{name}] starts");
+            log.Info($"{name} @ {ShortenFileName(filePath)}:{line} - Function [{name}] starts");
         }
 
         async void FunctionEndAsync(string name, string filePath, int line)
         {
-            Console.WriteLine($"Function [{name}] ends");
+            log.Info($"{name} @ {ShortenFileName(filePath)}:{line} - Function [{name}] ended");
         }
 
         async void DebugAsync(string message, string name, string filePath, int line)
         {
-            //Console.WriteLine($"DEBUG :: {name} :: {message}");
             log.Debug($"{name} @ {ShortenFileName(filePath)}:{line} - {message}");
         }
 
         async void DebugAsync(string message, object obj, string name, string filePath, int line)
         {
-            Console.WriteLine($"DEBUG :: {name} :: {message}");
+            string serializedObj;
+            try
+            {
+                serializedObj = JsonConvert.SerializeObject(obj);
+            }
+            catch (Exception e)
+            {
+                serializedObj = "CANNOT SERIALIZE OBJECT - ERROR: " + e.Message;
+            }
+
+            log.Debug($"{name} @ {ShortenFileName(filePath)}:{line} - {message} - {serializedObj}");
         }
 
         async void WarningAsync(string message, string name, string filePath, int line)
         {
-            Console.WriteLine($"WARNING :: {name} :: {message}");
+            log.Warn($"{name} @ {ShortenFileName(filePath)}:{line} - {message}");
         }
 
-        async void Error(string message, string stackTrace, string name, string filePath, int line)
+        async void ErrorAsync (Exception ex, string name, string filePath, int line)
         {
-            Console.WriteLine($"ERROR :: {name} :: {message}");
+            log.Error($"{name} @ {ShortenFileName(filePath)}:{line} - {ex.Message}", ex);
         }
 
         #endregion Private functions
@@ -101,14 +113,9 @@ namespace PassStorage2.Base
             Task.Run(() => WarningAsync(message, name, filePath, line));
         }
 
-        public void Error(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
-        {
-            Task.Run(() => Error(message, null, name, filePath, line));
-        }
-
         public void Error(Exception ex, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            Task.Run(() => Error(ex.Message, ex.StackTrace, name, filePath, line));
+            Task.Run(() => ErrorAsync(ex, name, filePath, line));
         }
 
         #endregion Public functions

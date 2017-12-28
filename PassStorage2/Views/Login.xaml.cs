@@ -35,6 +35,7 @@ namespace PassStorage2.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.FunctionStart();
             bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 
             if (!result)
@@ -51,12 +52,14 @@ namespace PassStorage2.Views
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.FunctionStart();
             Switcher.PageSwitcher.WindowState = WindowState.Minimized;
         }
 
         private void menuClose_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            Logger.Instance.FunctionStart();
+            Application.Current.Shutdown();
         }
 
         private void menuAbout_Click(object sender, RoutedEventArgs e)
@@ -66,7 +69,11 @@ namespace PassStorage2.Views
 
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) btnLogin_Click(null, null);
+            if (e.Key == Key.Enter)
+            {
+                Logger.Instance.Debug($"Key [{e.Key} pressed]");
+                btnLogin_Click(null, null);
+            }
         }
     }
 }

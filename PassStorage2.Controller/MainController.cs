@@ -42,7 +42,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -62,7 +62,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -80,7 +80,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -98,7 +98,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -116,7 +116,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -211,7 +211,7 @@ namespace PassStorage2.Controller
 
                     if (!protection.IsAllowed)
                     {
-                        Logger.Instance.Error("Passwords are incorrect");
+                        Logger.Instance.Error(new Exception("Passwords are incorrect"));
                         return false;
                     }
 
@@ -298,7 +298,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally
@@ -317,7 +317,7 @@ namespace PassStorage2.Controller
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e.Message);
+                Logger.Instance.Error(e);
                 return null;
             }
             finally

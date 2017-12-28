@@ -66,6 +66,7 @@ namespace PassStorage2.Views
 
         private void RefreshLabels()
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 counters = new Counters(passwords.Count, controller.GetMostUsed(passwords).Count(), passwords.Count(x => x.IsExpired));
@@ -76,6 +77,10 @@ namespace PassStorage2.Views
             catch (Exception ex)
             {
                 Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
             }
         }
 
@@ -118,6 +123,8 @@ namespace PassStorage2.Views
 
         private void ControlLoadingGrid(bool isVisible, string message)
         {
+            Logger.Instance.Debug($"Setting loading spinner grid to [{isVisible}] with message [{message}]");
+
             if (!string.IsNullOrEmpty(message)) waitMsg.Text = message;
 
             gridWait.Visibility = isVisible ? Visibility.Visible : Visibility.Hidden;
@@ -125,29 +132,66 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            RefreshLabels();
-            listViewPasswords.ItemsSource = null;
-            listViewPasswords.ItemsSource = passwords;
+            Logger.Instance.FunctionStart();
+            try
+            {
+                RefreshLabels();
+                listViewPasswords.ItemsSource = null;
+                listViewPasswords.ItemsSource = passwords;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            RefreshLabels();
-            var mostUsed = controller.GetMostUsed(passwords);
-            listViewPasswords.ItemsSource = null;
-            listViewPasswords.ItemsSource = mostUsed;
+            Logger.Instance.FunctionStart();
+            try
+            {
+                RefreshLabels();
+                var mostUsed = controller.GetMostUsed(passwords);
+                listViewPasswords.ItemsSource = null;
+                listViewPasswords.ItemsSource = mostUsed;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-            RefreshLabels();
-            var expired = controller.GetAllExpired(passwords);
-            listViewPasswords.ItemsSource = null;
-            listViewPasswords.ItemsSource = expired;
+            Logger.Instance.FunctionStart();
+            try
+            {
+                RefreshLabels();
+                var expired = controller.GetAllExpired(passwords);
+                listViewPasswords.ItemsSource = null;
+                listViewPasswords.ItemsSource = expired;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.Error(ex);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.Debug("Switching to Modify view");
             Switcher.Switch(new Modify(controller, counters));
         }
 
@@ -187,7 +231,8 @@ namespace PassStorage2.Views
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Application.Current.Shutdown();
+            Logger.Instance.FunctionStart();
+            Application.Current.Shutdown();
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
@@ -197,6 +242,7 @@ namespace PassStorage2.Views
 
         private void listViewPasswords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Logger.Instance.FunctionStart();
             try
             {
                 if (!((sender as ListView).SelectedItem is Password item))
@@ -208,20 +254,27 @@ namespace PassStorage2.Views
             {
                 Logger.Instance.Error(ex);
             }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         private void btnCopyLogin_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.Debug("Copying login");
             Clipboard.SetText(detailLogin.Text);
         }
 
         private void btnCopyPassword_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.Debug("Copying password");
             Clipboard.SetText(detailPassword.Text);
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            Logger.Instance.Debug("Switching to Modify view");
             Switcher.Switch(new Modify(controller, counters, detailsId));
         }
     }
