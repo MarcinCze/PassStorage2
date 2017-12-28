@@ -4,5 +4,6 @@
     {
         public const int ExpirationDays = 180;
         public const string Fhash = "";
+        public const string Shash = "";
     }
 }

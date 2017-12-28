@@ -83,6 +83,7 @@
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
     <Compile Include="DataCryptoLayer\PlayfairCipher.cs" />
     <Compile Include="DataCryptoLayer\Rijndael.cs" />
+    <Compile Include="DataCryptoLayer\SHA.cs" />
     <Compile Include="DataCryptoLayer\VigenereCipher.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MostUsageAnalyzer.cs" />
