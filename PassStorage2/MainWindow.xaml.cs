@@ -16,7 +16,6 @@ namespace PassStorage2
         {
             InitializeComponent();
             //ConsoleManager.Show();
-            Logger.Instance.SetLogLevel(Logger.LogLevel.Debug);
             controller = new Controller.SqliteController();
             Switcher.PageSwitcher = this;
             Switcher.Switch(new Views.Login(controller));

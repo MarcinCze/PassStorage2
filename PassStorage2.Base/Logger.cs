@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,50 +11,58 @@ namespace PassStorage2.Base
 {
     public sealed class Logger
     {
-        public enum LogLevel { All, Debug, Warning, Error }
+        private readonly log4net.ILog log;
 
-        private LogLevel level = LogLevel.Error;
-
-        private Logger() { }
+        private Logger()
+        {
+            FileInfo configFileInfo = new FileInfo("log4net.config");
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(configFileInfo);
+            log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        }
 
         public static Logger Instance { get; } = new Logger();
 
-        #region Protected functions
+        #region Private functions
 
-        protected async void FunctionStartAsync(string name, string filePath, int line)
+        string ShortenFileName(string fileName)
+        {
+            return fileName.Substring((fileName.Length - 10));
+        }
+
+        async void FunctionStartAsync(string name, string filePath, int line)
         {
             Console.WriteLine($"Function [{name}] starts");
         }
 
-        protected async void FunctionEndAsync(string name, string filePath, int line)
+        async void FunctionEndAsync(string name, string filePath, int line)
         {
             Console.WriteLine($"Function [{name}] ends");
         }
 
-        protected async void DebugAsync(string message, string name, string filePath, int line)
+        async void DebugAsync(string message, string name, string filePath, int line)
+        {
+            //Console.WriteLine($"DEBUG :: {name} :: {message}");
+            log.Debug($"{name} @ {ShortenFileName(filePath)}:{line} - {message}");
+        }
+
+        async void DebugAsync(string message, object obj, string name, string filePath, int line)
         {
             Console.WriteLine($"DEBUG :: {name} :: {message}");
         }
 
-        protected async void WarningAsync(string message, string name, string filePath, int line)
+        async void WarningAsync(string message, string name, string filePath, int line)
         {
             Console.WriteLine($"WARNING :: {name} :: {message}");
         }
 
-        protected async void Error(string message, string stackTrace, string name, string filePath, int line)
+        async void Error(string message, string stackTrace, string name, string filePath, int line)
         {
             Console.WriteLine($"ERROR :: {name} :: {message}");
         }
 
-        #endregion Protected functions
+        #endregion Private functions
 
         #region Public functions
-
-        public void SetLogLevel(LogLevel level)
-        {
-            this.Warning($"Setting log level to {level}");
-            this.level = level;
-        }
 
         /// <summary>
         /// Logging start of the function
@@ -63,10 +72,7 @@ namespace PassStorage2.Base
         /// <param name="line">Line of code</param>
         public void FunctionStart([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.All)
-            {
-                Task.Run(() => FunctionStartAsync(name, filePath, line));
-            }   
+            Task.Run(() => FunctionStartAsync(name, filePath, line));
         }
 
         /// <summary>
@@ -77,26 +83,22 @@ namespace PassStorage2.Base
         /// <param name="line">Line of code</param>
         public void FunctionEnd([CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.All)
-            {
-                Task.Run(() => FunctionEndAsync(name, filePath, line));
-            }
+            Task.Run(() => FunctionEndAsync(name, filePath, line));
         }
 
         public void Debug(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level == LogLevel.Debug || level == LogLevel.All)
-            {
-                Task.Run(() => DebugAsync(message, name, filePath, line));
-            }
+            Task.Run(() => DebugAsync(message, name, filePath, line));
+        }
+
+        public void Debug(string message, object item, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
+        {
+            Task.Run(() => DebugAsync(message, item, name, filePath, line));
         }
 
         public void Warning(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
         {
-            if (level != LogLevel.Error)
-            {
-                Task.Run(() => WarningAsync(message, name, filePath, line));
-            }
+            Task.Run(() => WarningAsync(message, name, filePath, line));
         }
 
         public void Error(string message, [CallerMemberName] string name = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int line = 0)
