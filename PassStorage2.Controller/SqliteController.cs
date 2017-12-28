@@ -230,7 +230,7 @@ namespace PassStorage2.Controller
             finally
             {
                 stopWatch.Stop();
-                Logger.Instance.Debug($"############# SAVE {stopWatch.ElapsedMilliseconds} ms #############");
+                Logger.Instance.Debug($"########### SAVE {stopWatch.ElapsedMilliseconds} ms ###########");
                 Logger.Instance.FunctionEnd();
             }
         }

@@ -140,7 +140,7 @@ namespace PassStorage2.Base.DataAccessLayer
             finally
             {
                 stopWatch.Stop();
-                Logger.Instance.Debug($"**** Get from DB ended in {stopWatch.ElapsedMilliseconds} ms");
+                Logger.Instance.Debug($"########### Get from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
                 Logger.Instance.FunctionEnd();
             }
         }
@@ -191,7 +191,7 @@ namespace PassStorage2.Base.DataAccessLayer
             finally
             {
                 stopWatch.Stop();
-                Logger.Instance.Debug($"**** GetAll from DB ended in {stopWatch.ElapsedMilliseconds} ms");
+                Logger.Instance.Debug($"########### GetAll from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
                 Logger.Instance.FunctionEnd();
             }
         }
