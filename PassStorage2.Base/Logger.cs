@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime;
 using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace PassStorage2.Base
 {
