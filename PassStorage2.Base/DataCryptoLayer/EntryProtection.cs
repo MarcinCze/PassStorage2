@@ -21,10 +21,10 @@ namespace PassStorage2.Base.DataCryptoLayer
 
         public void Validate()
         {
-            Logger.Instance.Debug($"############## FIRST: {Primary}");
-            Logger.Instance.Debug($"############## FIRST: {Secondary}");
-            Logger.Instance.Debug($"############## FirstHash: {SHA.GenerateSHA256String(Primary)}");
-            Logger.Instance.Debug($"############## SecondaryHash: {SHA.GenerateSHA256String(Secondary)}");
+            //Logger.Instance.Debug($"############## FIRST: {Primary}");
+            //Logger.Instance.Debug($"############## FIRST: {Secondary}");
+            //Logger.Instance.Debug($"############## FirstHash: {SHA.GenerateSHA256String(Primary)}");
+            //Logger.Instance.Debug($"############## SecondaryHash: {SHA.GenerateSHA256String(Secondary)}");
 
             IsAllowed = SHA.Equals(Constants.Fhash, Primary) && SHA.Equals(Constants.Shash, Secondary);
             Logger.Instance.Debug($"IsAllowed = {IsAllowed}");
