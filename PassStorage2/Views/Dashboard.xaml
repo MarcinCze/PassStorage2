@@ -108,38 +108,51 @@
                     <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
                         <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
                         <Separator Margin="0,20,0,0"/>
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Login</TextBlock>
-                        <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignHeadline1TextBlock}">Login</TextBlock>
+                        <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
                         <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyLogin_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
 
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Password</TextBlock>
-                        <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignHeadline1TextBlock}">Password</TextBlock>
+                        <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
                         <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyPassword_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
                         <Separator Margin="0,20,0,0"/>
 
                         <Grid>
-                            <Button Name="btnEdit" Width="100" Style="{StaticResource MaterialDesignRaisedButton}" 
-                                    ToolTip="Edit this entry" VerticalAlignment="Center" Margin="0,50,150,0" Click="btnEdit_Click">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Brush" />
-                                    <TextBlock Width="15" />
-                                    <TextBlock>Edit</TextBlock>
-                                </StackPanel>
-                            </Button>
-                            <Button Name="btnClose" Width="100" Style="{StaticResource MaterialDesignRaisedButton}" 
-                                    ToolTip="Close details" VerticalAlignment="Center" Margin="150,50,0,0"
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Right}">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="CloseCircleOutline" />
-                                    <TextBlock Width="15" />
-                                    <TextBlock>Close</TextBlock>
-                                </StackPanel>
-                            </Button>
+                            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">
+                                <Button Name="btnEdit" Width="120" Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Edit this entry" VerticalAlignment="Center" Click="btnEdit_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Brush" />
+                                        <TextBlock Width="15" />
+                                        <TextBlock>Edit</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnDelete" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" Margin="20,0,20,0"
+                                        ToolTip="Remove this entry" VerticalAlignment="Center" Click="btnDelete_Click"
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Right}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Delete" />
+                                        <TextBlock Width="15" />
+                                        <TextBlock>Delete</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                                <Button Name="btnClose" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" 
+                                        ToolTip="Close details" VerticalAlignment="Center"
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Right}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="CloseCircleOutline" />
+                                        <TextBlock Width="15" />
+                                        <TextBlock>Close</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            
                         </Grid>
                     </StackPanel>
                 </materialDesign:DrawerHost.RightDrawerContent>

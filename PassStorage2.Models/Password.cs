@@ -16,6 +16,10 @@ namespace PassStorage2.Models
         /// </summary>
         public int Id { get; set; }
         /// <summary>
+        /// Additional ID as Guid
+        /// </summary>
+        public string Uid { get; set; }
+        /// <summary>
         /// Title of password
         /// </summary>
         public string Title { get; set; }

@@ -38,30 +38,7 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        protected void GenerateTables()
-        {
-            const string query = @"
-                             CREATE TABLE Password (
-                                Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
-                                Title TEXT NOT NULL,
-                                Login TEXT NOT NULL,
-                                Pass TEXT NOT NULL,
-                                SaveTime TEXT,
-                                PassChangeTime TEXT,
-                                ViewCount INTEGER )
-                            ";
-
-            using (var connection = new SQLiteConnection(ConnString))
-            {
-                connection.Open();
-                var command = new SQLiteCommand(query, connection);
-                Logger.Instance.Debug("Executing command in database", command);
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-        }
-
-        public bool Save(Password pass, bool isPassUpdate)
+        public virtual bool Save(Password pass, bool isPassUpdate)
         {
             try
             {
@@ -100,7 +77,7 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        public Password Get(int id)
+        public virtual Password Get(int id)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -145,7 +122,7 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        public IEnumerable<Password> GetAll()
+        public virtual IEnumerable<Password> GetAll()
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -196,19 +173,16 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        public bool IncrementViewCount(int id)
+        public virtual bool IncrementViewCount(int id)
         {
             try
             {
                 Logger.Instance.FunctionStart();
-
-                string query = $"UPDATE Password SET ViewCount = ViewCount + 1 WHERE Id = {id}";
-
                 using (var connection = new SQLiteConnection(ConnString))
                 {
                     connection.Open();
-                    var command = new SQLiteCommand(query, connection);
-                    Logger.Instance.Debug($"Executing command in database - {query}");
+                    var command = new SQLiteCommand($"UPDATE Password SET ViewCount = ViewCount + 1 WHERE Id = {id}", connection);
+                    Logger.Instance.Debug($"Executing command in database - {command.CommandText}");
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -223,6 +197,29 @@ namespace PassStorage2.Base.DataAccessLayer
             finally
             {
                 Logger.Instance.FunctionEnd();
+            }
+        }
+
+        protected void GenerateTables()
+        {
+            const string query = @"
+                             CREATE TABLE Password (
+                                Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
+                                Title TEXT NOT NULL,
+                                Login TEXT NOT NULL,
+                                Pass TEXT NOT NULL,
+                                SaveTime TEXT,
+                                PassChangeTime TEXT,
+                                ViewCount INTEGER )
+                            ";
+
+            using (var connection = new SQLiteConnection(ConnString))
+            {
+                connection.Open();
+                var command = new SQLiteCommand(query, connection);
+                Logger.Instance.Debug("Executing command in database", command);
+                command.ExecuteNonQuery();
+                connection.Close();
             }
         }
     }

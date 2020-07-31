@@ -89,12 +89,13 @@ namespace PassStorage2.Views
             ControlLoadingGrid(true, "Loading...");
 
             passwords = null;
-            Task.Run(() => LoadList());
+            listViewPasswords.ItemsSource = null;
+            Task.Run(LoadList);
         }
 
         private void LoadList()
         {
-            passwords = controller.GetAll().ToList();
+            passwords = controller.GetAll()?.ToList();
 
             Dispatcher.Invoke(() =>
             {
@@ -276,6 +277,18 @@ namespace PassStorage2.Views
         {
             Logger.Instance.Debug("Switching to Modify view");
             Switcher.Switch(new Modify(controller, counters, detailsId));
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var response = MessageBox.Show("Are you sure to remove?", "Confirm", MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (response != MessageBoxResult.Yes)
+                return;
+            
+            controller.Delete(detailsId);
+            UserControl_Loaded(null, null);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace PassStorage2.Controller
 {
     public class SqliteController : Interfaces.IController
     {
-        private readonly DbHandler storage;
+        private readonly DbHandlerExtended storage;
         private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
         private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
 
@@ -21,7 +21,7 @@ namespace PassStorage2.Controller
         public SqliteController()
         {
             Logger.Instance.Debug("Creating SqliteController");
-            storage = new DbHandler();
+            storage = new DbHandlerExtended();
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
         }
@@ -65,7 +65,24 @@ namespace PassStorage2.Controller
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            try
+            {
+                Logger.Instance.FunctionStart();
+                storage.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                stopWatch.Stop();
+                Logger.Instance.Debug($"########### DELETE {stopWatch.ElapsedMilliseconds} ms ###########");
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public Password Get(int id)

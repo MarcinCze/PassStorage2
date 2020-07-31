@@ -108,6 +108,9 @@ namespace PassStorage2.Views
                 password.Login = tbLogin.Text;
                 password.Pass = tbPassword.Text;
 
+                if (string.IsNullOrEmpty(password.Uid))
+                    password.Uid = Guid.NewGuid().ToString();
+
                 controller.Save(password, updTime);
                 Switcher.Switch(new Dashboard(controller));
             }
