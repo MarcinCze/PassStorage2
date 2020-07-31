@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace PassStorage2.Controller
 {
-    public class MainController //: IController
+    public class MainController : IController
     {
         private readonly FileHandler storage;
         private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
@@ -324,6 +324,21 @@ namespace PassStorage2.Controller
             {
                 Logger.Instance.FunctionEnd();
             }
+        }
+
+        public IEnumerable<Password> GetBySearchWord(string searchWord)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Password> GetBySearchWord(string searchWord, IEnumerable<Password> passwords)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(Password pass, bool updatePassTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }

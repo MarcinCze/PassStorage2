@@ -4,6 +4,7 @@ using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -287,6 +288,29 @@ namespace PassStorage2.Controller
         public void UpdateViewCount(int id, int counter)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Password> GetBySearchWord(string searchWord)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Password> GetBySearchWord(string searchWord, IEnumerable<Password> passwords)
+        {
+            Logger.Instance.FunctionStart();
+            try
+            {
+                return passwords.Where(x => x.Title.ToUpper().Contains(searchWord.ToUpper())).OrderBy(x => x.Title);
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+                return null;
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
     }
 }

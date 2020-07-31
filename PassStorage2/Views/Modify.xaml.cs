@@ -33,7 +33,7 @@ namespace PassStorage2.Views
             if (passwordId.HasValue)
             {
                 Logger.Instance.Debug("Entering EDIT mode");
-                password = controller.Get(passwordId.Value);
+                password = controller?.Get(passwordId.Value);
             }
             else
             {

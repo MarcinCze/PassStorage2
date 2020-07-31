@@ -69,6 +69,7 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
+                txtSearch.Text = string.Empty;
                 counters = new Counters(passwords.Count, controller.GetMostUsed(passwords).Count(), passwords.Count(x => x.IsExpired));
                 ((btnAll.Content as StackPanel).Children[3] as TextBlock).Text = $" ({counters.All})";
                 ((btnMostlyUsed.Content as StackPanel).Children[3] as TextBlock).Text = $" ({counters.MostUsed})";
@@ -289,6 +290,30 @@ namespace PassStorage2.Views
             
             controller.Delete(detailsId);
             UserControl_Loaded(null, null);
+        }
+
+        private void txtSearch_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var searchResults = controller.GetBySearchWord(this.txtSearch.Text, passwords);
+            listViewPasswords.ItemsSource = null;
+            listViewPasswords.ItemsSource = searchResults;
+
+            //Logger.Instance.FunctionStart();
+            //try
+            //{
+            //    //RefreshLabels();
+            //    var searchResults = controller.GetBySearchWord(this.txtSearch.Text);
+            //    listViewPasswords.ItemsSource = null;
+            //    listViewPasswords.ItemsSource = searchResults;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logger.Instance.Error(ex);
+            //}
+            //finally
+            //{
+            //    Logger.Instance.FunctionEnd();
+            //}
         }
     }
 }

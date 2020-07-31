@@ -12,6 +12,8 @@ namespace PassStorage2.Controller.Interfaces
         IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords);
         IEnumerable<Password> GetMostUsed();
         IEnumerable<Password> GetMostUsed(IEnumerable<Password> passwords);
+        IEnumerable<Password> GetBySearchWord(string searchWord);
+        IEnumerable<Password> GetBySearchWord(string searchWord, IEnumerable<Password> passwords);
         Password Get(int id);
         Password Get(int id, IEnumerable<Password> passwords);
         void Save(Password pass, bool updatePassTime);

@@ -38,6 +38,15 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
+                <TextBox Name="txtSearch"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    VerticalAlignment="Top"
+                    AcceptsReturn="False"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Margin="0,10,0,10"
+                    materialDesign:HintAssist.Hint="Search by title..." KeyUp="txtSearch_KeyUp"/>
+
                 <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Add new one" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PlusCircleOutline" />
