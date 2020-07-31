@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2", "PassStorage2\PassStorage2.csproj", "{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}"
 EndProject
@@ -18,26 +18,26 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Release|Any CPU.Build.0 = Release|Any CPU
-		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Debug|x64.ActiveCfg = Debug|x64
+		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Debug|x64.Build.0 = Debug|x64
+		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Release|x64.ActiveCfg = Release|x64
+		{68A5A934-8EBF-4A24-BBE3-5D7E84E57328}.Release|x64.Build.0 = Release|x64
+		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Debug|x64.ActiveCfg = Debug|x64
+		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Debug|x64.Build.0 = Debug|x64
+		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Release|x64.ActiveCfg = Release|x64
+		{099DB720-6DFF-4D63-B8A1-8CFD619781CA}.Release|x64.Build.0 = Release|x64
+		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Debug|x64.ActiveCfg = Debug|x64
+		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Debug|x64.Build.0 = Debug|x64
+		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Release|x64.ActiveCfg = Release|x64
+		{370F024F-22D5-4A75-9CB3-8E2E0B53115D}.Release|x64.Build.0 = Release|x64
+		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Debug|x64.ActiveCfg = Debug|x64
+		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Debug|x64.Build.0 = Debug|x64
+		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|x64.ActiveCfg = Release|x64
+		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

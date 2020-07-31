@@ -108,14 +108,14 @@
                     <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
                         <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
                         <Separator Margin="0,20,0,0"/>
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignHeadline1TextBlock}">Login</TextBlock>
-                        <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Login</TextBlock>
+                        <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
                         <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyLogin_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
 
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignHeadline1TextBlock}">Password</TextBlock>
-                        <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadline1TextBlock}"/>
+                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Password</TextBlock>
+                        <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
                         <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyPassword_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
