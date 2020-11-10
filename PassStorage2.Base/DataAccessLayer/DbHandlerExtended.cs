@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using PassStorage2.Models;
@@ -10,10 +11,33 @@ namespace PassStorage2.Base.DataAccessLayer
 {
     public class DbHandlerExtended : DbHandler
     {
-        public DbHandlerExtended() : base()
+        public DbHandlerExtended()
         {
-            GenerateAdditionalStructure();
-            FillMissingUid();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                if (!File.Exists(FileName))
+                {
+                    Logger.Instance.Debug("SQLite file doesn't exist. Creating...");
+                    SQLiteConnection.CreateFile(FileName);
+                    GenerateTables();
+                }
+                else
+                {
+                    Logger.Instance.Debug("SQLite file exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                GenerateAdditionalStructure();
+                FillMissingUid();
+
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public override IEnumerable<Password> GetAll()
