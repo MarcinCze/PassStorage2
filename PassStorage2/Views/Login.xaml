@@ -12,30 +12,30 @@
              d:DesignHeight="650" d:DesignWidth="1024" KeyDown="UserControl_KeyDown">
     <Grid>
         <Label Content="Pass Storage 2.0" FontSize="40" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnLogin" Content="LOGIN" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Center" Width="155" Height="54" Click="btnLogin_Click"/>
+        <Button Name="btnLogin" Content="LOGIN_LOGIN" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Center" Width="155" Height="54" Click="btnLogin_Click"/>
 
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
 	        PlacementMode="BottomAndAlignRightEdges"
 	        StaysOpen="False">
             <StackPanel >
-                <Button Content="Minimize" Name="menuMinimize" Click="menuMinimize_Click" />
-                <Button Content="Close" Name="menuClose" Click="menuClose_Click" />
+                <Button Content="LOGIN_MENU_MINIMIZE" Name="menuMinimize" Click="menuMinimize_Click" />
+                <Button Content="LOGIN_MENU_CLOSE" Name="menuClose" Click="menuClose_Click" />
                 <Separator />
-                <Button Content="Pass Storage 2.0..." Name="menuAbout" Click="menuAbout_Click" />
+                <Button Content="LOGIN_MENU_TITLE" Name="menuAbout" Click="menuAbout_Click" />
             </StackPanel>
         </materialDesign:PopupBox>
 
         <PasswordBox FontSize="20" Width="300"
             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,200" x:Name="passPrimary" 
-            materialDesign:HintAssist.Hint="Primary key" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+            materialDesign:HintAssist.Hint="LOGIN_PRIMARY_KEY" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
         <PasswordBox FontSize="20" Width="300"
             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" x:Name="passSecondary" 
-            materialDesign:HintAssist.Hint="Secondary key" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+            materialDesign:HintAssist.Hint="LOGIN_SECONDARY_KEY" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
         <Grid Name="gridWrongPass">
             <materialDesign:Card Padding="32" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="800">
-                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" TextAlignment="Center">Secret keys are not correct !</TextBlock>
+                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" x:Name="txtWrongPassCard" TextAlignment="Center">LOGIN_SECRETS_ARE_WRONG</TextBlock>
             </materialDesign:Card>
         </Grid>
     </Grid>

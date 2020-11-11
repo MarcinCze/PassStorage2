@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.ConfigurationProvider", "PassStorage2.ConfigurationProvider\PassStorage2.ConfigurationProvider.csproj", "{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.Translations", "PassStorage2.Translations\PassStorage2.Translations.csproj", "{7787AB29-86A4-42D5-9242-8607A2F5BE92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -56,6 +60,18 @@ Global
 		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|x64.Build.0 = Release|x64
 		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|x86.ActiveCfg = Release|x86
 		{7940D278-CCAA-4F5A-8D79-58F8363E3A83}.Release|x86.Build.0 = Release|x86
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Debug|x64.ActiveCfg = Debug|x64
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Debug|x64.Build.0 = Debug|x64
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Debug|x86.ActiveCfg = Debug|x86
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Debug|x86.Build.0 = Debug|x86
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Release|x64.ActiveCfg = Release|x64
+		{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}.Release|x86.ActiveCfg = Release|x86
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Debug|x64.ActiveCfg = Debug|x64
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Debug|x64.Build.0 = Debug|x64
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Debug|x86.ActiveCfg = Debug|x86
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Debug|x86.Build.0 = Debug|x86
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Release|x64.ActiveCfg = Release|x64
+		{7787AB29-86A4-42D5-9242-8607A2F5BE92}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

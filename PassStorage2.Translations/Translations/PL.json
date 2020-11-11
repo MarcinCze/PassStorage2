@@ -1,0 +1,30 @@
+[
+  {
+    "Name": "LOGIN_LOGIN",
+    "Value": "ZALOGUJ"
+  },
+  {
+    "Name": "LOGIN_PRIMARY_KEY",
+    "Value": "Pierwszy kod"
+  },
+  {
+    "Name": "LOGIN_SECONDARY_KEY",
+    "Value": "Drugi kod"
+  },
+  {
+    "Name": "LOGIN_MENU_MINIMIZE",
+    "Value": "Zminimalizuj"
+  },
+  {
+    "Name": "LOGIN_MENU_CLOSE",
+    "Value": "Zamknij"
+  },
+  {
+    "Name": "LOGIN_MENU_TITLE",
+    "Value": "PassStorage 2.0..."
+  },
+  {
+    "Name": "LOGIN_SECRETS_ARE_WRONG",
+    "Value": "Podano niepoprawne kody!"
+  }
+]

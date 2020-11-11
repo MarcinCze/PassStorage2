@@ -340,5 +340,10 @@ namespace PassStorage2.Controller
         {
             throw new NotImplementedException();
         }
+
+        public string Translate(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

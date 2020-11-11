@@ -13,27 +13,27 @@
     <Grid>
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
-                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
+                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ALL_PASSWORDS" HorizontalContentAlignment="Left" Click="btnAll_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FormatListBulleted" />
                         <TextBlock Width="15" />
-                        <TextBlock>All passwords</TextBlock>
+                        <TextBlock x:Name="labelBtnAll">DASHBOARD_BTN_ALL_PASSWORDS</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show mostly used passwords" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
+                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_MOSTLY_USED" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CursorDefaultOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Mostly used</TextBlock>
+                        <TextBlock x:Name="labelBtnMostlyUsed">DASHBOARD_BTN_MOSTLY_USED</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show passwords where expiration date is exceeded" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
+                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXPIRY_WARNING" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AlertCircleOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Expiry warning</TextBlock>
+                        <TextBlock x:Name="labelBtnExpiryWarning">DASHBOARD_BTN_EXPIRY_WARNING</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
@@ -45,42 +45,42 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Margin="0,10,0,10"
-                    materialDesign:HintAssist.Hint="Search by title..." KeyUp="txtSearch_KeyUp"/>
+                    materialDesign:HintAssist.Hint="DASHBOARD_SEARCH_HINT" KeyUp="txtSearch_KeyUp"/>
 
-                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Add new one" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
+                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_ADD_NEW" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PlusCircleOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Add new</TextBlock>
+                        <TextBlock x:Name="labelBtnAddNew">DASHBOARD_BTN_TIP_ADD_NEW</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries to separate file" HorizontalContentAlignment="Left" Click="btnBackup_Click">
+                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_BACKUP" HorizontalContentAlignment="Left" Click="btnBackup_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FolderLock" />
                         <TextBlock Width="15" />
-                        <TextBlock>Backup</TextBlock>
+                        <TextBlock x:Name="labelBtnBackup">DASHBOARD_BTN_BACKUP</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries DECODED(!) to separate file" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
+                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_BACKUP_DECODED" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FolderLockOpen" />
                         <TextBlock Width="15" />
-                        <TextBlock>Backup decoded</TextBlock>
+                        <TextBlock x:Name="labelBtnBackupDecoded">DASHBOARD_BTN_BACKUP_DECODED</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Close application" HorizontalContentAlignment="Left" Click="btnExit_Click">
+                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXIT" HorizontalContentAlignment="Left" Click="btnExit_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Export" />
                         <TextBlock Width="15" />
-                        <TextBlock>Exit</TextBlock>
+                        <TextBlock x:Name="labelBtnExit">DASHBOARD_BTN_EXIT</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Credentials" HorizontalContentAlignment="Left" Click="btnAbout_Click">
+                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ABOUT" HorizontalContentAlignment="Left" Click="btnAbout_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Incognito" />
                         <TextBlock Width="15" />
-                        <TextBlock>About</TextBlock>
+                        <TextBlock x:Name="labelBtnAbout">DASHBOARD_BTN_ABOUT</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -95,9 +95,9 @@
                 <ListView.View>
                     <GridView>
                         <!--<GridViewColumn Header="Image" Width="200" />-->
-                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="350"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
-                        <GridViewColumn Header="Warning">
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}" x:Name="tableHdrTitle" Header="DASHBOARD_TABLE_HDR_TITLE" Width="350"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" x:Name="tableHdrValidFrom" Header="DASHBOARD_TABLE_HDR_VALID_FROM" Width="200" />
+                        <GridViewColumn x:Name="tableHdrWarning" Header="DASHBOARD_TABLE_HDR_WARNING">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataTemplate.Resources>

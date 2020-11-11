@@ -1,4 +1,6 @@
-﻿using PassStorage2.Base;
+﻿using MaterialDesignThemes.Wpf;
+
+using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Models;
 using System;
@@ -37,6 +39,7 @@ namespace PassStorage2.Views
 
             controller = cntr;
             this.menu = menu;
+            TranslateControls();
         }
 
         private void OpenDetailsDrawer(Password pass)
@@ -314,6 +317,30 @@ namespace PassStorage2.Views
             //{
             //    Logger.Instance.FunctionEnd();
             //}
+        }
+
+        private void TranslateControls()
+        {
+            labelBtnAll.Text = controller.Translate(labelBtnAll.Text);
+            btnAll.ToolTip = controller.Translate(btnAll.ToolTip.ToString());
+            labelBtnMostlyUsed.Text = controller.Translate(labelBtnMostlyUsed.Text);
+            btnMostlyUsed.ToolTip = controller.Translate(btnMostlyUsed.ToolTip.ToString());
+            labelBtnExpiryWarning.Text = controller.Translate(labelBtnExpiryWarning.Text);
+            btnExpiryWarning.ToolTip = controller.Translate(btnExpiryWarning.ToolTip.ToString());
+            HintAssist.SetHint(txtSearch, controller.Translate(HintAssist.GetHint(txtSearch).ToString()));
+            labelBtnAddNew.Text = controller.Translate(labelBtnAddNew.Text);
+            btnAddNew.ToolTip = controller.Translate(btnAddNew.ToolTip.ToString());
+            labelBtnBackup.Text = controller.Translate(labelBtnBackup.Text);
+            btnBackup.ToolTip = controller.Translate(btnBackup.ToolTip.ToString());
+            labelBtnBackupDecoded.Text = controller.Translate(labelBtnBackupDecoded.Text);
+            btnBackupDecoded.ToolTip = controller.Translate(btnBackupDecoded.ToolTip.ToString());
+            labelBtnExit.Text = controller.Translate(labelBtnExit.Text);
+            btnExit.ToolTip = controller.Translate(btnExit.ToolTip.ToString());
+            labelBtnAbout.Text = controller.Translate(labelBtnAbout.Text);
+            btnAbout.ToolTip = controller.Translate(btnAbout.ToolTip.ToString());
+            tableHdrTitle.Header = controller.Translate(tableHdrTitle.Header.ToString());
+            tableHdrValidFrom.Header = controller.Translate(tableHdrValidFrom.Header.ToString());
+            tableHdrWarning.Header = controller.Translate(tableHdrWarning.Header.ToString());
         }
     }
 }

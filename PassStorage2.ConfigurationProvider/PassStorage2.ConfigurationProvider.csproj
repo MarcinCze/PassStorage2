@@ -4,17 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{370F024F-22D5-4A75-9CB3-8E2E0B53115D}</ProjectGuid>
+    <ProjectGuid>{18FCC4B4-A2E7-4ADA-B504-A6D531E53BA8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PassStorage2.Controller</RootNamespace>
-    <AssemblyName>PassStorage2.Controller</AssemblyName>
+    <RootNamespace>PassStorage2.ConfigurationProvider</RootNamespace>
+    <AssemblyName>PassStorage2.ConfigurationProvider</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Key-256.ico</ApplicationIcon>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -57,7 +54,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -68,35 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Interfaces\IController.cs" />
-    <Compile Include="MainController.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqliteController.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Key-256.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PassStorage2.Base\PassStorage2.Base.csproj">
-      <Project>{099db720-6dff-4d63-b8a1-8cfd619781ca}</Project>
-      <Name>PassStorage2.Base</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PassStorage2.ConfigurationProvider\PassStorage2.ConfigurationProvider.csproj">
-      <Project>{18fcc4b4-a2e7-4ada-b504-a6d531e53ba8}</Project>
-      <Name>PassStorage2.ConfigurationProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PassStorage2.Models\PassStorage2.Models.csproj">
-      <Project>{7940d278-ccaa-4f5a-8d79-58f8363e3a83}</Project>
-      <Name>PassStorage2.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PassStorage2.Translations\PassStorage2.Translations.csproj">
-      <Project>{7787ab29-86a4-42d5-9242-8607a2f5be92}</Project>
-      <Name>PassStorage2.Translations</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
