@@ -142,5 +142,13 @@
   {
     "Name": "DASHBOARD_DRAWER_BTN_TIP_CLOSE",
     "Value": "Close details"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_HDR",
+    "Value": "Confirm"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_CONTENT",
+    "Value": "Are you sure to remove?"
   }
 ]

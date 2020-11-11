@@ -285,7 +285,10 @@ namespace PassStorage2.Views
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            var response = MessageBox.Show("Are you sure to remove?", "Confirm", MessageBoxButton.YesNo,
+            var response = MessageBox.Show(
+                controller.Translate("DASHBOARD_DELETE_PASS_MSG_CONTENT"), 
+                controller.Translate("DASHBOARD_DELETE_PASS_MSG_HDR"), 
+                MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             if (response != MessageBoxResult.Yes)
