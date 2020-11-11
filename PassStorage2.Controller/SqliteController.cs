@@ -1,5 +1,6 @@
 ﻿using PassStorage2.Base;
 using PassStorage2.Base.DataAccessLayer;
+using PassStorage2.ConfigurationProvider.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Translations;
 using PassStorage2.Translations.Interfaces;
@@ -18,6 +19,7 @@ namespace PassStorage2.Controller
         private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
         private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
         private readonly ITranslationProvider translationProvider;
+        private readonly IConfigurationProvider configurationProvider;
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
@@ -28,8 +30,9 @@ namespace PassStorage2.Controller
             storage = new DbHandlerExtended(); 
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
+            configurationProvider = new PassStorage2.ConfigurationProvider.ConfigurationProvider();
             translationProvider = new TranslationProvider();
-            translationProvider.SetLanguage(Language.PL);
+            translationProvider.SetLanguage(GetLangEnum());
         }
 
         public void Backup()
@@ -319,5 +322,7 @@ namespace PassStorage2.Controller
         }
 
         public string Translate(string key) => translationProvider.Translate(key);
+
+        protected Language GetLangEnum() => Enum.TryParse(configurationProvider.ApplicationLanguage, out Language lang) ? lang : Language.EN;
     }
 }

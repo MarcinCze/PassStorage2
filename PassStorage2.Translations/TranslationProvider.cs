@@ -14,7 +14,7 @@ namespace PassStorage2.Translations
     public class TranslationProvider : ITranslationProvider
     {
         protected Language SelectedLang{ get; set; }
-        protected List<TranslationModel> Dictionary { get; set; }
+        internal List<TranslationModel> Dictionary { get; set; }
 
         public TranslationProvider()
         {
