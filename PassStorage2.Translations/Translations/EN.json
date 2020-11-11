@@ -105,6 +105,42 @@
   },
   {
     "Name": "DASHBOARD_TABLE_HDR_WARNING",
-    "Value": "WARNING"
+    "Value": "Warning"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_LOGIN",
+    "Value": "Login"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_PASSWORD",
+    "Value": "Password"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_TIP_COPY",
+    "Value": "Copy to clipboard"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_EDIT",
+    "Value": "Edit"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_EDIT",
+    "Value": "Edit this entry"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_DELETE",
+    "Value": "Delete"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_DELETE",
+    "Value": "Remove this entry"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_CLOSE",
+    "Value": "Close"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_CLOSE",
+    "Value": "Close details"
   }
 ]

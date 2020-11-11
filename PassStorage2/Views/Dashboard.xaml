@@ -117,15 +117,15 @@
                     <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
                         <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
                         <Separator Margin="0,20,0,0"/>
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Login</TextBlock>
+                        <TextBlock Name="txtDrawerLogin" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_LOGIN</TextBlock>
                         <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
-                        <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyLogin_Click">
+                        <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="DASHBOARD_DRAWER_TIP_COPY" Click="btnCopyLogin_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
 
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Password</TextBlock>
+                        <TextBlock Name="txtDrawerPassword" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_PASSWORD</TextBlock>
                         <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
-                        <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyPassword_Click">
+                        <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="DASHBOARD_DRAWER_TIP_COPY" Click="btnCopyPassword_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
                         <Separator Margin="0,20,0,0"/>
@@ -133,31 +133,31 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">
                                 <Button Name="btnEdit" Width="120" Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Edit this entry" VerticalAlignment="Center" Click="btnEdit_Click">
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_EDIT" VerticalAlignment="Center" Click="btnEdit_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Brush" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Edit</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnEdit">DASHBOARD_DRAWER_BTN_EDIT</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnDelete" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" Margin="20,0,20,0"
-                                        ToolTip="Remove this entry" VerticalAlignment="Center" Click="btnDelete_Click"
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_DELETE" VerticalAlignment="Center" Click="btnDelete_Click"
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Right}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Delete" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Delete</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnDelete">DASHBOARD_DRAWER_BTN_DELETE</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnClose" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" 
-                                        ToolTip="Close details" VerticalAlignment="Center"
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_CLOSE" VerticalAlignment="Center"
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Right}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="CloseCircleOutline" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Close</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnClose">DASHBOARD_DRAWER_BTN_CLOSE</TextBlock>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>

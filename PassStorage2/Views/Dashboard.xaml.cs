@@ -341,6 +341,16 @@ namespace PassStorage2.Views
             tableHdrTitle.Header = controller.Translate(tableHdrTitle.Header.ToString());
             tableHdrValidFrom.Header = controller.Translate(tableHdrValidFrom.Header.ToString());
             tableHdrWarning.Header = controller.Translate(tableHdrWarning.Header.ToString());
+            txtDrawerLogin.Text = controller.Translate(txtDrawerLogin.Text.ToString());
+            txtDrawerPassword.Text = controller.Translate(txtDrawerPassword.Text.ToString());
+            btnCopyLogin.ToolTip = controller.Translate(btnCopyLogin.ToolTip.ToString());
+            btnCopyPassword.ToolTip = controller.Translate(btnCopyPassword.ToolTip.ToString());
+            btnEdit.ToolTip = controller.Translate(btnEdit.ToolTip.ToString());
+            labelDrawerBtnEdit.Text = controller.Translate(labelDrawerBtnEdit.Text.ToString());
+            btnDelete.ToolTip = controller.Translate(btnDelete.ToolTip.ToString());
+            labelDrawerBtnDelete.Text = controller.Translate(labelDrawerBtnDelete.Text.ToString());
+            btnClose.ToolTip = controller.Translate(btnClose.ToolTip.ToString());
+            labelDrawerBtnClose.Text = controller.Translate(labelDrawerBtnClose.Text.ToString());
         }
     }
 }
