@@ -29,7 +29,7 @@ namespace PassStorage2.Controller
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
             translationProvider = new TranslationProvider();
-            //translationProvider.SetLanguage(Language.PL);
+            translationProvider.SetLanguage(Language.PL);
         }
 
         public void Backup()

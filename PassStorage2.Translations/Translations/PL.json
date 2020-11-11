@@ -26,5 +26,129 @@
   {
     "Name": "LOGIN_SECRETS_ARE_WRONG",
     "Value": "Podano niepoprawne kody!"
+  },
+  {
+    "Name": "DASHBOARD_BTN_ALL_PASSWORDS",
+    "Value": "Wszystkie"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ALL_PASSWORDS",
+    "Value": "Wszystkie elementy"
+  },
+  {
+    "Name": "DASHBOARD_BTN_MOSTLY_USED",
+    "Value": "Popularne"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_MOSTLY_USED",
+    "Value": "Najpopularniejsze elementy"
+  },
+  {
+    "Name": "DASHBOARD_BTN_EXPIRY_WARNING",
+    "Value": "Przeterminowane"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_EXPIRY_WARNING",
+    "Value": "Elementy gdzie klucz jest przeterminowany"
+  },
+  {
+    "Name": "DASHBOARD_SEARCH_HINT",
+    "Value": "Wyszukaj..."
+  },
+  {
+    "Name": "DASHBOARD_BTN_ADD_NEW",
+    "Value": "Nowy"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ADD_NEW",
+    "Value": "Dodaj nowy klucz"
+  },
+  {
+    "Name": "DASHBOARD_BTN_BACKUP",
+    "Value": "Kopia zapasowa"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_BACKUP",
+    "Value": "Wykonaj kopie do osobnego pliku"
+  },
+  {
+    "Name": "DASHBOARD_BTN_BACKUP_DECODED",
+    "Value": "Kopia zapasowa (jawna)"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_BACKUP_DECODED",
+    "Value": "Wykonaj kopie do osobnego pliku (JAWNA)"
+  },
+  {
+    "Name": "DASHBOARD_BTN_EXIT",
+    "Value": "Zamknij"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_EXIT",
+    "Value": "Zamknij program"
+  },
+  {
+    "Name": "DASHBOARD_BTN_ABOUT",
+    "Value": "O..."
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ABOUT",
+    "Value": "O autorze..."
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_TITLE",
+    "Value": "Nazwa"
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_VALID_FROM",
+    "Value": "Aktualna od"
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_WARNING",
+    "Value": "Uwaga"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_LOGIN",
+    "Value": "Login"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_PASSWORD",
+    "Value": "Klucz"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_TIP_COPY",
+    "Value": "Skopiuj do schowka"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_EDIT",
+    "Value": "Edytuj"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_EDIT",
+    "Value": "Edytuj ten wpis"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_DELETE",
+    "Value": "Skasuj"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_DELETE",
+    "Value": "Skasuj ten wpis"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_CLOSE",
+    "Value": "Zamknij"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_CLOSE",
+    "Value": "Zamknij detale"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_HDR",
+    "Value": "Uwaga"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_CONTENT",
+    "Value": "Czy na pewno?"
   }
 ]
