@@ -5,6 +5,7 @@ using PassStorage2.Models;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using MaterialDesignThemes.Wpf;
 
 namespace PassStorage2.Views
 {
@@ -39,6 +40,8 @@ namespace PassStorage2.Views
             {
                 Logger.Instance.Debug("Entering INSERT mode");
             }
+
+            TranslateControls();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -145,6 +148,29 @@ namespace PassStorage2.Views
         {
             Logger.Instance.FunctionStart();
             tbPassword.Text = RandomPassword.Generate((int)sliderRandomPassLength.Value);
+        }
+
+        private void TranslateControls()
+        {
+            labelBtnAll.Text = controller.Translate(labelBtnAll.Text);
+            btnAll.ToolTip = controller.Translate(btnAll.ToolTip.ToString());
+            labelBtnMostlyUsed.Text = controller.Translate(labelBtnMostlyUsed.Text);
+            btnMostlyUsed.ToolTip = controller.Translate(btnMostlyUsed.ToolTip.ToString());
+            labelBtnExpiryWarning.Text = controller.Translate(labelBtnExpiryWarning.Text);
+            btnExpiryWarning.ToolTip = controller.Translate(btnExpiryWarning.ToolTip.ToString());
+            labelBtnExit.Text = controller.Translate(labelBtnExit.Text);
+            btnExit.ToolTip = controller.Translate(btnExit.ToolTip.ToString());
+            labelBtnAbout.Text = controller.Translate(labelBtnAbout.Text);
+            btnAbout.ToolTip = controller.Translate(btnAbout.ToolTip.ToString());
+            labelNavBtnSave.Text = controller.Translate(labelNavBtnSave.Text);
+            btnSave.ToolTip = controller.Translate(btnSave.ToolTip.ToString());
+            labelNavBtnCancel.Text = controller.Translate(labelNavBtnCancel.Text);
+            btnCancel.ToolTip = controller.Translate(btnCancel.ToolTip.ToString());
+            HintAssist.SetHint(tbTitle, controller.Translate(HintAssist.GetHint(tbTitle).ToString()));
+            HintAssist.SetHint(tbLogin, controller.Translate(HintAssist.GetHint(tbLogin).ToString()));
+            HintAssist.SetHint(tbPassword, controller.Translate(HintAssist.GetHint(tbPassword).ToString()));
+            sliderRandomPassLength.ToolTip = controller.Translate(sliderRandomPassLength.ToolTip.ToString());
+            btnRandomPass.ToolTip = controller.Translate(btnRandomPass.ToolTip.ToString());
         }
     }
 }

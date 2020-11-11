@@ -150,5 +150,41 @@
   {
     "Name": "DASHBOARD_DELETE_PASS_MSG_CONTENT",
     "Value": "Czy na pewno?"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_SAVE",
+    "Value": "Zapisz"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_TIP_SAVE",
+    "Value": "Zachowaj nowy wpis"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_CANCEL",
+    "Value": "Anuluj"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_TIP_CANCEL",
+    "Value": "Anuluj zmiany"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_TITLE",
+    "Value": "Nazwa"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_LOGIN",
+    "Value": "Login"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_PASSWORD",
+    "Value": "Klucz"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_TIP_SLIDER",
+    "Value": "Liczba"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_BTN_TIP_GENERATE",
+    "Value": "Generuj losowy klucz"
   }
 ]

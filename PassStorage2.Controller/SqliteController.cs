@@ -25,7 +25,7 @@ namespace PassStorage2.Controller
         public SqliteController()
         {
             Logger.Instance.Debug("Creating SqliteController");
-            storage = new DbHandlerExtended();
+            storage = new DbHandlerExtended(); 
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
             translationProvider = new TranslationProvider();
