@@ -122,6 +122,10 @@
     <Content Include="Key-256.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PassStorage2.ConfigurationProvider\PassStorage2.ConfigurationProvider.csproj">
+      <Project>{18fcc4b4-a2e7-4ada-b504-a6d531e53ba8}</Project>
+      <Name>PassStorage2.ConfigurationProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PassStorage2.Models\PassStorage2.Models.csproj">
       <Project>{7940d278-ccaa-4f5a-8d79-58f8363e3a83}</Project>
       <Name>PassStorage2.Models</Name>

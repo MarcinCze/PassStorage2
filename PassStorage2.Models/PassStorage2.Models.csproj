@@ -72,7 +72,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="PasswordTag.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="Counters.cs" />
     <Compile Include="Password.cs" />
     <Compile Include="PasswordExt.cs" />

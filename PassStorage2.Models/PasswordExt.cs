@@ -9,5 +9,15 @@ namespace PassStorage2.Models
         /// </summary>
         [NonSerialized]
         public bool IsMostUsed;
+
+        /// <summary>
+        /// Default expiration days
+        /// </summary>
+        public int ExpirationDays = 365;
+
+        /// <summary>
+        /// Is password expired?
+        /// </summary>
+        public bool IsExpired => (DateTime.Now - PassChangeTime).TotalDays >= ExpirationDays;
     }
 }

@@ -11,9 +11,12 @@ namespace PassStorage2.Base.DataAccessLayer
 {
     public class DbHandlerExtended : DbHandler
     {
-        public DbHandlerExtended()
+        protected readonly ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider;
+
+        public DbHandlerExtended(ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider)
         {
             Logger.Instance.FunctionStart();
+            this.configurationProvider = configurationProvider;
             try
             {
                 if (!File.Exists(FileName))
@@ -68,7 +71,8 @@ namespace PassStorage2.Base.DataAccessLayer
                             SaveTime = reader.GetDateTime(4),
                             PassChangeTime = reader.GetDateTime(5),
                             ViewCount = reader.GetInt32(6),
-                            Uid = reader.GetString(7)
+                            Uid = reader.GetString(7),
+                            ExpirationDays = configurationProvider.ExpirationDays
                         });
                     }
 
@@ -115,7 +119,8 @@ namespace PassStorage2.Base.DataAccessLayer
                         SaveTime = reader.GetDateTime(4),
                         PassChangeTime = reader.GetDateTime(5),
                         ViewCount = reader.GetInt32(6),
-                        Uid = reader.GetString(7)
+                        Uid = reader.GetString(7),
+                        ExpirationDays = configurationProvider.ExpirationDays
                     };
                     connection.Close();
                     return pass;
