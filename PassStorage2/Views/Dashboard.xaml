@@ -13,27 +13,27 @@
     <Grid>
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
-                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
+                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ALL_PASSWORDS" HorizontalContentAlignment="Left" Click="btnAll_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FormatListBulleted" />
                         <TextBlock Width="15" />
-                        <TextBlock>All passwords</TextBlock>
+                        <TextBlock x:Name="labelBtnAll">DASHBOARD_BTN_ALL_PASSWORDS</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show mostly used passwords" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
+                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_MOSTLY_USED" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CursorDefaultOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Mostly used</TextBlock>
+                        <TextBlock x:Name="labelBtnMostlyUsed">DASHBOARD_BTN_MOSTLY_USED</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show passwords where expiration date is exceeded" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
+                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXPIRY_WARNING" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AlertCircleOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Expiry warning</TextBlock>
+                        <TextBlock x:Name="labelBtnExpiryWarning">DASHBOARD_BTN_EXPIRY_WARNING</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
@@ -45,42 +45,42 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto"
                     Margin="0,10,0,10"
-                    materialDesign:HintAssist.Hint="Search by title..." KeyUp="txtSearch_KeyUp"/>
+                    materialDesign:HintAssist.Hint="DASHBOARD_SEARCH_HINT" KeyUp="txtSearch_KeyUp"/>
 
-                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Add new one" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
+                <Button Name="btnAddNew" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_ADD_NEW" HorizontalContentAlignment="Left" Click="btnAddNew_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="PlusCircleOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Add new</TextBlock>
+                        <TextBlock x:Name="labelBtnAddNew">DASHBOARD_BTN_TIP_ADD_NEW</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries to separate file" HorizontalContentAlignment="Left" Click="btnBackup_Click">
+                <Button Name="btnBackup" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_BACKUP" HorizontalContentAlignment="Left" Click="btnBackup_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FolderLock" />
                         <TextBlock Width="15" />
-                        <TextBlock>Backup</TextBlock>
+                        <TextBlock x:Name="labelBtnBackup">DASHBOARD_BTN_BACKUP</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Backup all entries DECODED(!) to separate file" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
+                <Button Name="btnBackupDecoded" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_BACKUP_DECODED" HorizontalContentAlignment="Left" Click="btnBackupDecoded_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FolderLockOpen" />
                         <TextBlock Width="15" />
-                        <TextBlock>Backup decoded</TextBlock>
+                        <TextBlock x:Name="labelBtnBackupDecoded">DASHBOARD_BTN_BACKUP_DECODED</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Close application" HorizontalContentAlignment="Left" Click="btnExit_Click">
+                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXIT" HorizontalContentAlignment="Left" Click="btnExit_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Export" />
                         <TextBlock Width="15" />
-                        <TextBlock>Exit</TextBlock>
+                        <TextBlock x:Name="labelBtnExit">DASHBOARD_BTN_EXIT</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Credentials" HorizontalContentAlignment="Left" Click="btnAbout_Click">
+                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ABOUT" HorizontalContentAlignment="Left" Click="btnAbout_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Incognito" />
                         <TextBlock Width="15" />
-                        <TextBlock>About</TextBlock>
+                        <TextBlock x:Name="labelBtnAbout">DASHBOARD_BTN_ABOUT</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -95,9 +95,9 @@
                 <ListView.View>
                     <GridView>
                         <!--<GridViewColumn Header="Image" Width="200" />-->
-                        <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="350"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" Header="Valid from" Width="200" />
-                        <GridViewColumn Header="Warning">
+                        <GridViewColumn DisplayMemberBinding="{Binding Title}" x:Name="tableHdrTitle" Header="DASHBOARD_TABLE_HDR_TITLE" Width="350"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding PassChangeTime}" x:Name="tableHdrValidFrom" Header="DASHBOARD_TABLE_HDR_VALID_FROM" Width="200" />
+                        <GridViewColumn x:Name="tableHdrWarning" Header="DASHBOARD_TABLE_HDR_WARNING">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <DataTemplate.Resources>
@@ -117,15 +117,15 @@
                     <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
                         <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
                         <Separator Margin="0,20,0,0"/>
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Login</TextBlock>
+                        <TextBlock Name="txtDrawerLogin" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_LOGIN</TextBlock>
                         <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
-                        <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyLogin_Click">
+                        <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="DASHBOARD_DRAWER_TIP_COPY" Click="btnCopyLogin_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
 
-                        <TextBlock Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">Password</TextBlock>
+                        <TextBlock Name="txtDrawerPassword" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_PASSWORD</TextBlock>
                         <TextBlock Name="detailPassword" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
-                        <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Copy to clipboard" Click="btnCopyPassword_Click">
+                        <Button Name="btnCopyPassword" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="DASHBOARD_DRAWER_TIP_COPY" Click="btnCopyPassword_Click">
                             <materialDesign:PackIcon Width="32" Height="32" Kind="ArrowDownBoldHexagonOutline" />
                         </Button>
                         <Separator Margin="0,20,0,0"/>
@@ -133,31 +133,31 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">
                                 <Button Name="btnEdit" Width="120" Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Edit this entry" VerticalAlignment="Center" Click="btnEdit_Click">
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_EDIT" VerticalAlignment="Center" Click="btnEdit_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Brush" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Edit</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnEdit">DASHBOARD_DRAWER_BTN_EDIT</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnDelete" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" Margin="20,0,20,0"
-                                        ToolTip="Remove this entry" VerticalAlignment="Center" Click="btnDelete_Click"
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_DELETE" VerticalAlignment="Center" Click="btnDelete_Click"
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Right}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Delete" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Delete</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnDelete">DASHBOARD_DRAWER_BTN_DELETE</TextBlock>
                                     </StackPanel>
                                 </Button>
                                 <Button Name="btnClose" Width="120" Style="{StaticResource MaterialDesignRaisedButton}" 
-                                        ToolTip="Close details" VerticalAlignment="Center"
+                                        ToolTip="DASHBOARD_DRAWER_BTN_TIP_CLOSE" VerticalAlignment="Center"
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Right}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="CloseCircleOutline" />
                                         <TextBlock Width="15" />
-                                        <TextBlock>Close</TextBlock>
+                                        <TextBlock x:Name="labelDrawerBtnClose">DASHBOARD_DRAWER_BTN_CLOSE</TextBlock>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>

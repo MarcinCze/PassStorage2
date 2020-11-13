@@ -13,58 +13,58 @@
     <Grid>
         <Grid Name="gridMenu" Width="240" HorizontalAlignment="Left" Margin="5,5,0,0">
             <StackPanel Width="240">
-                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show list of all passwords" HorizontalContentAlignment="Left" Click="btnAll_Click">
+                <Button Name="btnAll" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ALL_PASSWORDS" HorizontalContentAlignment="Left" Click="btnAll_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="FormatListBulleted" />
                         <TextBlock Width="15" />
-                        <TextBlock>All passwords</TextBlock>
+                        <TextBlock x:Name="labelBtnAll">DASHBOARD_BTN_ALL_PASSWORDS</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show mostly used passwords" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
+                <Button Name="btnMostlyUsed" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_MOSTLY_USED" HorizontalContentAlignment="Left" Click="btnMostlyUsed_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="CursorDefaultOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Mostly used</TextBlock>
+                        <TextBlock x:Name="labelBtnMostlyUsed">DASHBOARD_BTN_MOSTLY_USED</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
-                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Show passwords where expiration date is exceeded" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
+                <Button Name="btnExpiryWarning" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXPIRY_WARNING" HorizontalContentAlignment="Left" Click="btnExpiryWarning_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AlertCircleOutline" />
                         <TextBlock Width="15" />
-                        <TextBlock>Expiry warning</TextBlock>
+                        <TextBlock x:Name="labelBtnExpiryWarning">DASHBOARD_BTN_EXPIRY_WARNING</TextBlock>
                         <TextBlock/>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="btnSave" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Save changes" HorizontalContentAlignment="Left" Click="btnSave_Click">
+                <Button Name="btnSave" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="MODIFY_NAV_BTN_TIP_SAVE" HorizontalContentAlignment="Left" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Check" Foreground="Green" />
                         <TextBlock Width="15" />
-                        <TextBlock Foreground="Green">Save</TextBlock>
+                        <TextBlock x:Name="labelNavBtnSave" Foreground="Green">MODIFY_NAV_BTN_SAVE</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnCancel" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Discard changes" HorizontalContentAlignment="Left" Click="btnCancel_Click">
+                <Button Name="btnCancel" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="MODIFY_NAV_BTN_TIP_CANCEL" HorizontalContentAlignment="Left" Click="btnCancel_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Close" Foreground="Red" />
                         <TextBlock Width="15" />
-                        <TextBlock Foreground="Red">Cancel</TextBlock>
+                        <TextBlock x:Name="labelNavBtnCancel" Foreground="Red">MODIFY_NAV_BTN_CANCEL</TextBlock>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Close application" HorizontalContentAlignment="Left" Click="btnExit_Click">
+                <Button Name="btnExit" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_EXIT" HorizontalContentAlignment="Left" Click="btnExit_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Export" />
                         <TextBlock Width="15" />
-                        <TextBlock>Exit</TextBlock>
+                        <TextBlock x:Name="labelBtnExit">DASHBOARD_BTN_EXIT</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="Credentials" HorizontalContentAlignment="Left" Click="btnAbout_Click">
+                <Button Name="btnAbout" Style="{StaticResource MaterialDesignFlatButton}" ToolTip="DASHBOARD_BTN_TIP_ABOUT" HorizontalContentAlignment="Left" Click="btnAbout_Click">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Incognito" />
                         <TextBlock Width="15" />
-                        <TextBlock>About</TextBlock>
+                        <TextBlock x:Name="labelBtnAbout">DASHBOARD_BTN_ABOUT</TextBlock>
                     </StackPanel>
                 </Button>
             </StackPanel>
@@ -73,21 +73,21 @@
         <Grid Width="770" HorizontalAlignment="Right">
             <TextBox Name="tbTitle" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,100,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
-	                materialDesign:HintAssist.Hint="Title"
+	                materialDesign:HintAssist.Hint="MODIFY_PASSWORD_TITLE"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
 	                FontSize="24"
 	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 	                Text="" />
             <TextBox Name="tbLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,170,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
-	                materialDesign:HintAssist.Hint="Login"
+	                materialDesign:HintAssist.Hint="MODIFY_PASSWORD_LOGIN"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
 	                FontSize="24"
 	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
 	                Text="" />
             <TextBox Name="tbPassword" HorizontalAlignment="Left" VerticalAlignment="Top" Width="500" Margin="100,240,0,0"
 	                materialDesign:HintAssist.FloatingScale="0.50"
-	                materialDesign:HintAssist.Hint="Password"
+	                materialDesign:HintAssist.Hint="MODIFY_PASSWORD_PASSWORD"
 	                materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0"
 	                FontSize="24"
 	                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -95,9 +95,9 @@
 
             <Slider Name="sliderRandomPassLength" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,100,150" Width="300" Maximum="20" Minimum="4"
 	                Style="{StaticResource MaterialDesignDiscreteSlider}"
-	                ToolTip="Random password's length"
+	                ToolTip="MODIFY_PASSWORD_TIP_SLIDER"
 	                Value="10" />
-            <Button Name="btnRandomPass" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="Generate random password" 
+            <Button Name="btnRandomPass" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="MODIFY_PASSWORD_BTN_TIP_GENERATE" 
                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,212,80" Click="btnRandomPass_Click">
                 <materialDesign:PackIcon Width="32" Height="32" Kind="Dice5" />
             </Button>

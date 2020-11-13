@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace PassStorage2.Controller
 {
+    [Obsolete("MainController is using file as a storage. It should not be used anymore.")]
     public class MainController : IController
     {
         private readonly FileHandler storage;
@@ -200,37 +201,7 @@ namespace PassStorage2.Controller
             throw new NotImplementedException();
         }
 
-        public bool SetPasswords(string primary, string secondary)
-        {
-            Logger.Instance.FunctionStart();
-            try
-            {
-                using (var protection = new Base.DataCryptoLayer.EntryProtection(primary, secondary))
-                {
-                    protection.Validate();
-
-                    if (!protection.IsAllowed)
-                    {
-                        Logger.Instance.Error(new Exception("Passwords are incorrect"));
-                        return false;
-                    }
-
-                    PasswordFirst = primary;
-                    PasswordSecond = secondary;
-                    Logger.Instance.Debug("Passwords ok");
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.Instance.Error(e);
-                return false;
-            }
-            finally
-            {
-                Logger.Instance.FunctionEnd();
-            }
-        }
+        public bool SetPasswords(string primary, string secondary) => throw new NotImplementedException();
 
         public void UpdateViewCount(int id, int counter)
         {
@@ -337,6 +308,11 @@ namespace PassStorage2.Controller
         }
 
         public void Save(Password pass, bool updatePassTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Translate(string key)
         {
             throw new NotImplementedException();
         }

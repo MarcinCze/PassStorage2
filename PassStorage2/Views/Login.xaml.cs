@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 
 namespace PassStorage2.Views
 {
@@ -26,6 +27,8 @@ namespace PassStorage2.Views
             }
 
             controller = cntr;
+
+            TranslateControls();
         }
 
         public void UtilizeState(object state)
@@ -74,6 +77,17 @@ namespace PassStorage2.Views
                 Logger.Instance.Debug($"Key [{e.Key} pressed]");
                 btnLogin_Click(null, null);
             }
+        }
+
+        private void TranslateControls()
+        {
+            btnLogin.Content = controller.Translate(btnLogin.Content.ToString());
+            HintAssist.SetHint(passPrimary, controller.Translate(HintAssist.GetHint(passPrimary).ToString()));
+            HintAssist.SetHint(passSecondary, controller.Translate(HintAssist.GetHint(passSecondary).ToString()));
+            txtWrongPassCard.Text = controller.Translate(txtWrongPassCard.Text);
+            menuMinimize.Content = controller.Translate(menuMinimize.Content.ToString());
+            menuClose.Content = controller.Translate(menuClose.Content.ToString());
+            menuAbout.Content = controller.Translate(menuAbout.Content.ToString());
         }
     }
 }

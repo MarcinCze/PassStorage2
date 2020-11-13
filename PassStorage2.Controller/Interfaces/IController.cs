@@ -23,5 +23,6 @@ namespace PassStorage2.Controller.Interfaces
         void IncrementViewCount(int id, IEnumerable<Password> passwords);
         void Backup();
         void BackupDecoded();
+        string Translate(string key);
     }
 }

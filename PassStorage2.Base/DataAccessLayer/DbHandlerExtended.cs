@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using PassStorage2.Models;
@@ -10,10 +11,36 @@ namespace PassStorage2.Base.DataAccessLayer
 {
     public class DbHandlerExtended : DbHandler
     {
-        public DbHandlerExtended() : base()
+        protected readonly ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider;
+
+        public DbHandlerExtended(ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider)
         {
-            GenerateAdditionalStructure();
-            FillMissingUid();
+            Logger.Instance.FunctionStart();
+            this.configurationProvider = configurationProvider;
+            try
+            {
+                if (!File.Exists(FileName))
+                {
+                    Logger.Instance.Debug("SQLite file doesn't exist. Creating...");
+                    SQLiteConnection.CreateFile(FileName);
+                    GenerateTables();
+                }
+                else
+                {
+                    Logger.Instance.Debug("SQLite file exist");
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                GenerateAdditionalStructure();
+                FillMissingUid();
+
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public override IEnumerable<Password> GetAll()
@@ -44,7 +71,8 @@ namespace PassStorage2.Base.DataAccessLayer
                             SaveTime = reader.GetDateTime(4),
                             PassChangeTime = reader.GetDateTime(5),
                             ViewCount = reader.GetInt32(6),
-                            Uid = reader.GetString(7)
+                            Uid = reader.GetString(7),
+                            ExpirationDays = configurationProvider.ExpirationDays
                         });
                     }
 
@@ -91,7 +119,8 @@ namespace PassStorage2.Base.DataAccessLayer
                         SaveTime = reader.GetDateTime(4),
                         PassChangeTime = reader.GetDateTime(5),
                         ViewCount = reader.GetInt32(6),
-                        Uid = reader.GetString(7)
+                        Uid = reader.GetString(7),
+                        ExpirationDays = configurationProvider.ExpirationDays
                     };
                     connection.Close();
                     return pass;

@@ -1,10 +1,13 @@
 ﻿using PassStorage2.Base;
 using PassStorage2.Base.DataAccessLayer;
+using PassStorage2.ConfigurationProvider.Interfaces;
 using PassStorage2.Models;
+using PassStorage2.Translations;
+using PassStorage2.Translations.Interfaces;
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -15,6 +18,8 @@ namespace PassStorage2.Controller
         private readonly DbHandlerExtended storage;
         private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
         private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
+        private readonly ITranslationProvider translationProvider;
+        private readonly IConfigurationProvider configurationProvider;
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
@@ -22,9 +27,13 @@ namespace PassStorage2.Controller
         public SqliteController()
         {
             Logger.Instance.Debug("Creating SqliteController");
-            storage = new DbHandlerExtended();
+            configurationProvider = new PassStorage2.ConfigurationProvider.ConfigurationProvider();
+            storage = new DbHandlerExtended(configurationProvider); 
             decoder = new Base.DataCryptoLayer.Decoder();
             encoder = new Base.DataCryptoLayer.Encoder();
+            
+            translationProvider = new TranslationProvider();
+            translationProvider.SetLanguage(GetLangEnum());
         }
 
         public void Backup()
@@ -258,10 +267,12 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                using (var protection = new Base.DataCryptoLayer.EntryProtection(primary, secondary))
+                using (var protection = new Base.DataCryptoLayer.EntryProtection(
+                    primary, 
+                    secondary, 
+                    configurationProvider.PrimaryHash, 
+                    configurationProvider.SecondaryHash))
                 {
-                    protection.Validate();
-
                     if (!protection.IsAllowed)
                     {
                         Logger.Instance.Error(new Exception("Passwords are incorrect"));
@@ -312,5 +323,9 @@ namespace PassStorage2.Controller
                 Logger.Instance.FunctionEnd();
             }
         }
+
+        public string Translate(string key) => translationProvider.Translate(key);
+
+        protected Language GetLangEnum() => Enum.TryParse(configurationProvider.ApplicationLanguage, out Language lang) ? lang : Language.EN;
     }
 }

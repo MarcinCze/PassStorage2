@@ -1,0 +1,190 @@
+[
+  {
+    "Name": "LOGIN_LOGIN",
+    "Value": "LOGIN"
+  },
+  {
+    "Name": "LOGIN_PRIMARY_KEY",
+    "Value": "Primary key"
+  },
+  {
+    "Name": "LOGIN_SECONDARY_KEY",
+    "Value": "Secondary key"
+  },
+  {
+    "Name": "LOGIN_MENU_MINIMIZE",
+    "Value": "Minimize"
+  },
+  {
+    "Name": "LOGIN_MENU_CLOSE",
+    "Value": "Close"
+  },
+  {
+    "Name": "LOGIN_MENU_TITLE",
+    "Value": "PassStorage 2.0..."
+  },
+  {
+    "Name": "LOGIN_SECRETS_ARE_WRONG",
+    "Value": "Secret keys are incorrect!"
+  },
+  {
+    "Name": "DASHBOARD_BTN_ALL_PASSWORDS",
+    "Value": "All passwords"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ALL_PASSWORDS",
+    "Value": "Show list of all passwords"
+  },
+  {
+    "Name": "DASHBOARD_BTN_MOSTLY_USED",
+    "Value": "Mostly used"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_MOSTLY_USED",
+    "Value": "Show mostly used passwords"
+  },
+  {
+    "Name": "DASHBOARD_BTN_EXPIRY_WARNING",
+    "Value": "Expiration warning"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_EXPIRY_WARNING",
+    "Value": "Show passwords where expiration date is exceeded"
+  },
+  {
+    "Name": "DASHBOARD_SEARCH_HINT",
+    "Value": "Search by title..."
+  },
+  {
+    "Name": "DASHBOARD_BTN_ADD_NEW",
+    "Value": "Add new"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ADD_NEW",
+    "Value": "Add new one"
+  },
+  {
+    "Name": "DASHBOARD_BTN_BACKUP",
+    "Value": "Backup"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_BACKUP",
+    "Value": "Backup all entries to separate file"
+  },
+  {
+    "Name": "DASHBOARD_BTN_BACKUP_DECODED",
+    "Value": "Backup decoded"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_BACKUP_DECODED",
+    "Value": "Backup all entries DECODED(!) to separate file"
+  },
+  {
+    "Name": "DASHBOARD_BTN_EXIT",
+    "Value": "Exit"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_EXIT",
+    "Value": "Close application"
+  },
+  {
+    "Name": "DASHBOARD_BTN_ABOUT",
+    "Value": "About"
+  },
+  {
+    "Name": "DASHBOARD_BTN_TIP_ABOUT",
+    "Value": "Credentials"
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_TITLE",
+    "Value": "Title"
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_VALID_FROM",
+    "Value": "Valid from"
+  },
+  {
+    "Name": "DASHBOARD_TABLE_HDR_WARNING",
+    "Value": "Warning"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_LOGIN",
+    "Value": "Login"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_PASSWORD",
+    "Value": "Password"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_TIP_COPY",
+    "Value": "Copy to clipboard"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_EDIT",
+    "Value": "Edit"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_EDIT",
+    "Value": "Edit this entry"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_DELETE",
+    "Value": "Delete"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_DELETE",
+    "Value": "Remove this entry"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_CLOSE",
+    "Value": "Close"
+  },
+  {
+    "Name": "DASHBOARD_DRAWER_BTN_TIP_CLOSE",
+    "Value": "Close details"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_HDR",
+    "Value": "Confirm"
+  },
+  {
+    "Name": "DASHBOARD_DELETE_PASS_MSG_CONTENT",
+    "Value": "Are you sure to remove?"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_SAVE",
+    "Value": "Save"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_TIP_SAVE",
+    "Value": "Save entry"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_CANCEL",
+    "Value": "Cancel"
+  },
+  {
+    "Name": "MODIFY_NAV_BTN_TIP_CANCEL",
+    "Value": "Discard changes"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_TITLE",
+    "Value": "Title"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_LOGIN",
+    "Value": "Login"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_PASSWORD",
+    "Value": "Password"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_TIP_SLIDER",
+    "Value": "Random password's length"
+  },
+  {
+    "Name": "MODIFY_PASSWORD_BTN_TIP_GENERATE",
+    "Value": "Generate random password"
+  }
+]
