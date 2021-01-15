@@ -4,7 +4,6 @@ using PassStorage2.Translations.Interfaces;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +27,7 @@ namespace PassStorage2.Translations
                 SelectedLang = language;
                 Task.Run(LoadTranslationsAsync).Wait();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Dictionary = new List<TranslationModel>();
             }
@@ -39,17 +38,17 @@ namespace PassStorage2.Translations
             if (!Dictionary.Any(x => x.Name.Equals(key)))
                 return key;
 
-            return Dictionary.FirstOrDefault(x => x.Name.Equals(key)).Value;
+            return Dictionary.FirstOrDefault(x => x.Name.Equals(key))?.Value;
         }
 
         protected async Task LoadTranslationsAsync()
         {
-            string fileName = Path.Combine("Translations", $"{SelectedLang}.json");
+            var fileName = Path.Combine("Translations", $"{SelectedLang}.json");
 
             if (!File.Exists(fileName))
                 throw new Exception("Translation file doesn't exist");
 
-            string content = null;
+            string content;
             using (var reader = new StreamReader(fileName))
             {
                 content = await reader.ReadToEndAsync();

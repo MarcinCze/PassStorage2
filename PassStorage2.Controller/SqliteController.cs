@@ -8,7 +8,6 @@ using PassStorage2.Translations.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 
 namespace PassStorage2.Controller
@@ -41,22 +40,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                if (!Directory.Exists("Backups")) Directory.CreateDirectory("Backups");
-
-                string fileName = $"{DbHandler.FileName}_{DateTime.Now:yyyy-MM-dd}";
-                int idx = 1;
-
-                while (true)
-                {
-                    if (!File.Exists($"Backups\\{fileName}"))
-                    {
-                        File.Copy(DbHandler.FileName, $"Backups\\{fileName}");
-                        break;
-                    }
-
-                    fileName = $"{DbHandler.FileName}_{DateTime.Now:yyyy-MM-dd}" + $"_{idx}";
-                    idx++;
-                }
+                BackupHandler.Backup();
             }
             catch (Exception e)
             {
@@ -70,7 +54,19 @@ namespace PassStorage2.Controller
 
         public void BackupDecoded()
         {
-            throw new NotImplementedException();
+            Logger.Instance.FunctionStart();
+            try
+            {
+                BackupHandler.BackupDecoded(GetAll());
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Error(e);
+            }
+            finally
+            {
+                Logger.Instance.FunctionEnd();
+            }
         }
 
         public void Delete(int id)

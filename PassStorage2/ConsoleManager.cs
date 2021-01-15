@@ -30,13 +30,11 @@ namespace PassStorage2
         /// </summary>
         public static void Show()
         {
-            //#if DEBUG
             if (!HasConsole)
             {
                 AllocConsole();
                 InvalidateOutAndError();
             }
-            //#endif
         }
 
         /// <summary>
@@ -44,25 +42,19 @@ namespace PassStorage2
         /// </summary>
         public static void Hide()
         {
-            //#if DEBUG
             if (HasConsole)
             {
                 SetOutAndErrorNull();
                 FreeConsole();
             }
-            //#endif
         }
 
         public static void Toggle()
         {
             if (HasConsole)
-            {
                 Hide();
-            }
             else
-            {
                 Show();
-            }
         }
 
         static void InvalidateOutAndError()

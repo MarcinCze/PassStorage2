@@ -1,11 +1,11 @@
-﻿using System;
+﻿using PassStorage2.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using PassStorage2.Models;
 
 namespace PassStorage2.Base.DataAccessLayer
 {

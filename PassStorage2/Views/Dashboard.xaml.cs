@@ -205,7 +205,14 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
+                ControlLoadingGrid(true, "Exporting...");
+
+                passwords = null;
+                listViewPasswords.ItemsSource = null;
+
                 controller.Backup();
+
+                Task.Run(LoadList);
             }
             catch (Exception ex)
             {
@@ -222,7 +229,12 @@ namespace PassStorage2.Views
             Logger.Instance.FunctionStart();
             try
             {
-                controller.BackupDecoded();
+                ControlLoadingGrid(true, "Exporting decoded...");
+
+                passwords = null;
+                listViewPasswords.ItemsSource = null;
+
+                Task.Run(controller.BackupDecoded).ContinueWith(x => LoadList());
             }
             catch (Exception ex)
             {
