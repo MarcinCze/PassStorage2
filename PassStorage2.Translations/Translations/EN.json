@@ -116,6 +116,10 @@
     "Value": "Password"
   },
   {
+    "Name": "DASHBOARD_DRAWER_PASS_STYLE_CHANGE",
+    "Value": "Change password style"
+  },
+  {
     "Name": "DASHBOARD_DRAWER_TIP_COPY",
     "Value": "Copy to clipboard"
   },

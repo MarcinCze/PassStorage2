@@ -12,6 +12,8 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace PassStorage2.Views
 {
@@ -25,7 +27,7 @@ namespace PassStorage2.Views
         private readonly MenuType menu;
         private List<Password> passwords;
         private Counters counters;
-        private int detailsId;
+        private Password detailsPass;
 
         public enum MenuType { All, Most, Expiry }
 
@@ -48,10 +50,12 @@ namespace PassStorage2.Views
             try
             {
                 Task.Run(() => controller.IncrementViewCount(pass.Id));
+                detailsPass = pass;
                 detailTitle.Text = pass.Title;
                 detailLogin.Text = pass.Login;
                 detailPassword.Text = pass.Pass;
-                detailsId = pass.Id;
+                togglePasswordStyle.IsChecked = false;
+                togglePasswordStyle_Click(togglePasswordStyle, null);
 
                 ButtonAutomationPeer peer = new ButtonAutomationPeer(btnOpenDrawer);
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
@@ -280,19 +284,19 @@ namespace PassStorage2.Views
         private void btnCopyLogin_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Copying login");
-            Clipboard.SetText(detailLogin.Text);
+            Clipboard.SetText(detailsPass.Login);
         }
 
         private void btnCopyPassword_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Copying password");
-            Clipboard.SetText(detailPassword.Text);
+            Clipboard.SetText(detailsPass.Pass);
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to Modify view");
-            Switcher.Switch(new Modify(controller, logger, counters, detailsId));
+            Switcher.Switch(new Modify(controller, logger, counters, detailsPass.Id));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -306,7 +310,7 @@ namespace PassStorage2.Views
             if (response != MessageBoxResult.Yes)
                 return;
             
-            controller.Delete(detailsId);
+            controller.Delete(detailsPass.Id);
             UserControl_Loaded(null, null);
         }
 
@@ -341,6 +345,7 @@ namespace PassStorage2.Views
             tableHdrWarning.Header = controller.Translate(tableHdrWarning.Header.ToString());
             txtDrawerLogin.Text = controller.Translate(txtDrawerLogin.Text.ToString());
             txtDrawerPassword.Text = controller.Translate(txtDrawerPassword.Text.ToString());
+            togglePasswordStyle.ToolTip = controller.Translate(togglePasswordStyle.ToolTip.ToString());
             btnCopyLogin.ToolTip = controller.Translate(btnCopyLogin.ToolTip.ToString());
             btnCopyPassword.ToolTip = controller.Translate(btnCopyPassword.ToolTip.ToString());
             btnEdit.ToolTip = controller.Translate(btnEdit.ToolTip.ToString());
@@ -349,6 +354,27 @@ namespace PassStorage2.Views
             labelDrawerBtnDelete.Text = controller.Translate(labelDrawerBtnDelete.Text.ToString());
             btnClose.ToolTip = controller.Translate(btnClose.ToolTip.ToString());
             labelDrawerBtnClose.Text = controller.Translate(labelDrawerBtnClose.Text.ToString());
+        }
+
+        private void togglePasswordStyle_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as ToggleButton).IsChecked.GetValueOrDefault())
+            {
+                var results = detailsPass.GetPositionedString();
+                detailPassword.Text = results.password;
+                detailPassword.FontSize = detailPasswordPositions.FontSize = 16;
+                detailPassword.FontFamily = new FontFamily("Consolas");
+                detailPasswordPositions.FontFamily = new FontFamily("Consolas");
+                detailPasswordPositions.Visibility = Visibility.Visible;
+                detailPasswordPositions.Text = results.positions;
+            }
+            else
+            {
+                detailPassword.Text = detailsPass.Pass;
+                detailPassword.FontFamily = detailLogin.FontFamily;
+                detailPasswordPositions.Visibility = Visibility.Hidden;
+                detailPassword.FontSize = detailPasswordPositions.FontSize = detailLogin.FontSize;
+            }
         }
     }
 }

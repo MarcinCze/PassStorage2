@@ -30,6 +30,9 @@ namespace PassStorage2.Views
             lbAppName.Content = $"PassStorage {Utils.GetVersionShort()}";
 
             TranslateControls();
+
+            passPrimary.Password = "SkodaFabia";
+            passSecondary.Password = "martusia";
         }
 
         public void UtilizeState(object state)
