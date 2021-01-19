@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using PassStorage2.Controller.Interfaces;
+
 namespace PassStorage2
 {
     /// <summary>
@@ -9,17 +11,10 @@ namespace PassStorage2
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly Controller.Interfaces.IController controller;
-
-        public MainWindow()
+        public MainWindow(IController controller)
         {
             InitializeComponent();
 
-#if DEBUG
-            ConsoleManager.Show();
-#endif
-
-            controller = new Controller.SqliteController();
             Switcher.PageSwitcher = this;
             Switcher.Switch(new Views.Login(controller));
         }

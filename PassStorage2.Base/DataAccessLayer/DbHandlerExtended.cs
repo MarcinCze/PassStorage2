@@ -6,14 +6,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using PassStorage2.ConfigurationProvider.Interfaces;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
     public class DbHandlerExtended : DbHandler
     {
-        protected readonly ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider;
+        protected readonly IConfigurationProvider configurationProvider;
 
-        public DbHandlerExtended(ConfigurationProvider.Interfaces.IConfigurationProvider configurationProvider)
+        public DbHandlerExtended(IConfigurationProvider configurationProvider)
         {
             Logger.Instance.FunctionStart();
             this.configurationProvider = configurationProvider;
@@ -179,7 +180,7 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
-        public virtual void Delete(int id)
+        public override void Delete(int id)
         {
             try
             {

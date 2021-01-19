@@ -283,8 +283,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var analyzer = new MostUsageAnalyzer(passwords);
-                return analyzer.Analyze();
+                return MostUsageAnalyzer.Get(passwords);
             }
             catch (Exception e)
             {

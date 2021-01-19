@@ -15,18 +15,21 @@ namespace PassStorage2.Views
     {
         private readonly IController controller;
 
-        public Login(IController cntr)
+        public Login(IController controller)
         {
             InitializeComponent();
+
+            this.controller = controller;
+
             Logger.Instance.Debug("Creating Login user control");
             gridWrongPass.Visibility = Visibility.Hidden;
 
-            if (cntr is null)
+            if (controller is null)
             {
                 Logger.Instance.Warning("Login :: controller is empty");
             }
 
-            controller = cntr;
+            this.controller = controller;
 
             TranslateControls();
         }
@@ -49,7 +52,7 @@ namespace PassStorage2.Views
             else
             {
                 Logger.Instance.Debug("SetPass ok. Switching to DASHBOARD");
-                Switcher.Switch(new Dashboard(controller));
+                Switcher.Switch(new Dashboard(this.controller));
             }
         }
 

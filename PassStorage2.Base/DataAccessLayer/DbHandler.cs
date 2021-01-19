@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
+using PassStorage2.Base.DataAccessLayer.Interfaces;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
-    public class DbHandler
+    public class DbHandler : IStorageHandler
     {
         public const string FileName = "PassStorage2.Storage.sqlite";
         protected string ConnString => $"Data Source={FileName};Version=3;";
@@ -221,6 +222,11 @@ namespace PassStorage2.Base.DataAccessLayer
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        public virtual void Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

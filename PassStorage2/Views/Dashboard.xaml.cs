@@ -315,23 +315,6 @@ namespace PassStorage2.Views
             var searchResults = controller.GetBySearchWord(this.txtSearch.Text, passwords);
             listViewPasswords.ItemsSource = null;
             listViewPasswords.ItemsSource = searchResults;
-
-            //Logger.Instance.FunctionStart();
-            //try
-            //{
-            //    //RefreshLabels();
-            //    var searchResults = controller.GetBySearchWord(this.txtSearch.Text);
-            //    listViewPasswords.ItemsSource = null;
-            //    listViewPasswords.ItemsSource = searchResults;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logger.Instance.Error(ex);
-            //}
-            //finally
-            //{
-            //    Logger.Instance.FunctionEnd();
-            //}
         }
 
         private void TranslateControls()

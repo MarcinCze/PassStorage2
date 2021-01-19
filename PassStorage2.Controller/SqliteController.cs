@@ -4,34 +4,41 @@ using PassStorage2.ConfigurationProvider.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Translations;
 using PassStorage2.Translations.Interfaces;
+using PassStorage2.Base.DataAccessLayer.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using PassStorage2.Base.DataCryptoLayer.Interfaces;
 
 namespace PassStorage2.Controller
 {
     public class SqliteController : Interfaces.IController
     {
-        private readonly DbHandlerExtended storage;
-        private readonly Base.DataCryptoLayer.Interfaces.IDecodeData decoder;
-        private readonly Base.DataCryptoLayer.Interfaces.IEncodeData encoder;
+        private readonly IStorageHandler storage;
+        private readonly IDecodeData decoder;
+        private readonly IEncodeData encoder;
         private readonly ITranslationProvider translationProvider;
         private readonly IConfigurationProvider configurationProvider;
 
         protected string PasswordFirst { get; set; }
         protected string PasswordSecond { get; set; }
 
-        public SqliteController()
+        public SqliteController(
+            IStorageHandler storage, 
+            IDecodeData decoder, 
+            IEncodeData encoder, 
+            ITranslationProvider translationProvider, 
+            IConfigurationProvider configurationProvider)
         {
             Logger.Instance.Debug("Creating SqliteController");
-            configurationProvider = new PassStorage2.ConfigurationProvider.ConfigurationProvider();
-            storage = new DbHandlerExtended(configurationProvider); 
-            decoder = new Base.DataCryptoLayer.Decoder();
-            encoder = new Base.DataCryptoLayer.Encoder();
-            
-            translationProvider = new TranslationProvider();
+            this.configurationProvider = configurationProvider;
+            this.storage = storage;
+            this.decoder = decoder;
+            this.encoder = encoder;
+
+            this.translationProvider = translationProvider;
             translationProvider.SetLanguage(GetLangEnum());
         }
 
@@ -195,8 +202,7 @@ namespace PassStorage2.Controller
             Logger.Instance.FunctionStart();
             try
             {
-                var analyzer = new MostUsageAnalyzer(passwords);
-                return analyzer.Analyze().OrderBy(x => x.Title);
+                return MostUsageAnalyzer.Get(passwords).OrderBy(x => x.Title);
             }
             catch (Exception e)
             {
