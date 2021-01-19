@@ -27,6 +27,8 @@ namespace PassStorage2.Views
             logger.Debug("Creating Login user control");
             gridWrongPass.Visibility = Visibility.Hidden;
 
+            lbAppName.Content = $"PassStorage {Utils.GetVersionShort()}";
+
             TranslateControls();
         }
 

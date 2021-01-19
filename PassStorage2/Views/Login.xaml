@@ -11,7 +11,7 @@
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
              d:DesignHeight="650" d:DesignWidth="1024" KeyDown="UserControl_KeyDown">
     <Grid>
-        <Label Content="Pass Storage 2.0" FontSize="40" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Name="lbAppName" Content="Pass Storage 2.0" FontSize="40" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Button Name="btnLogin" Content="LOGIN_LOGIN" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Center" Width="155" Height="54" Click="btnLogin_Click"/>
 
         <materialDesign:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10"
