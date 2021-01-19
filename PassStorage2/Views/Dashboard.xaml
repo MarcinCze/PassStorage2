@@ -172,6 +172,9 @@
                 </Button>
             </materialDesign:DrawerHost>
         </Grid>
+
+        <TextBlock Name="lbBuild" Margin="10,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="12" Foreground="#CACACA" Style="{StaticResource MaterialDesignBody1TextBlock}">build 25456878</TextBlock>
+
     </Grid>
     
 </UserControl>

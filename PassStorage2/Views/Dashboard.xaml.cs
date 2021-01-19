@@ -4,6 +4,7 @@ using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Logger.Interfaces;
 using PassStorage2.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace PassStorage2.Views
 
             logger.Debug("Creating Dashboard user control");
 
+            lbBuild.Text = Utils.GetBuildName();
             TranslateControls();
         }
 

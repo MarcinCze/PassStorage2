@@ -2,6 +2,7 @@
 using PassStorage2.Base.DataAccessLayer.Interfaces;
 using PassStorage2.Base.DataCryptoLayer.Interfaces;
 using PassStorage2.ConfigurationProvider.Interfaces;
+using PassStorage2.Controller.Interfaces;
 using PassStorage2.Logger.Interfaces;
 using PassStorage2.Models;
 using PassStorage2.Translations;
@@ -14,7 +15,7 @@ using System.Linq;
 
 namespace PassStorage2.Controller
 {
-    public class SqliteController : Interfaces.IController
+    public class SqliteController : IController
     {
         private readonly IStorageHandler storage;
         private readonly IDecodeData decoder;

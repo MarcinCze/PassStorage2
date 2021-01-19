@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+
 using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
+using PassStorage2.Logger.Interfaces;
 using PassStorage2.Models;
+
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using MaterialDesignThemes.Wpf;
-using PassStorage2.Logger.Interfaces;
 
 namespace PassStorage2.Views
 {
@@ -40,6 +42,7 @@ namespace PassStorage2.Views
                 logger.Debug("Entering INSERT mode");
             }
 
+            lbBuild.Text = Utils.GetBuildName();
             TranslateControls();
         }
 

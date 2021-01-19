@@ -1,11 +1,13 @@
-﻿using PassStorage2.Base;
+﻿using MaterialDesignThemes.Wpf;
+
+using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
+using PassStorage2.Logger.Interfaces;
+
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
-using PassStorage2.Logger.Interfaces;
 
 namespace PassStorage2.Views
 {
@@ -28,11 +30,9 @@ namespace PassStorage2.Views
             gridWrongPass.Visibility = Visibility.Hidden;
 
             lbAppName.Content = $"PassStorage {Utils.GetVersionShort()}";
+            lbBuild.Text = Utils.GetBuildName();
 
             TranslateControls();
-
-            passPrimary.Password = "SkodaFabia";
-            passSecondary.Password = "martusia";
         }
 
         public void UtilizeState(object state)

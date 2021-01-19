@@ -38,6 +38,8 @@
                 <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" x:Name="txtWrongPassCard" TextAlignment="Center">LOGIN_SECRETS_ARE_WRONG</TextBlock>
             </materialDesign:Card>
         </Grid>
+
+        <TextBlock Name="lbBuild" Margin="10,0,0,10" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="12" Foreground="#CACACA" Style="{StaticResource MaterialDesignBody1TextBlock}">build 25456878</TextBlock>
     </Grid>
 
 </UserControl>

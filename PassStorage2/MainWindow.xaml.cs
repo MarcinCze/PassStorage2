@@ -1,9 +1,10 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-
+﻿using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
 using PassStorage2.Logger.Interfaces;
+
+using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace PassStorage2
 {
@@ -15,6 +16,7 @@ namespace PassStorage2
         public MainWindow(IController controller, ILogger logger)
         {
             InitializeComponent();
+            this.Title = GenerateTitle();
 
             Switcher.PageSwitcher = this;
             Switcher.Switch(new Views.Login(controller, logger));
@@ -34,5 +36,7 @@ namespace PassStorage2
             else
                 throw new ArgumentException("NextPage is not ISwitchable! " + nextPage.Name);
         }
+
+        public string GenerateTitle() => $"PassStorage {Utils.GetVersionShort()}";
     }
 }

@@ -25,14 +25,14 @@
         /// <summary>
         /// Construct
         /// </summary>
-        /// <param name="a">All passwords counter</param>
-        /// <param name="m">Most used counter</param>
-        /// <param name="e">Expired counter</param>
-        public Counters (int a, int m, int e)
+        /// <param name="all">All passwords counter</param>
+        /// <param name="mostUsed">Most used counter</param>
+        /// <param name="expired">Expired counter</param>
+        public Counters (int all, int mostUsed, int expired)
         {
-            All = a;
-            MostUsed = m;
-            Expired = e;
+            All = all;
+            MostUsed = mostUsed;
+            Expired = expired;
         }
     }
 }

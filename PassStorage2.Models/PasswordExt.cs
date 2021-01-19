@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace PassStorage2.Models
 {
@@ -21,11 +20,15 @@ namespace PassStorage2.Models
         /// </summary>
         public bool IsExpired => (DateTime.Now - PassChangeTime).TotalDays >= ExpirationDays;
 
+        /// <summary>
+        /// Get main password where one char sits on two positions plus index string
+        /// </summary>
+        /// <returns></returns>
         public (string password, string positions) GetPositionedString()
         {
+            int index = 1;
             string password = string.Empty;
             string positions = string.Empty;
-            int index = 1;
 
             foreach (var c in Pass)
             {
@@ -37,10 +40,10 @@ namespace PassStorage2.Models
                         positions += " 1";
                         break;
                     case 5:
-                        positions += $" 5";
+                        positions += " 5";
                         break;
                     default:
-                        positions += index % 5 == 0 ? index.ToString() : "  ";
+                        positions += index % 5 == 0 ? $"{index}" : "  ";
                         break;
                 }
 
