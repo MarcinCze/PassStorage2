@@ -7,6 +7,7 @@ using PassStorage2.Base.DataCryptoLayer.Interfaces;
 using PassStorage2.ConfigurationProvider.Interfaces;
 using PassStorage2.Controller;
 using PassStorage2.Controller.Interfaces;
+using PassStorage2.Logger.Interfaces;
 using PassStorage2.Translations;
 using PassStorage2.Translations.Interfaces;
 
@@ -30,6 +31,7 @@ namespace PassStorage2
 
         private void ConfigureServices(ServiceCollection services)
         {
+            services.AddScoped<ILogger, Logger.Logger>();
             services.AddScoped<IController, SqliteController>();
             services.AddScoped<IDecodeData, Decoder>();
             services.AddScoped<IEncodeData, Encoder>();

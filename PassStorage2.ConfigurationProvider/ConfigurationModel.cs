@@ -6,5 +6,7 @@
         public int ExpirationDays { get; set; }
         public string FH { get; set; }
         public string SH { get; set; }
+        public bool LogFunctionStart { get; set; }
+        public bool LogFunctionEnd { get; set; }
     }
 }

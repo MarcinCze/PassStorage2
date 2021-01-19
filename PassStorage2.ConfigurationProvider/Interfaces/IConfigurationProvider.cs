@@ -6,5 +6,7 @@
         int ExpirationDays { get; }
         string PrimaryHash { get; }
         string SecondaryHash { get; }
+        bool LogFunctionStart { get; }
+        bool LogFunctionEnd { get; }
     }
 }

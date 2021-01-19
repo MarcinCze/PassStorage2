@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
+using PassStorage2.Logger.Interfaces;
 
 namespace PassStorage2.Views
 {
@@ -15,30 +16,28 @@ namespace PassStorage2.Views
     public partial class Modify : UserControl
     {
         private readonly IController controller;
+        private readonly ILogger logger;
         private readonly Counters counters;
         private Password password;
 
-        public Modify(IController cntr, Counters c, int? passwordId = null)
+        public Modify(IController controller, ILogger logger, Counters counters, int? passwordId = null)
         {
             InitializeComponent();
-            Logger.Instance.Debug("Creating Modify user control");
-            
-            counters = c;
-            Logger.Instance.Debug("Rewriting counters.", counters);
 
-            if (cntr is null)
-                Logger.Instance.Warning("Modify :: controller is empty");
+            this.logger = logger;
+            this.controller = controller;
+            this.counters = counters;
 
-            controller = cntr;
+            logger.Debug("Creating Modify user control");
 
             if (passwordId.HasValue)
             {
-                Logger.Instance.Debug("Entering EDIT mode");
+                logger.Debug("Entering EDIT mode");
                 password = controller?.Get(passwordId.Value);
             }
             else
             {
-                Logger.Instance.Debug("Entering INSERT mode");
+                logger.Debug("Entering INSERT mode");
             }
 
             TranslateControls();
@@ -46,8 +45,8 @@ namespace PassStorage2.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
-            Logger.Instance.Debug($"Are counters need refreshing? - {counters.NeedRefresh}");
+            logger.FunctionStart();
+            logger.Debug($"Are counters need refreshing? - {counters.NeedRefresh}");
             if (counters.NeedRefresh)
             {
                 var passwords = controller.GetAll().ToList();
@@ -74,25 +73,25 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to dashboard. Mode = All");
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.All));
+            logger.Debug("Switching to dashboard. Mode = All");
+            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.All));
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to dashboard. Mode = Most");
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.Most));
+            logger.Debug("Switching to dashboard. Mode = Most");
+            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.Most));
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to dashboard. Mode = Expiry");
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.Expiry));
+            logger.Debug("Switching to dashboard. Mode = Expiry");
+            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.Expiry));
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 bool updTime;
@@ -105,7 +104,7 @@ namespace PassStorage2.Views
                     updTime = !(password.Pass.Equals(tbPassword.Text));
                 }
 
-                Logger.Instance.Debug($"Update password change time - {updTime}");
+                logger.Debug($"Update password change time - {updTime}");
 
                 password.Title = tbTitle.Text;
                 password.Login = tbLogin.Text;
@@ -115,27 +114,27 @@ namespace PassStorage2.Views
                     password.Uid = Guid.NewGuid().ToString();
 
                 controller.Save(password, updTime);
-                Switcher.Switch(new Dashboard(controller));
+                Switcher.Switch(new Dashboard(controller, logger));
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to Dashboard. Mode = All");
-            Switcher.Switch(new Dashboard(controller, Dashboard.MenuType.All));
+            logger.Debug("Switching to Dashboard. Mode = All");
+            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.All));
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             Application.Current.Shutdown();
         }
 
@@ -146,7 +145,7 @@ namespace PassStorage2.Views
 
         private void btnRandomPass_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             tbPassword.Text = RandomPassword.Generate((int)sliderRandomPassLength.Value);
         }
 

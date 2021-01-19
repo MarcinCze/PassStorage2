@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.Translations",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.HashGen", "PassStorage2.HashGen\PassStorage2.HashGen.csproj", "{D8BE4AAE-9E7B-4C9C-B918-745894960259}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.Logger", "PassStorage2.Logger\PassStorage2.Logger.csproj", "{3910B041-AB1D-4904-A9B9-A2B476A66C88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -86,6 +88,12 @@ Global
 		{D8BE4AAE-9E7B-4C9C-B918-745894960259}.Release|x64.Build.0 = Release|x64
 		{D8BE4AAE-9E7B-4C9C-B918-745894960259}.Release|x86.ActiveCfg = Release|x86
 		{D8BE4AAE-9E7B-4C9C-B918-745894960259}.Release|x86.Build.0 = Release|x86
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Debug|x64.ActiveCfg = Debug|x64
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Debug|x64.Build.0 = Debug|x64
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Debug|x86.ActiveCfg = Debug|x86
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Debug|x86.Build.0 = Debug|x86
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Release|x64.ActiveCfg = Release|x64
+		{3910B041-AB1D-4904-A9B9-A2B476A66C88}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

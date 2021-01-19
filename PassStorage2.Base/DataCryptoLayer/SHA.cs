@@ -15,9 +15,8 @@ namespace PassStorage2.Base.DataCryptoLayer
                 byte[] hash = sha256.ComputeHash(bytes);
                 return GetStringFromHash(hash);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Logger.Instance.Error(e);
                 return null;
             }
         }
@@ -32,12 +31,13 @@ namespace PassStorage2.Base.DataCryptoLayer
                 return GetStringFromHash(hash);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Logger.Instance.Error(e);
                 return null;
             }
         }
+
+        public static bool Equals(string shaHash, string value, bool isSha512 = false) => (isSha512 ? GenerateSHA512String(value) : GenerateSHA256String(value)).Equals(shaHash);
 
         private static string GetStringFromHash(byte[] hash)
         {
@@ -47,11 +47,6 @@ namespace PassStorage2.Base.DataCryptoLayer
                 result.Append(hash[i].ToString("X2"));
             }
             return result.ToString();
-        }
-
-        public static bool Equals(string shaHash, string value, bool isSha512 = false)
-        {
-            return (isSha512 ? GenerateSHA512String(value) : GenerateSHA256String(value)).Equals(shaHash);
         }
     }
 }

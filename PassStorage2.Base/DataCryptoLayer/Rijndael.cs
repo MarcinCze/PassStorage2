@@ -15,7 +15,6 @@ namespace PassStorage2.Base.DataCryptoLayer
         internal const string Inputkey = "27D951BA-1046-462F-A07B-246F68DBABF3";
         #endregion
 
-
         private static RijndaelManaged RatelRijndaelManaged(string salt)
         {
             if (salt == null) throw new ArgumentNullException(nameof(salt));

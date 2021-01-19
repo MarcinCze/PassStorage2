@@ -1,11 +1,17 @@
-﻿using PassStorage2.Models;
+﻿using PassStorage2.Logger.Interfaces;
+using PassStorage2.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace PassStorage2.Base.DataCryptoLayer
 {
-    public class Encoder : Interfaces.IEncodeData
+    public class Encoder : Coder, Interfaces.IEncodeData
     {
+        public Encoder(ILogger logger) : base(logger)
+        { }
+
         public IEnumerable<Password> Encode(IEnumerable<Password> passwords, string primaryKey, string secondaryKey)
         {
             var watch = new Stopwatch();
@@ -20,12 +26,12 @@ namespace PassStorage2.Base.DataCryptoLayer
                     pass.Pass = Rijndael.EncryptRijndael(pass.Pass, secondaryKey);
                 }
                 watch.Stop();
-                Logger.Instance.Debug($"ENCODE finished in {watch.ElapsedMilliseconds} ms");
+                logger.Debug($"ENCODE finished in {watch.ElapsedMilliseconds} ms");
                 return passwords;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return passwords;
             }
         }
@@ -42,12 +48,12 @@ namespace PassStorage2.Base.DataCryptoLayer
                 password.Pass = Rijndael.EncryptRijndael(password.Pass, secondaryKey);
 
                 watch.Stop();
-                Logger.Instance.Debug($"ENCODE finished in {watch.ElapsedMilliseconds} ms");
+                logger.Debug($"ENCODE finished in {watch.ElapsedMilliseconds} ms");
                 return password;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return password;
             }
         }

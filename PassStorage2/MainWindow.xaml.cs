@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 using PassStorage2.Controller.Interfaces;
+using PassStorage2.Logger.Interfaces;
 
 namespace PassStorage2
 {
@@ -11,12 +12,12 @@ namespace PassStorage2
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(IController controller)
+        public MainWindow(IController controller, ILogger logger)
         {
             InitializeComponent();
 
             Switcher.PageSwitcher = this;
-            Switcher.Switch(new Views.Login(controller));
+            Switcher.Switch(new Views.Login(controller, logger));
         }
 
         public void Navigate(UserControl nextPage)

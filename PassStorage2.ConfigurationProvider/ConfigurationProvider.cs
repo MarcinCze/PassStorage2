@@ -23,6 +23,8 @@ namespace PassStorage2.ConfigurationProvider
         public string PrimaryHash => configModel?.FH;
         public string SecondaryHash => configModel?.SH;
         public string ApplicationLanguage => configModel?.AppLang;
+        public bool LogFunctionStart => configModel?.LogFunctionStart ?? false;
+        public bool LogFunctionEnd => configModel?.LogFunctionEnd ?? false;
 
         protected async Task LoadAsync()
         {

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf;
+using PassStorage2.Logger.Interfaces;
 
 namespace PassStorage2.Views
 {
@@ -14,22 +15,17 @@ namespace PassStorage2.Views
     public partial class Login : UserControl, ISwitchable
     {
         private readonly IController controller;
+        private readonly ILogger logger;
 
-        public Login(IController controller)
+        public Login(IController controller, ILogger logger)
         {
             InitializeComponent();
 
             this.controller = controller;
+            this.logger = logger;
 
-            Logger.Instance.Debug("Creating Login user control");
+            logger.Debug("Creating Login user control");
             gridWrongPass.Visibility = Visibility.Hidden;
-
-            if (controller is null)
-            {
-                Logger.Instance.Warning("Login :: controller is empty");
-            }
-
-            this.controller = controller;
 
             TranslateControls();
         }
@@ -41,30 +37,30 @@ namespace PassStorage2.Views
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 
             if (!result)
             {
-                Logger.Instance.Warning("SetPass result is failure. Showing message");
+                logger.Warning("SetPass result is failure. Showing message");
                 gridWrongPass.Visibility = Visibility.Visible;
             }
             else
             {
-                Logger.Instance.Debug("SetPass ok. Switching to DASHBOARD");
-                Switcher.Switch(new Dashboard(this.controller));
+                logger.Debug("SetPass ok. Switching to DASHBOARD");
+                Switcher.Switch(new Dashboard(this.controller, this.logger));
             }
         }
 
         private void menuMinimize_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             Switcher.PageSwitcher.WindowState = WindowState.Minimized;
         }
 
         private void menuClose_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             Application.Current.Shutdown();
         }
 
@@ -77,7 +73,7 @@ namespace PassStorage2.Views
         {
             if (e.Key == Key.Enter)
             {
-                Logger.Instance.Debug($"Key [{e.Key} pressed]");
+                logger.Debug($"Key [{e.Key} pressed]");
                 btnLogin_Click(null, null);
             }
         }

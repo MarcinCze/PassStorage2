@@ -2,6 +2,7 @@
 
 using PassStorage2.Base;
 using PassStorage2.Controller.Interfaces;
+using PassStorage2.Logger.Interfaces;
 using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace PassStorage2.Views
     public partial class Dashboard : UserControl
     {
         private readonly IController controller;
+        private readonly ILogger logger;
         private readonly MenuType menu;
         private List<Password> passwords;
         private Counters counters;
@@ -27,24 +29,22 @@ namespace PassStorage2.Views
 
         public enum MenuType { All, Most, Expiry }
 
-        public Dashboard(IController cntr, MenuType menu = MenuType.All)
+        public Dashboard(IController controller, ILogger logger, MenuType menu = MenuType.All)
         {
             InitializeComponent();
-            Logger.Instance.Debug("Creating Dashboard user control");
 
-            if (cntr is null)
-            {
-                Logger.Instance.Warning("Dashboard :: controller is empty");
-            }
-
-            controller = cntr;
+            this.controller = controller;
+            this.logger = logger;
             this.menu = menu;
+
+            logger.Debug("Creating Dashboard user control");
+
             TranslateControls();
         }
 
         private void OpenDetailsDrawer(Password pass)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 Task.Run(() => controller.IncrementViewCount(pass.Id));
@@ -59,17 +59,17 @@ namespace PassStorage2.Views
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void RefreshLabels()
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 txtSearch.Text = string.Empty;
@@ -80,11 +80,11 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
@@ -128,7 +128,7 @@ namespace PassStorage2.Views
 
         private void ControlLoadingGrid(bool isVisible, string message)
         {
-            Logger.Instance.Debug($"Setting loading spinner grid to [{isVisible}] with message [{message}]");
+            logger.Debug($"Setting loading spinner grid to [{isVisible}] with message [{message}]");
 
             if (!string.IsNullOrEmpty(message)) waitMsg.Text = message;
 
@@ -137,7 +137,7 @@ namespace PassStorage2.Views
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 RefreshLabels();
@@ -146,17 +146,17 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 RefreshLabels();
@@ -166,17 +166,17 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 RefreshLabels();
@@ -186,23 +186,23 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to Modify view");
-            Switcher.Switch(new Modify(controller, counters));
+            logger.Debug("Switching to Modify view");
+            Switcher.Switch(new Modify(controller, logger, counters));
         }
 
         private void btnBackup_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 ControlLoadingGrid(true, "Exporting...");
@@ -216,17 +216,17 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnBackupDecoded_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 ControlLoadingGrid(true, "Exporting decoded...");
@@ -238,17 +238,17 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             Application.Current.Shutdown();
         }
 
@@ -259,7 +259,7 @@ namespace PassStorage2.Views
 
         private void listViewPasswords_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Logger.Instance.FunctionStart();
+            logger.FunctionStart();
             try
             {
                 if (!((sender as ListView).SelectedItem is Password item))
@@ -269,30 +269,30 @@ namespace PassStorage2.Views
             }
             catch (Exception ex)
             {
-                Logger.Instance.Error(ex);
+                logger.Error(ex);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
         private void btnCopyLogin_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Copying login");
+            logger.Debug("Copying login");
             Clipboard.SetText(detailLogin.Text);
         }
 
         private void btnCopyPassword_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Copying password");
+            logger.Debug("Copying password");
             Clipboard.SetText(detailPassword.Text);
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Logger.Instance.Debug("Switching to Modify view");
-            Switcher.Switch(new Modify(controller, counters, detailsId));
+            logger.Debug("Switching to Modify view");
+            Switcher.Switch(new Modify(controller, logger, counters, detailsId));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)

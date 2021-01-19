@@ -1,12 +1,16 @@
-﻿using PassStorage2.Models;
+﻿using PassStorage2.Logger.Interfaces;
+using PassStorage2.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace PassStorage2.Base.DataCryptoLayer
 {
-    public class Decoder : Interfaces.IDecodeData
+    public class Decoder : Coder, Interfaces.IDecodeData
     {
+        public Decoder(ILogger logger) : base(logger)
+        { }
+
         public IEnumerable<Password> Decode(IEnumerable<Password> passwords, string primaryKey, string secondaryKey)
         {
             var watch = new Stopwatch();
@@ -34,13 +38,13 @@ namespace PassStorage2.Base.DataCryptoLayer
             }
             catch (System.Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return passwords;
             }
             finally
             {
                 watch.Stop();
-                Logger.Instance.Debug($"DECODE finished in {watch.ElapsedMilliseconds} ms");
+                logger.Debug($"DECODE finished in {watch.ElapsedMilliseconds} ms");
             }
         }
 
@@ -65,13 +69,13 @@ namespace PassStorage2.Base.DataCryptoLayer
             }
             catch (System.Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return password;
             }
             finally
             {
                 watch.Stop();
-                Logger.Instance.Debug($"DECODE finished in {watch.ElapsedMilliseconds} ms");
+                logger.Debug($"DECODE finished in {watch.ElapsedMilliseconds} ms");
             }
         }
     }

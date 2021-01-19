@@ -7,7 +7,7 @@ namespace PassStorage2.Base
 {
     public static class MostUsageAnalyzer
     {
-        public static IEnumerable<Password> Get(IEnumerable<Password> list)
+        public static (IEnumerable<Password> passwords, int? min, int? max, int? border) Get(IEnumerable<Password> list)
         {
             try
             {
@@ -15,21 +15,19 @@ namespace PassStorage2.Base
 
                 if (!list.Any())
                 {
-                    return mostUsed;
+                    return (mostUsed, null, null, null);
                 }
 
                 int max = list.Max(x => x.ViewCount);
                 int min = list.Min(x => x.ViewCount);
                 int border = (max - min) / 2 + min;
-                Logger.Instance.Debug($"MOST USED VALS :: Min [{min}] :: Max [{max}] :: Border [{border}]");
 
                 mostUsed.AddRange(list.Where(pass => pass.ViewCount > border));
-                return mostUsed;
+                return (mostUsed, min, max, border);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Logger.Instance.Error(e);
-                return null;
+                return (null, null, null, null);
             }
         }
     }

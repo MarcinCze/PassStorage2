@@ -1,10 +1,12 @@
-﻿using PassStorage2.Models;
+﻿using PassStorage2.Base.DataAccessLayer.Interfaces;
+using PassStorage2.Logger.Interfaces;
+using PassStorage2.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.IO;
-using PassStorage2.Base.DataAccessLayer.Interfaces;
 
 namespace PassStorage2.Base.DataAccessLayer
 {
@@ -13,29 +15,32 @@ namespace PassStorage2.Base.DataAccessLayer
         public const string FileName = "PassStorage2.Storage.sqlite";
         protected string ConnString => $"Data Source={FileName};Version=3;";
 
-        public DbHandler()
+        protected readonly ILogger logger;
+
+        public DbHandler(ILogger logger)
         {
-            Logger.Instance.FunctionStart();
+            this.logger = logger;
+            logger.FunctionStart();
             try
             {
                 if (!File.Exists(FileName))
                 {
-                    Logger.Instance.Debug("SQLite file doesn't exist. Creating...");
+                    logger.Debug("SQLite file doesn't exist. Creating...");
                     SQLiteConnection.CreateFile(FileName);
                     GenerateTables();
                 }
                 else
                 {
-                    Logger.Instance.Debug("SQLite file exist");
+                    logger.Debug("SQLite file exist");
                 }
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
@@ -43,7 +48,7 @@ namespace PassStorage2.Base.DataAccessLayer
         {
             try
             {
-                Logger.Instance.FunctionStart();
+                logger.FunctionStart();
 
                 string query;
                 if (pass.Id == 0)
@@ -60,7 +65,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
-                    Logger.Instance.Debug($"Executing command in database - {query}");
+                    logger.Debug($"Executing command in database - {query}");
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -69,12 +74,12 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return false;
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
@@ -85,7 +90,7 @@ namespace PassStorage2.Base.DataAccessLayer
 
             try
             {
-                Logger.Instance.FunctionStart();
+                logger.FunctionStart();
 
                 string query = $"SELECT Id, Title, Login, Pass, SaveTime, PassChangeTime, ViewCount FROM Password WHERE Id = {id}";
 
@@ -93,7 +98,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
-                    Logger.Instance.Debug($"Executing command in database - {query}");
+                    logger.Debug($"Executing command in database - {query}");
                     var reader = command.ExecuteReader();
                     reader.Read();
                     var pass = new Password
@@ -112,14 +117,14 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return null;
             }
             finally
             {
                 stopWatch.Stop();
-                Logger.Instance.Debug($"########### Get from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
-                Logger.Instance.FunctionEnd();
+                logger.Debug($"########### Get from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
+                logger.FunctionEnd();
             }
         }
 
@@ -130,7 +135,7 @@ namespace PassStorage2.Base.DataAccessLayer
 
             try
             {
-                Logger.Instance.FunctionStart();
+                logger.FunctionStart();
                 
                 var list = new List<Password>();
                 string query = "SELECT Id, Title, Login, Pass, SaveTime, PassChangeTime, ViewCount FROM Password";
@@ -139,7 +144,7 @@ namespace PassStorage2.Base.DataAccessLayer
                 {
                     connection.Open();
                     var command = new SQLiteCommand(query, connection);
-                    Logger.Instance.Debug($"Executing command in database - {query}");
+                    logger.Debug($"Executing command in database - {query}");
                     var reader = command.ExecuteReader();
                 
                     while (reader.Read())
@@ -163,14 +168,14 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return null;
             }
             finally
             {
                 stopWatch.Stop();
-                Logger.Instance.Debug($"########### GetAll from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
-                Logger.Instance.FunctionEnd();
+                logger.Debug($"########### GetAll from DB ended in {stopWatch.ElapsedMilliseconds} ms ###########");
+                logger.FunctionEnd();
             }
         }
 
@@ -178,12 +183,12 @@ namespace PassStorage2.Base.DataAccessLayer
         {
             try
             {
-                Logger.Instance.FunctionStart();
+                logger.FunctionStart();
                 using (var connection = new SQLiteConnection(ConnString))
                 {
                     connection.Open();
                     var command = new SQLiteCommand($"UPDATE Password SET ViewCount = ViewCount + 1 WHERE Id = {id}", connection);
-                    Logger.Instance.Debug($"Executing command in database - {command.CommandText}");
+                    logger.Debug($"Executing command in database - {command.CommandText}");
                     command.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -192,12 +197,12 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             catch (Exception e)
             {
-                Logger.Instance.Error(e);
+                logger.Error(e);
                 return false;
             }
             finally
             {
-                Logger.Instance.FunctionEnd();
+                logger.FunctionEnd();
             }
         }
 
@@ -218,7 +223,7 @@ namespace PassStorage2.Base.DataAccessLayer
             {
                 connection.Open();
                 var command = new SQLiteCommand(query, connection);
-                Logger.Instance.Debug("Executing command in database", command);
+                logger.Debug("Executing command in database", command);
                 command.ExecuteNonQuery();
                 connection.Close();
             }

@@ -66,9 +66,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -100,21 +97,18 @@
     <Compile Include="BackupHandler.cs" />
     <Compile Include="DataAccessLayer\DbHandler.cs" />
     <Compile Include="DataAccessLayer\DbHandlerExtended.cs" />
-    <Compile Include="DataAccessLayer\FileHandler.cs" />
     <Compile Include="DataAccessLayer\Interfaces\IStorageHandler.cs" />
-    <Compile Include="DataAccessLayer\WebServiceHandler.cs" />
     <Compile Include="DataCryptoLayer\AES.cs" />
+    <Compile Include="DataCryptoLayer\Coder.cs" />
     <Compile Include="DataCryptoLayer\Decoder.cs" />
     <Compile Include="DataCryptoLayer\Encoder.cs" />
     <Compile Include="DataCryptoLayer\EntryProtection.cs" />
-    <Compile Include="DataCryptoLayer\Interfaces\ICrypto.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IDecodeData.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
     <Compile Include="DataCryptoLayer\PlayfairCipher.cs" />
     <Compile Include="DataCryptoLayer\Rijndael.cs" />
     <Compile Include="DataCryptoLayer\SHA.cs" />
     <Compile Include="DataCryptoLayer\VigenereCipher.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="MostUsageAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomPassword.cs" />
@@ -128,6 +122,10 @@
       <Project>{18fcc4b4-a2e7-4ada-b504-a6d531e53ba8}</Project>
       <Name>PassStorage2.ConfigurationProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PassStorage2.Logger\PassStorage2.Logger.csproj">
+      <Project>{3910b041-ab1d-4904-a9b9-a2b476a66c88}</Project>
+      <Name>PassStorage2.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PassStorage2.Models\PassStorage2.Models.csproj">
       <Project>{7940d278-ccaa-4f5a-8d79-58f8363e3a83}</Project>
       <Name>PassStorage2.Models</Name>
@@ -135,9 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
