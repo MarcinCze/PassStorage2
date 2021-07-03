@@ -22,16 +22,8 @@ namespace PassStorage2.Base.DataAccessLayer
             this.configurationProvider = configurationProvider;
             try
             {
-                if (!File.Exists(FileName))
-                {
-                    logger.Debug("SQLite file doesn't exist. Creating...");
-                    SQLiteConnection.CreateFile(FileName);
-                    GenerateTables();
-                }
-                else
-                {
-                    logger.Debug("SQLite file exist");
-                }
+                GenerateAdditionalStructure();
+                FillMissingUid();
             }
             catch (Exception e)
             {
@@ -39,9 +31,6 @@ namespace PassStorage2.Base.DataAccessLayer
             }
             finally
             {
-                GenerateAdditionalStructure();
-                FillMissingUid();
-
                 logger.FunctionEnd();
             }
         }

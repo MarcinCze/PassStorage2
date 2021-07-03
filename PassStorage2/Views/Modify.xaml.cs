@@ -19,31 +19,33 @@ namespace PassStorage2.Views
     {
         private readonly IController controller;
         private readonly ILogger logger;
-        private readonly Counters counters;
+        private readonly IServiceProvider serviceProvider;
+        private Counters counters;
         private Password password;
 
-        public Modify(IController controller, ILogger logger, Counters counters, int? passwordId = null)
+        public Modify(IController controller, ILogger logger, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             this.logger = logger;
             this.controller = controller;
-            this.counters = counters;
+            this.serviceProvider = serviceProvider;
 
             logger.Debug("Creating Modify user control");
 
-            if (passwordId.HasValue)
-            {
-                logger.Debug("Entering EDIT mode");
-                password = controller?.Get(passwordId.Value);
-            }
-            else
-            {
-                logger.Debug("Entering INSERT mode");
-            }
-
             lbBuild.Text = Utils.GetBuildName();
             TranslateControls();
+        }
+
+        public void SetCounters(Counters counters)
+        {
+            this.counters = counters;
+        }
+
+        public void SetPassword(int passwordId)
+        {
+            logger.Debug("Entering EDIT mode");
+            password = controller?.Get(passwordId);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -77,19 +79,25 @@ namespace PassStorage2.Views
         private void btnAll_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to dashboard. Mode = All");
-            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.All));
+            var dashboardView = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+            dashboardView.SetMenuType(Dashboard.MenuType.All);
+            Switcher.Switch(dashboardView);
         }
 
         private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to dashboard. Mode = Most");
-            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.Most));
+            var dashboardView = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+            dashboardView.SetMenuType(Dashboard.MenuType.Most);
+            Switcher.Switch(dashboardView);
         }
 
         private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to dashboard. Mode = Expiry");
-            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.Expiry));
+            var dashboardView = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+            dashboardView.SetMenuType(Dashboard.MenuType.Expiry);
+            Switcher.Switch(dashboardView);
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -117,7 +125,8 @@ namespace PassStorage2.Views
                     password.Uid = Guid.NewGuid().ToString();
 
                 controller.Save(password, updTime);
-                Switcher.Switch(new Dashboard(controller, logger));
+                var dashboardView = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+                Switcher.Switch(dashboardView);
             }
             catch (Exception ex)
             {
@@ -132,7 +141,8 @@ namespace PassStorage2.Views
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to Dashboard. Mode = All");
-            Switcher.Switch(new Dashboard(controller, logger, Dashboard.MenuType.All));
+            var dashboardView = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+            Switcher.Switch(dashboardView);
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

@@ -39,5 +39,9 @@ namespace PassStorage2.Models
         /// View count - how many times it was checked
         /// </summary>
         public int ViewCount { get; set; }
+        /// <summary>
+        /// Additional comment
+        /// </summary>
+        public string AdditionalInfo { get; set; }
     }
 }

@@ -18,13 +18,15 @@ namespace PassStorage2.Views
     {
         private readonly IController controller;
         private readonly ILogger logger;
+        private readonly IServiceProvider serviceProvider;
 
-        public Login(IController controller, ILogger logger)
+        public Login(IController controller, ILogger logger, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             this.controller = controller;
             this.logger = logger;
+            this.serviceProvider = serviceProvider;
 
             logger.Debug("Creating Login user control");
             gridWrongPass.Visibility = Visibility.Hidden;
@@ -35,10 +37,7 @@ namespace PassStorage2.Views
             TranslateControls();
         }
 
-        public void UtilizeState(object state)
-        {
-            throw new NotImplementedException();
-        }
+        public void UtilizeState(object state) => throw new NotImplementedException();
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -53,7 +52,8 @@ namespace PassStorage2.Views
             else
             {
                 logger.Debug("SetPass ok. Switching to DASHBOARD");
-                Switcher.Switch(new Dashboard(this.controller, this.logger));
+                var dashboard = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
+                Switcher.Switch(dashboard);
             }
         }
 

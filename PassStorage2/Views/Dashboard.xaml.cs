@@ -25,25 +25,32 @@ namespace PassStorage2.Views
     {
         private readonly IController controller;
         private readonly ILogger logger;
-        private readonly MenuType menu;
+        private readonly IServiceProvider serviceProvider;
+        private MenuType menu;
         private List<Password> passwords;
         private Counters counters;
         private Password detailsPass;
 
         public enum MenuType { All, Most, Expiry }
 
-        public Dashboard(IController controller, ILogger logger, MenuType menu = MenuType.All)
+        public Dashboard(IController controller, ILogger logger, IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
             this.controller = controller;
             this.logger = logger;
-            this.menu = menu;
+            this.serviceProvider = serviceProvider;
+            this.menu = MenuType.All;
 
             logger.Debug("Creating Dashboard user control");
 
             lbBuild.Text = Utils.GetBuildName();
             TranslateControls();
+        }
+
+        public void SetMenuType(MenuType menuType)
+        {
+            this.menu = menuType;
         }
 
         private void OpenDetailsDrawer(Password pass)
@@ -203,7 +210,9 @@ namespace PassStorage2.Views
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to Modify view");
-            Switcher.Switch(new Modify(controller, logger, counters));
+            var modifyView = (Modify)serviceProvider.GetService(typeof(Modify));
+            modifyView.SetCounters(counters);
+            Switcher.Switch(modifyView);
         }
 
         private void btnBackup_Click(object sender, RoutedEventArgs e)
@@ -298,7 +307,10 @@ namespace PassStorage2.Views
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             logger.Debug("Switching to Modify view");
-            Switcher.Switch(new Modify(controller, logger, counters, detailsPass.Id));
+            var modifyView = (Modify)serviceProvider.GetService(typeof(Modify));
+            modifyView.SetCounters(counters);
+            modifyView.SetPassword(detailsPass.Id);
+            Switcher.Switch(modifyView);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
