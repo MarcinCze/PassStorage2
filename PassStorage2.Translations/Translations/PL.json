@@ -116,6 +116,10 @@
     "Value": "Klucz"
   },
   {
+    "Name": "DASHBOARD_DRAWER_ADDITIONAL_INFO",
+    "Value": "Info"
+  },
+  {
     "Name": "DASHBOARD_DRAWER_PASS_STYLE_CHANGE",
     "Value": "Zmiana stylu"
   },

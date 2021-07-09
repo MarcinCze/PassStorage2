@@ -115,8 +115,13 @@
             <materialDesign:DrawerHost Width="770" Height="650" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <materialDesign:DrawerHost.RightDrawerContent>
                     <StackPanel  Margin="0,50,0,0" Width="500" HorizontalAlignment="Center">
+                        
                         <TextBlock Name="detailTitle" TextAlignment="Center" Margin="0,4,0,4" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
                         <Separator Margin="0,20,0,0"/>
+
+                        <TextBlock Name="txtDrawerAdditionalInfo" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_ADDITIONAL_INFO</TextBlock>
+                        <TextBlock Name="detailAdditionalInfo" Text="Additional Data" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
+
                         <TextBlock Name="txtDrawerLogin" Margin="10,28,0,8" Style="{StaticResource MaterialDesignSubheadingTextBlock}">DASHBOARD_DRAWER_LOGIN</TextBlock>
                         <TextBlock Name="detailLogin" Margin="30,4,0,6" Style="{StaticResource MaterialDesignHeadlineTextBlock}"/>
                         <Button Name="btnCopyLogin" Style="{StaticResource MaterialDesignFloatingActionButton}" ToolTip="DASHBOARD_DRAWER_TIP_COPY" Click="btnCopyLogin_Click">
@@ -133,7 +138,7 @@
                         <Separator Margin="0,20,0,0"/>
 
                         <Grid>
-                            <StackPanel Orientation="Horizontal" Margin="0,50,0,0" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="0,30,0,0" HorizontalAlignment="Center">
                                 <Button Name="btnEdit" Width="120" Style="{StaticResource MaterialDesignRaisedButton}"
                                         ToolTip="DASHBOARD_DRAWER_BTN_TIP_EDIT" VerticalAlignment="Center" Click="btnEdit_Click">
                                     <StackPanel Orientation="Horizontal">

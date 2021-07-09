@@ -63,6 +63,7 @@ namespace PassStorage2.Views
                 detailTitle.Text = pass.Title;
                 detailLogin.Text = pass.Login;
                 detailPassword.Text = pass.Pass;
+                detailAdditionalInfo.Text = pass.AdditionalInfo;
                 togglePasswordStyle.IsChecked = false;
                 togglePasswordStyle_Click(togglePasswordStyle, null);
 
@@ -359,6 +360,7 @@ namespace PassStorage2.Views
             tableHdrWarning.Header = controller.Translate(tableHdrWarning.Header.ToString());
             txtDrawerLogin.Text = controller.Translate(txtDrawerLogin.Text.ToString());
             txtDrawerPassword.Text = controller.Translate(txtDrawerPassword.Text.ToString());
+            txtDrawerAdditionalInfo.Text = controller.Translate(txtDrawerAdditionalInfo.Text.ToString());
             togglePasswordStyle.ToolTip = controller.Translate(togglePasswordStyle.ToolTip.ToString());
             btnCopyLogin.ToolTip = controller.Translate(btnCopyLogin.ToolTip.ToString());
             btnCopyPassword.ToolTip = controller.Translate(btnCopyPassword.ToolTip.ToString());
