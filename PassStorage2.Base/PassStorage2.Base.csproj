@@ -106,6 +106,7 @@
     <Compile Include="DataCryptoLayer\EntryProtection.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IDecodeData.cs" />
     <Compile Include="DataCryptoLayer\Interfaces\IEncodeData.cs" />
+    <Compile Include="DataCryptoLayer\Interfaces\IEntryProtection.cs" />
     <Compile Include="DataCryptoLayer\PlayfairCipher.cs" />
     <Compile Include="DataCryptoLayer\Rijndael.cs" />
     <Compile Include="DataCryptoLayer\SHA.cs" />

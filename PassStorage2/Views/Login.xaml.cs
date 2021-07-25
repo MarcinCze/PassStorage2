@@ -42,18 +42,17 @@ namespace PassStorage2.Views
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             logger.FunctionStart();
-            bool result = controller.SetPasswords(passPrimary.Password, passSecondary.Password);
 
-            if (!result)
-            {
-                logger.Warning("SetPass result is failure. Showing message");
-                gridWrongPass.Visibility = Visibility.Visible;
-            }
-            else
+            if (controller.SetPasswords(passPrimary.Password, passSecondary.Password))
             {
                 logger.Debug("SetPass ok. Switching to DASHBOARD");
                 var dashboard = (Dashboard)serviceProvider.GetService(typeof(Dashboard));
                 Switcher.Switch(dashboard);
+            }
+            else
+            {
+                logger.Warning("SetPass result is failure. Showing message");
+                gridWrongPass.Visibility = Visibility.Visible;
             }
         }
 

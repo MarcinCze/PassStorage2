@@ -20,6 +20,7 @@ namespace PassStorage2.Controller
         private readonly IStorageHandler storage;
         private readonly IDecodeData decoder;
         private readonly IEncodeData encoder;
+        private readonly IEntryProtection entryProtection;
         private readonly ITranslationProvider translationProvider;
         private readonly IConfigurationProvider configurationProvider;
         private readonly ILogger logger;
@@ -31,15 +32,15 @@ namespace PassStorage2.Controller
             IStorageHandler storage,
             IDecodeData decoder,
             IEncodeData encoder,
+            IEntryProtection entryProtection,
             ITranslationProvider translationProvider,
             IConfigurationProvider configurationProvider,
             ILogger logger)
-        {
-            logger.Debug("Creating SqliteController");
-            
+        {            
             this.storage = storage;
             this.decoder = decoder;
             this.encoder = encoder;
+            this.entryProtection = entryProtection;
             this.logger = logger;
             this.configurationProvider = configurationProvider;
             this.translationProvider = translationProvider;
@@ -122,8 +123,6 @@ namespace PassStorage2.Controller
             }
         }
 
-        public Password Get(int id, IEnumerable<Password> passwords) => throw new NotImplementedException();
-
         public IEnumerable<Password> GetAll()
         {
             var stopWatch = new Stopwatch();
@@ -144,48 +143,12 @@ namespace PassStorage2.Controller
             }
         }
 
-        public IEnumerable<Password> GetAllExpired()
-        {
-            logger.FunctionStart();
-            try
-            {
-                return GetAllExpired(GetAll());
-            }
-            catch (Exception e)
-            {
-                logger.Error(e);
-                return null;
-            }
-            finally
-            {
-                logger.FunctionEnd();
-            }
-        }
-
         public IEnumerable<Password> GetAllExpired(IEnumerable<Password> passwords)
         {
             logger.FunctionStart();
             try
             {
                 return passwords.Where(x => x.IsExpired).OrderBy(x => x.Title);
-            }
-            catch (Exception e)
-            {
-                logger.Error(e);
-                return null;
-            }
-            finally
-            {
-                logger.FunctionEnd();
-            }
-        }
-
-        public IEnumerable<Password> GetMostUsed()
-        {
-            logger.FunctionStart();
-            try
-            {
-                return GetMostUsed(GetAll());
             }
             catch (Exception e)
             {
@@ -240,11 +203,6 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void IncrementViewCount(int id, IEnumerable<Password> passwords)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Save(Password pass, bool updatePassTime)
         {
             logger.FunctionStart();
@@ -272,23 +230,18 @@ namespace PassStorage2.Controller
             logger.FunctionStart();
             try
             {
-                using (var protection = new Base.DataCryptoLayer.EntryProtection(
-                    primary, 
-                    secondary, 
-                    configurationProvider.PrimaryHash, 
+                if (entryProtection.IsAllowed(
+                    primary,
+                    secondary,
+                    configurationProvider.PrimaryHash,
                     configurationProvider.SecondaryHash))
                 {
-                    if (!protection.IsAllowed)
-                    {
-                        logger.Error(new Exception("Passwords are incorrect"));
-                        return false;
-                    }
-
                     PasswordFirst = primary;
                     PasswordSecond = secondary;
-                    logger.Debug("Passwords ok");
                     return true;
                 }
+
+                throw new Exception("Passwords are incorrect");
             }
             catch (Exception e)
             {
@@ -300,10 +253,6 @@ namespace PassStorage2.Controller
                 logger.FunctionEnd();
             }
         }
-
-        public void UpdateViewCount(int id, int counter) => throw new NotImplementedException();
-
-        public IEnumerable<Password> GetBySearchWord(string searchWord) => throw new NotImplementedException();
 
         public IEnumerable<Password> GetBySearchWord(string searchWord, IEnumerable<Password> passwords)
         {

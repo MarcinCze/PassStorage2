@@ -35,6 +35,7 @@ namespace PassStorage2
             services.AddScoped<IController, SqliteController>();
             services.AddScoped<IDecodeData, Decoder>();
             services.AddScoped<IEncodeData, Encoder>();
+            services.AddScoped<IEntryProtection, EntryProtection>();
             services.AddScoped<IStorageHandler, DbHandlerAdditionalInfo>();
             services.AddScoped<ITranslationProvider, TranslationProvider>();
             services.AddScoped<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();

@@ -7,7 +7,7 @@ using PassStorage2.Models;
 
 namespace PassStorage2.Base
 {
-    public class BackupHandler
+    public static class BackupHandler
     {
         private const string BackupPath = "Backups";
 
