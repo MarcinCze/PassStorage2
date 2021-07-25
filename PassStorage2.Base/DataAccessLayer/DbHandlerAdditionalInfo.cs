@@ -127,6 +127,46 @@ namespace PassStorage2.Base.DataAccessLayer
             }
         }
 
+        public override bool Save(Password pass, bool isPassUpdate)
+        {
+            try
+            {
+                logger.FunctionStart();
+
+                string query;
+                if (pass.Id == 0)
+                {
+                    query = $"INSERT INTO Password (Title, Login, Pass, SaveTime, PassChangeTime, ViewCount, Uid, AdditionalInfo) " +
+                            $"VALUES ('{pass.Title}', '{pass.Login}', '{pass.Pass}', '{DateTime.Now:O}', '{DateTime.Now:O}', {pass.ViewCount}, '{pass.Uid}', '{pass.AdditionalInfo}')";
+                }
+                else
+                {
+                    string updTime = isPassUpdate ? $", PassChangeTime = '{DateTime.Now:O}'" : string.Empty;
+                    query = $"UPDATE Password SET Title = '{pass.Title}', Login = '{pass.Login}', Pass = '{pass.Pass}', AdditionalInfo = '{pass.AdditionalInfo}', ViewCount = {pass.ViewCount} {updTime} WHERE Id = {pass.Id} AND Uid = '{pass.Uid}'";
+                }
+
+                using (var connection = new SQLiteConnection(ConnString))
+                {
+                    connection.Open();
+                    var command = new SQLiteCommand(query, connection);
+                    logger.Debug($"Executing command in database - {query}");
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e);
+                return false;
+            }
+            finally
+            {
+                logger.FunctionEnd();
+            }
+        }
+
         protected void GenerateAdditionalInfoColumn()
         {
             if (!ColumnExists("Password", "AdditionalInfo"))

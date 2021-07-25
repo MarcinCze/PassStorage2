@@ -67,6 +67,7 @@ namespace PassStorage2.Views
             if (password != null)
             {
                 tbTitle.Text = password.Title;
+                tbAdditionalInfo.Text = password.AdditionalInfo;
                 tbLogin.Text = password.Login;
                 tbPassword.Text = password.Pass;
             }
@@ -105,19 +106,11 @@ namespace PassStorage2.Views
             logger.FunctionStart();
             try
             {
-                bool updTime;
-                if (string.IsNullOrEmpty(password?.Pass))
-                {
-                    updTime = true;
-                }
-                else
-                {
-                    updTime = !(password.Pass.Equals(tbPassword.Text));
-                }
-
+                bool updTime = string.IsNullOrEmpty(password?.Pass) || !(password.Pass.Equals(tbPassword.Text));
                 logger.Debug($"Update password change time - {updTime}");
 
                 password.Title = tbTitle.Text;
+                password.AdditionalInfo = tbAdditionalInfo.Text;
                 password.Login = tbLogin.Text;
                 password.Pass = tbPassword.Text;
 
@@ -179,6 +172,7 @@ namespace PassStorage2.Views
             labelNavBtnCancel.Text = controller.Translate(labelNavBtnCancel.Text);
             btnCancel.ToolTip = controller.Translate(btnCancel.ToolTip.ToString());
             HintAssist.SetHint(tbTitle, controller.Translate(HintAssist.GetHint(tbTitle).ToString()));
+            HintAssist.SetHint(tbAdditionalInfo, controller.Translate(HintAssist.GetHint(tbAdditionalInfo).ToString()));
             HintAssist.SetHint(tbLogin, controller.Translate(HintAssist.GetHint(tbLogin).ToString()));
             HintAssist.SetHint(tbPassword, controller.Translate(HintAssist.GetHint(tbPassword).ToString()));
             sliderRandomPassLength.ToolTip = controller.Translate(sliderRandomPassLength.ToolTip.ToString());

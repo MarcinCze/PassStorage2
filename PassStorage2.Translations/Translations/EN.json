@@ -180,6 +180,10 @@
     "Value": "Title"
   },
   {
+    "Name": "MODIFY_PASSWORD_ADDITIONAL_INFO",
+    "Value": "Additional info"
+  },
+  {
     "Name": "MODIFY_PASSWORD_LOGIN",
     "Value": "Login"
   },

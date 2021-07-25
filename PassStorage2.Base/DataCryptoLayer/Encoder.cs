@@ -4,6 +4,7 @@ using PassStorage2.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PassStorage2.Base.DataCryptoLayer
 {
@@ -43,9 +44,17 @@ namespace PassStorage2.Base.DataCryptoLayer
 
             try
             {
-                password.Title = Rijndael.EncryptRijndael(password.Title, secondaryKey);
-                password.Login = Rijndael.EncryptRijndael(password.Login, secondaryKey);
-                password.Pass = Rijndael.EncryptRijndael(password.Pass, secondaryKey);
+                Task.WaitAll(new Task[]
+                {
+                    Task.Factory.StartNew(() => password.Title = Rijndael.EncryptRijndael(password.Title, secondaryKey)),
+                    Task.Factory.StartNew(() => password.Login = Rijndael.EncryptRijndael(password.Login, secondaryKey)),
+                    Task.Factory.StartNew(() => password.Pass = Rijndael.EncryptRijndael(password.Pass, secondaryKey)),
+                    Task.Factory.StartNew(() =>
+                    {
+                        if (!string.IsNullOrEmpty(password.AdditionalInfo))
+                            password.AdditionalInfo = Rijndael.EncryptRijndael(password.AdditionalInfo, secondaryKey);
+                    })
+                });
 
                 watch.Stop();
                 logger.Debug($"ENCODE finished in {watch.ElapsedMilliseconds} ms");

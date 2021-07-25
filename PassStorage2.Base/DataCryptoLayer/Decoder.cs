@@ -30,7 +30,8 @@ namespace PassStorage2.Base.DataCryptoLayer
                     {
                         Task.Factory.StartNew(() => pass.Title = Rijndael.DecryptRijndael(pass.Title, secondaryKey)),
                         Task.Factory.StartNew(() => pass.Login = Rijndael.DecryptRijndael(pass.Login, secondaryKey)),
-                        Task.Factory.StartNew(() => pass.Pass = Rijndael.DecryptRijndael(pass.Pass, secondaryKey))
+                        Task.Factory.StartNew(() => pass.Pass = Rijndael.DecryptRijndael(pass.Pass, secondaryKey)),
+                        Task.Factory.StartNew(() => pass.AdditionalInfo = string.IsNullOrEmpty(pass.AdditionalInfo) ? null : Rijndael.DecryptRijndael(pass.AdditionalInfo, secondaryKey))
                     });
                 }
 
@@ -62,7 +63,8 @@ namespace PassStorage2.Base.DataCryptoLayer
                 {
                     Task.Factory.StartNew(() => password.Title = Rijndael.DecryptRijndael(password.Title, secondaryKey)),
                     Task.Factory.StartNew(() => password.Login = Rijndael.DecryptRijndael(password.Login, secondaryKey)),
-                    Task.Factory.StartNew(() => password.Pass = Rijndael.DecryptRijndael(password.Pass, secondaryKey))
+                    Task.Factory.StartNew(() => password.Pass = Rijndael.DecryptRijndael(password.Pass, secondaryKey)),
+                    Task.Factory.StartNew(() => password.AdditionalInfo = Rijndael.DecryptRijndael(password.AdditionalInfo, secondaryKey))
                 });
 
                 return password;
