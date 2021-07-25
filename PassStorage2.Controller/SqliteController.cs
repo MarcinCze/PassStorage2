@@ -28,10 +28,10 @@ namespace PassStorage2.Controller
         protected string PasswordSecond { get; set; }
 
         public SqliteController(
-            IStorageHandler storage, 
-            IDecodeData decoder, 
-            IEncodeData encoder, 
-            ITranslationProvider translationProvider, 
+            IStorageHandler storage,
+            IDecodeData decoder,
+            IEncodeData encoder,
+            ITranslationProvider translationProvider,
             IConfigurationProvider configurationProvider,
             ILogger logger)
         {
@@ -122,10 +122,7 @@ namespace PassStorage2.Controller
             }
         }
 
-        public Password Get(int id, IEnumerable<Password> passwords)
-        {
-            throw new NotImplementedException();
-        }
+        public Password Get(int id, IEnumerable<Password> passwords) => throw new NotImplementedException();
 
         public IEnumerable<Password> GetAll()
         {
@@ -304,15 +301,9 @@ namespace PassStorage2.Controller
             }
         }
 
-        public void UpdateViewCount(int id, int counter)
-        {
-            throw new NotImplementedException();
-        }
+        public void UpdateViewCount(int id, int counter) => throw new NotImplementedException();
 
-        public IEnumerable<Password> GetBySearchWord(string searchWord)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Password> GetBySearchWord(string searchWord) => throw new NotImplementedException();
 
         public IEnumerable<Password> GetBySearchWord(string searchWord, IEnumerable<Password> passwords)
         {

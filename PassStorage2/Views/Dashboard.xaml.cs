@@ -67,6 +67,13 @@ namespace PassStorage2.Views
                 togglePasswordStyle.IsChecked = false;
                 togglePasswordStyle_Click(togglePasswordStyle, null);
 
+                detailAdditionalInfo.Visibility = string.IsNullOrEmpty(pass.AdditionalInfo)
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
+                txtDrawerAdditionalInfo.Visibility = string.IsNullOrEmpty(pass.AdditionalInfo)
+                    ? Visibility.Collapsed
+                    : Visibility.Visible;
+
                 ButtonAutomationPeer peer = new ButtonAutomationPeer(btnOpenDrawer);
                 IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
                 invokeProv.Invoke();

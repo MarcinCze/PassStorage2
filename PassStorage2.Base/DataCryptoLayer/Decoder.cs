@@ -64,7 +64,7 @@ namespace PassStorage2.Base.DataCryptoLayer
                     Task.Factory.StartNew(() => password.Title = Rijndael.DecryptRijndael(password.Title, secondaryKey)),
                     Task.Factory.StartNew(() => password.Login = Rijndael.DecryptRijndael(password.Login, secondaryKey)),
                     Task.Factory.StartNew(() => password.Pass = Rijndael.DecryptRijndael(password.Pass, secondaryKey)),
-                    Task.Factory.StartNew(() => password.AdditionalInfo = Rijndael.DecryptRijndael(password.AdditionalInfo, secondaryKey))
+                    Task.Factory.StartNew(() => password.AdditionalInfo = string.IsNullOrEmpty(password.AdditionalInfo) ? null : Rijndael.DecryptRijndael(password.AdditionalInfo, secondaryKey))
                 });
 
                 return password;
