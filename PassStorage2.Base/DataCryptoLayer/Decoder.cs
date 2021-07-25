@@ -1,8 +1,11 @@
 ﻿using PassStorage2.Logger.Interfaces;
 using PassStorage2.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PassStorage2.Base.DataCryptoLayer
 {
@@ -18,26 +21,15 @@ namespace PassStorage2.Base.DataCryptoLayer
 
             try
             {
-                foreach (var pass in passwords)
-                {
-                    // 9716 ms
-                    //pass.Title = Rijndael.DecryptRijndael(pass.Title, secondaryKey);
-                    //pass.Login = Rijndael.DecryptRijndael(pass.Login, secondaryKey);
-                    //pass.Pass = Rijndael.DecryptRijndael(pass.Pass, secondaryKey);
-
-                    // 5565 ms
-                    Task.WaitAll(new Task[]
-                    {
-                        Task.Factory.StartNew(() => pass.Title = Rijndael.DecryptRijndael(pass.Title, secondaryKey)),
-                        Task.Factory.StartNew(() => pass.Login = Rijndael.DecryptRijndael(pass.Login, secondaryKey)),
-                        Task.Factory.StartNew(() => pass.Pass = Rijndael.DecryptRijndael(pass.Pass, secondaryKey)),
-                        Task.Factory.StartNew(() => pass.AdditionalInfo = string.IsNullOrEmpty(pass.AdditionalInfo) ? null : Rijndael.DecryptRijndael(pass.AdditionalInfo, secondaryKey))
-                    });
-                }
+                Task.WaitAll(
+                    passwords
+                        .Select(pass => Task.Factory.StartNew(() => Decode(pass, primaryKey, secondaryKey)))
+                        .ToArray()
+                );
 
                 return passwords;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 logger.Error(e);
                 return passwords;
@@ -51,14 +43,8 @@ namespace PassStorage2.Base.DataCryptoLayer
 
         public Password Decode(Password password, string primaryKey, string secondaryKey)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-
             try
             {
-                //password.Title = Rijndael.DecryptRijndael(password.Title, secondaryKey);
-                //password.Login = Rijndael.DecryptRijndael(password.Login, secondaryKey);
-                //password.Pass = Rijndael.DecryptRijndael(password.Pass, secondaryKey);
                 Task.WaitAll(new Task[]
                 {
                     Task.Factory.StartNew(() => password.Title = Rijndael.DecryptRijndael(password.Title, secondaryKey)),
@@ -69,15 +55,10 @@ namespace PassStorage2.Base.DataCryptoLayer
 
                 return password;
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 logger.Error(e);
                 return password;
-            }
-            finally
-            {
-                watch.Stop();
-                logger.Debug($"DECODE finished in {watch.ElapsedMilliseconds} ms");
             }
         }
     }
