@@ -32,13 +32,14 @@ namespace PassStorage2
         private void ConfigureServices(ServiceCollection services)
         {
             services.AddScoped<ILogger, Logger.Logger>();
-            services.AddScoped<IController, SqliteController>();
-            services.AddScoped<IDecodeData, Decoder>();
-            services.AddScoped<IEncodeData, Encoder>();
-            services.AddScoped<IEntryProtection, EntryProtection>();
-            services.AddScoped<IStorageHandler, DbHandlerAdditionalInfo>();
-            services.AddScoped<ITranslationProvider, TranslationProvider>();
-            services.AddScoped<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();
+            
+            services.AddSingleton<IController, SqliteController>();
+            services.AddSingleton<IDecodeData, Decoder>();
+            services.AddSingleton<IEncodeData, Encoder>();
+            services.AddSingleton<IEntryProtection, EntryProtection>();
+            services.AddSingleton<IStorageHandler, DbHandlerAdditionalInfo>();
+            services.AddSingleton<ITranslationProvider, TranslationProvider>();
+            services.AddSingleton<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<Views.Login>();

@@ -1,18 +1,16 @@
-﻿using PassStorage2.Base;
-using PassStorage2.Views;
-
+﻿using PassStorage3.Views;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PassStorage2
+namespace PassStorage3
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(Login loginView)
+        public MainWindow(LoginControl loginView)
         {
             InitializeComponent();
             this.Title = GenerateTitle();
@@ -36,6 +34,7 @@ namespace PassStorage2
                 throw new ArgumentException($"NextPage is not ISwitchable! {nextPage.Name}");
         }
 
-        public string GenerateTitle() => $"PassStorage {Utils.GetVersionShort()}";
+        //public string GenerateTitle() => $"PassStorage {Utils.GetVersionShort()}";
+        public string GenerateTitle() => $"PassStorage 3";
     }
 }
