@@ -5,6 +5,7 @@ using PassStorage3.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace PassStorage3.DataAccessLayer
 {
@@ -12,7 +13,8 @@ namespace PassStorage3.DataAccessLayer
     {
         private readonly ILogger logger;
         private readonly SqlLiteDatabaseContext databaseContext;
-        private List<Password> passwords;
+
+        private List<Entities.DbPassword> passwords;
 
         public SqlLiteStorageHandler(ILogger<SqlLiteStorageHandler> logger, SqlLiteDatabaseContext databaseContext)
         {
@@ -20,7 +22,7 @@ namespace PassStorage3.DataAccessLayer
             this.databaseContext = databaseContext;
         }
 
-        public async Task<IEnumerable<Password>> GetAllAsync()
+        public async Task<IEnumerable<Entities.DbPassword>> GetAllAsync()
         {
             if (passwords == null)
                 passwords = await databaseContext.Passwords.ToListAsync();
@@ -28,12 +30,15 @@ namespace PassStorage3.DataAccessLayer
             return passwords;
         }
 
-        public Task<Password> GetAsync(int id)
+        public async Task<Entities.DbPassword> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            if (passwords == null || !passwords.Any(x => x.Id == id))
+                passwords = await databaseContext.Passwords.ToListAsync();
+
+            return passwords.FirstOrDefault(x => x.Id == id);
         }
 
-        public Task SaveAsync(Password pass)
+        public Task SaveAsync(Entities.DbPassword pass)
         {
             throw new NotImplementedException();
         }

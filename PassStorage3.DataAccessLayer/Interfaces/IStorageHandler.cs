@@ -1,16 +1,15 @@
-﻿using PassStorage3.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PassStorage3.DataAccessLayer.Interfaces
 {
     public interface IStorageHandler
     {
-        Task<Password> GetAsync(int id);
+        Task<Entities.DbPassword> GetAsync(int id);
 
-        Task<IEnumerable<Password>> GetAllAsync();
+        Task<IEnumerable<Entities.DbPassword>> GetAllAsync();
 
-        Task SaveAsync(Password pass);
+        Task SaveAsync(Entities.DbPassword pass);
 
         Task DeleteAsync(int id);
     }

@@ -12,7 +12,7 @@ namespace PassStorage3.DataCryptoLayer
         public async Task<bool> ValidatePasswordsAsync(string passPrimary, string passSecondary)
         {
             // TODO Add Hash checking
-            if (passPrimary == "SkodaFabia" && passSecondary == "martusia")
+            if (passPrimary == "test1" && passSecondary == "test2")
             {
                 PasswordPrimary = passPrimary;
                 PasswordSecondary = passSecondary;

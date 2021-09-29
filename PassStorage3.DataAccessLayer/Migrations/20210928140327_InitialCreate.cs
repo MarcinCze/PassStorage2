@@ -25,7 +25,7 @@ namespace PassStorage3.DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Passwords", x => x.Id);
-                });           
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

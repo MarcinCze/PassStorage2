@@ -5,7 +5,7 @@ namespace PassStorage3.DataAccessLayer
 {
     public class SqlLiteDatabaseContext : DbContext
     {
-        public DbSet<Password> Passwords { get; set; }
+        public DbSet<Entities.DbPassword> Passwords { get; set; }
 
         public const string DatabaseName = "PassStorage3_DB.db";
 

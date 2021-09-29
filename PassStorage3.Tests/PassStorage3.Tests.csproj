@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PassStorage3.ConfigurationManager\PassStorage3.ConfigurationManager.csproj" />
+    <ProjectReference Include="..\PassStorage3.Controllers\PassStorage3.Controllers.csproj" />
+    <ProjectReference Include="..\PassStorage3.DataAccessLayer\PassStorage3.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PassStorage3.DataCryptoLayer\PassStorage3.DataCryptoLayer.csproj" />
+    <ProjectReference Include="..\PassStorage3.Exceptions\PassStorage3.Exceptions.csproj" />
+    <ProjectReference Include="..\PassStorage3.Models\PassStorage3.Models.csproj" />
+  </ItemGroup>
+
+</Project>

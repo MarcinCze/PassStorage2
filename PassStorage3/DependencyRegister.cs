@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PassStorage3.Controllers;
 using PassStorage3.Controllers.Interfaces;
+using PassStorage3.DataAccessLayer;
+using PassStorage3.DataAccessLayer.Interfaces;
 using PassStorage3.DataCryptoLayer;
 using PassStorage3.DataCryptoLayer.Interfaces;
-using PassStorage3.DataAccessLayer.Interfaces;
-using PassStorage3.DataAccessLayer;
-using Microsoft.EntityFrameworkCore;
 
 namespace PassStorage3
 {
@@ -18,7 +18,7 @@ namespace PassStorage3
                 .AddLogging(configure => configure.AddConsole())
                 .AddDbContext<SqlLiteDatabaseContext>(options =>
                 {
-                    options.UseSqlite($"Data Source = {DataAccessLayer.SqlLiteDatabaseContext.DatabaseName}");
+                    options.UseSqlite($"Data Source = {SqlLiteDatabaseContext.DatabaseName}");
                 })
                 .AddControllers()
                 .AddCrypto()
@@ -34,7 +34,9 @@ namespace PassStorage3
                     .AddSingleton<IViewCountController, ViewCountController>();
 
         private static IServiceCollection AddCrypto(this IServiceCollection services) =>
-            services.AddSingleton<ISecretsVault, SecretsVault>();
+            services.AddSingleton<ISecretsVault, SecretsVault>()
+                    .AddSingleton<IEncoder, Encoder>()
+                    .AddSingleton<IDecoder, Decoder>();
 
         private static IServiceCollection AddStorage(this IServiceCollection services) =>
             services.AddSingleton<IStorageHandler, SqlLiteStorageHandler>();

@@ -36,11 +36,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.Exceptions", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{4DDA145A-B414-4BAF-AA44-446B6E9E5C88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.DataAccessLayer", "PassStorage3.DataAccessLayer\PassStorage3.DataAccessLayer.csproj", "{5E66BE06-3A80-4FB2-873C-213E147C2207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.DataAccessLayer", "PassStorage3.DataAccessLayer\PassStorage3.DataAccessLayer.csproj", "{5E66BE06-3A80-4FB2-873C-213E147C2207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.ConfigurationManager", "PassStorage3.ConfigurationManager\PassStorage3.ConfigurationManager.csproj", "{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.ConfigurationManager", "PassStorage3.ConfigurationManager\PassStorage3.ConfigurationManager.csproj", "{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Translator", "PassStorage3.Translator\PassStorage3.Translator.csproj", "{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.Translator", "PassStorage3.Translator\PassStorage3.Translator.csproj", "{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Tests", "PassStorage3.Tests\PassStorage3.Tests.csproj", "{F988763A-1C64-4558-8CEC-EB611BC8597B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -227,6 +229,18 @@ Global
 		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x64.Build.0 = Release|Any CPU
 		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x86.ActiveCfg = Release|Any CPU
 		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x86.Build.0 = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|x64.Build.0 = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Debug|x86.Build.0 = Debug|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|x64.ActiveCfg = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|x64.Build.0 = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F988763A-1C64-4558-8CEC-EB611BC8597B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

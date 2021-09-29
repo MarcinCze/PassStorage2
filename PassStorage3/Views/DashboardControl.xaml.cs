@@ -35,7 +35,9 @@ namespace PassStorage3.Views
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            ControlLoadingGrid(true, "Loading...");
             var passwords = await crudController.GetAllAsync();
+            ControlLoadingGrid(false);
         }
 
         private void btnAll_Click(object sender, RoutedEventArgs e)
@@ -81,6 +83,15 @@ namespace PassStorage3.Views
         private void btnAbout_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void ControlLoadingGrid(bool isVisible, string message = null)
+        {
+            logger.LogInformation($"Setting loading spinner grid to [{isVisible}] with message [{message}]");
+
+            waitMsg.Text = string.IsNullOrEmpty(message) ? string.Empty : message;
+
+            gridWait.Visibility = isVisible ? Visibility.Visible : Visibility.Hidden;
         }
     }
 }

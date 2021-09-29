@@ -9,7 +9,7 @@ namespace PassStorage3.Controllers.Interfaces
         Task<Password> GetAsync(int id);
 
         Task<IEnumerable<Password>> GetAllAsync();
-        
+
         Task SaveAsync(Password pass);
 
         Task DeleteAsync(int id);
