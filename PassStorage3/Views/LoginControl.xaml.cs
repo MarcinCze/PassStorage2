@@ -27,7 +27,10 @@ namespace PassStorage3.Views
         private readonly IServiceProvider serviceProvider;
         private readonly IEntryProtectionController entryController;
 
-        public LoginControl(ILogger<LoginControl> logger, IServiceProvider serviceProvider, IEntryProtectionController entryController)
+        public LoginControl(
+            ILogger<LoginControl> logger, 
+            IServiceProvider serviceProvider, 
+            IEntryProtectionController entryController)
         {
             InitializeComponent();
 
@@ -50,6 +53,7 @@ namespace PassStorage3.Views
             {
                 logger.LogWarning("Entry validation failed. Showing message");
                 gridWrongPass.Visibility = Visibility.Visible;
+                passPrimary.Password = passSecondary.Password = string.Empty;
             }
             catch (Exception ex)
             {

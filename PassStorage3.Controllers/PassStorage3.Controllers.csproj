@@ -10,6 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PassStorage3.DataAccessLayer\PassStorage3.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\PassStorage3.DataCryptoLayer\PassStorage3.DataCryptoLayer.csproj" />
+    <ProjectReference Include="..\PassStorage3.Exceptions\PassStorage3.Exceptions.csproj" />
     <ProjectReference Include="..\PassStorage3.Models\PassStorage3.Models.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using PassStorage3.Controllers.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,65 @@ namespace PassStorage3.Views
     /// </summary>
     public partial class DashboardControl : UserControl
     {
-        public DashboardControl()
+        private readonly ILogger logger;
+        private readonly ICrudController crudController;
+
+        public DashboardControl(ILogger<DashboardControl> logger, ICrudController crudController)
         {
             InitializeComponent();
+
+            this.logger = logger;
+            this.crudController = crudController;
+        }
+
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var passwords = await crudController.GetAllAsync();
+        }
+
+        private void btnAll_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMostlyUsed_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExpiryWarning_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBackup_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnBackupDecoded_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

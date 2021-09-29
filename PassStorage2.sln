@@ -26,15 +26,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage2.Logger", "Pass
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3", "PassStorage3\PassStorage3.csproj", "{7A130D41-737A-4F88-8F1D-66A47282B1A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Controllers", "PassStorage3.Controllers\PassStorage3.Controllers.csproj", "{A1251731-B751-4C86-9F09-7FA7BA6C9766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.Controllers", "PassStorage3.Controllers\PassStorage3.Controllers.csproj", "{A1251731-B751-4C86-9F09-7FA7BA6C9766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Models", "PassStorage3.Models\PassStorage3.Models.csproj", "{C48302EB-4905-45FE-BCC9-9EB76156FC91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.Models", "PassStorage3.Models\PassStorage3.Models.csproj", "{C48302EB-4905-45FE-BCC9-9EB76156FC91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.DataCryptoLayer", "PassStorage3.DataCryptoLayer\PassStorage3.DataCryptoLayer.csproj", "{E7BB5DC4-A97F-40E3-AB55-0D75FB1B2351}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.DataCryptoLayer", "PassStorage3.DataCryptoLayer\PassStorage3.DataCryptoLayer.csproj", "{E7BB5DC4-A97F-40E3-AB55-0D75FB1B2351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Exceptions", "PassStorage3.Exceptions\PassStorage3.Exceptions.csproj", "{70B2A19D-CFE5-4A95-B827-CC312DE28EE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassStorage3.Exceptions", "PassStorage3.Exceptions\PassStorage3.Exceptions.csproj", "{70B2A19D-CFE5-4A95-B827-CC312DE28EE5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy", "Legacy", "{4DDA145A-B414-4BAF-AA44-446B6E9E5C88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.DataAccessLayer", "PassStorage3.DataAccessLayer\PassStorage3.DataAccessLayer.csproj", "{5E66BE06-3A80-4FB2-873C-213E147C2207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.ConfigurationManager", "PassStorage3.ConfigurationManager\PassStorage3.ConfigurationManager.csproj", "{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassStorage3.Translator", "PassStorage3.Translator\PassStorage3.Translator.csproj", "{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -185,6 +191,42 @@ Global
 		{70B2A19D-CFE5-4A95-B827-CC312DE28EE5}.Release|x64.Build.0 = Release|Any CPU
 		{70B2A19D-CFE5-4A95-B827-CC312DE28EE5}.Release|x86.ActiveCfg = Release|Any CPU
 		{70B2A19D-CFE5-4A95-B827-CC312DE28EE5}.Release|x86.Build.0 = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|x64.Build.0 = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E66BE06-3A80-4FB2-873C-213E147C2207}.Release|x86.Build.0 = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|x64.Build.0 = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|x64.ActiveCfg = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|x64.Build.0 = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{8505D0DA-68BD-4E13-A6D0-83F2DA93BAC9}.Release|x86.Build.0 = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|x64.Build.0 = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Debug|x86.Build.0 = Debug|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x64.ActiveCfg = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x64.Build.0 = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x86.ActiveCfg = Release|Any CPU
+		{FBA749E3-E7B1-425C-A663-6B0F0EC73C70}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

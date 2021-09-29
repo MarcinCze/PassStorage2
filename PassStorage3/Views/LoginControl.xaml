@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PassStorage3.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" KeyDown="UserControl_KeyDown">
     <Grid>
@@ -30,7 +32,7 @@
             VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" x:Name="passSecondary" 
             materialDesign:HintAssist.Hint="LOGIN_SECONDARY_KEY" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
-        <Grid Name="gridWrongPass">
+        <Grid Name="gridWrongPass" Visibility="Hidden">
             <materialDesign:Card Padding="32" Margin="16" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="800">
                 <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" x:Name="txtWrongPassCard" TextAlignment="Center">LOGIN_SECRETS_ARE_WRONG</TextBlock>
             </materialDesign:Card>

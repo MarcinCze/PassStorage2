@@ -4,6 +4,6 @@ namespace PassStorage3.Controllers.Interfaces
 {
     public interface IEntryProtectionController
     {
-        Task<bool> ValidateAsync(string passwordPrimary, string passwordSecondary);
+        Task ValidateAsync(string passwordPrimary, string passwordSecondary);
     }
 }

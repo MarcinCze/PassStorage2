@@ -2,6 +2,11 @@
 using Microsoft.Extensions.Logging;
 using PassStorage3.Controllers;
 using PassStorage3.Controllers.Interfaces;
+using PassStorage3.DataCryptoLayer;
+using PassStorage3.DataCryptoLayer.Interfaces;
+using PassStorage3.DataAccessLayer.Interfaces;
+using PassStorage3.DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
 
 namespace PassStorage3
 {
@@ -11,24 +16,14 @@ namespace PassStorage3
         {
             services
                 .AddLogging(configure => configure.AddConsole())
+                .AddDbContext<SqlLiteDatabaseContext>(options =>
+                {
+                    options.UseSqlite($"Data Source = {DataAccessLayer.SqlLiteDatabaseContext.DatabaseName}");
+                })
                 .AddControllers()
+                .AddCrypto()
+                .AddStorage()
                 .AddViews();
-
-            //services.AddScoped<ILogger, Logger.Logger>();
-
-            //services.AddSingleton<IController, SqliteController>();
-            //services.AddSingleton<IDecodeData, Decoder>();
-            //services.AddSingleton<IEncodeData, Encoder>();
-            //services.AddSingleton<IEntryProtection, EntryProtection>();
-            //services.AddSingleton<IStorageHandler, DbHandlerAdditionalInfo>();
-            //services.AddSingleton<ITranslationProvider, TranslationProvider>();
-            //services.AddSingleton<IConfigurationProvider, ConfigurationProvider.ConfigurationProvider>();
-
-            //services.AddSingleton<MainWindow>();
-            //services.AddSingleton<Views.LoginControl>();
-
-            //services.AddTransient<Views.Dashboard>();
-            //services.AddTransient<Views.Modify>();
         }
 
         private static IServiceCollection AddControllers(this IServiceCollection services) =>
@@ -37,6 +32,12 @@ namespace PassStorage3
                     .AddSingleton<ICrudController, CrudController>()
                     .AddSingleton<IDetailedGetController, DetailedGetController>()
                     .AddSingleton<IViewCountController, ViewCountController>();
+
+        private static IServiceCollection AddCrypto(this IServiceCollection services) =>
+            services.AddSingleton<ISecretsVault, SecretsVault>();
+
+        private static IServiceCollection AddStorage(this IServiceCollection services) =>
+            services.AddSingleton<IStorageHandler, SqlLiteStorageHandler>();
 
         private static IServiceCollection AddViews(this IServiceCollection services) =>
             services.AddSingleton<MainWindow>()
